@@ -1,4 +1,10 @@
-import { Button, ContentContainer, Heading, TextField } from '@navikt/ds-react'
+import {
+    Alert,
+    Button,
+    ContentContainer,
+    Heading,
+    TextField,
+} from '@navikt/ds-react'
 import Head from 'next/head'
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
@@ -6,7 +12,8 @@ import { v4 as uuidv4 } from 'uuid'
 const Index = () => {
     const [fnr, setFnr] = useState<string>()
     const [resetter, setResetter] = useState<boolean>(false)
-
+    const [error, setError] = useState<string | null>(null)
+    const [suksess, setSuksess] = useState<string | null>(null)
     return (
         <>
             <Head>
@@ -20,6 +27,8 @@ const Index = () => {
                 <TextField
                     onChange={(e) => {
                         setFnr(e.target.value)
+                        setError(null)
+                        setSuksess(null)
                     }}
                     value={fnr}
                     label="Fødselsnummer"
@@ -29,19 +38,39 @@ const Index = () => {
                     style={{ marginTop: '1em' }}
                     loading={resetter}
                     onClick={async () => {
+                        if (fnr?.length != 11) {
+                            setError('Forventer 11 siffer')
+                            return
+                        }
                         setResetter(true)
-                        await fetch(
-                            `/api/kafka/flex/testdata-reset/${uuidv4()}`,
-                            {
-                                method: 'POST',
-                                body: fnr,
-                            }
-                        )
+                        try {
+                            const res = await fetch(
+                                `/api/kafka/flex/testdata-reset/${uuidv4()}`,
+                                {
+                                    method: 'POST',
+                                    body: fnr,
+                                }
+                            )
+                            const body = await res.text()
+                            setSuksess(body)
+                        } catch (e) {
+                            setError(JSON.stringify(e))
+                        }
                         setResetter(false)
                     }}
                 >
                     Reset
                 </Button>
+                {error && (
+                    <Alert style={{ marginTop: '1em' }} variant={'error'}>
+                        {error}
+                    </Alert>
+                )}
+                {suksess && (
+                    <Alert style={{ marginTop: '1em' }} variant={'success'}>
+                        {suksess}
+                    </Alert>
+                )}
             </ContentContainer>
         </>
     )

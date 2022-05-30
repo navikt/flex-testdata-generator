@@ -26,7 +26,6 @@
         "@typescript-eslint/camelcase": 0,
         "@typescript-eslint/explicit-module-boundary-types": 0,
         "@typescript-eslint/ban-types": 0,
-        "no-console": "error",
         "no-fallthrough": 0,
         "no-undef": "off",
         "no-unused-vars": "off",

@@ -29,7 +29,7 @@ export async function sendToKafka(opts: Opts): Promise<RecordMetadata[]> {
             },
         ],
     }
-    const resposne = await producer.send(payload)
-    await producer.disconnect()
-    return resposne
+    const response = await producer.send(payload)
+    producer.disconnect().catch((e) => console.error('Feil ved disconnect', e))
+    return response
 }

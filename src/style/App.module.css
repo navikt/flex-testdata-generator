@@ -1,0 +1,11 @@
+.innholdsWrapper {
+    display: flex;
+}
+
+.sideMeny {
+    flex: 0 0 300px;
+}
+
+.innhold {
+    flex: 1 0 auto;
+}

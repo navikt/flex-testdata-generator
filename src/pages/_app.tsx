@@ -1,27 +1,33 @@
 import '../style/global.css'
 
-import type { AppProps as NextAppProps } from 'next/app'
-import Head from 'next/head'
-import React, { PropsWithChildren, useState } from 'react'
+import { PageHeader } from '@navikt/ds-react'
+import type { AppProps } from 'next/app'
+import Link from 'next/link'
+import React from 'react'
 
-interface AppProps extends Omit<NextAppProps, 'pageProps'> {
-    pageProps: PropsWithChildren<unknown> & {}
-}
+import styles from '../style/App.module.css'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     return (
         <>
-            <Head>
-                <title>Flex testdata kafka producer</title>
-                <meta name="robots" content="noindex" />
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1"
-                />
-            </Head>
-
-            <div id="root">
-                <Component {...pageProps} />
+            <PageHeader>Flex testdata kafka producer</PageHeader>
+            <div className={styles.innholdsWrapper}>
+                <ul className={styles.sideMeny}>
+                    <li>
+                        <Link href="/">Hjem</Link>
+                    </li>
+                    <li>
+                        <Link href="/reset">Reset testdata</Link>
+                    </li>
+                    <li>
+                        <Link href="/ditt-sykefravaer-melding">
+                            Ditt sykefravær melding
+                        </Link>
+                    </li>
+                </ul>
+                <div className={styles.innhold}>
+                    <Component {...pageProps} />
+                </div>
             </div>
         </>
     )

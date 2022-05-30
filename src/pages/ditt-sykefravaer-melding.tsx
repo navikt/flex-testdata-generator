@@ -6,11 +6,11 @@ const Index = () => {
     return (
         <>
             <Head>
-                <title>Flex testdata kafka producer</title>
+                <title>Ditt sykefravær melding</title>
             </Head>
             <ContentContainer>
                 <Heading size="xlarge" level="1">
-                    💪
+                    🚧
                 </Heading>
             </ContentContainer>
         </>

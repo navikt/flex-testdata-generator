@@ -43,18 +43,18 @@ const Index = () => {
                             return
                         }
                         setResetter(true)
-                        try {
-                            const res = await fetch(
-                                `/api/kafka/flex/testdata-reset/${uuidv4()}`,
-                                {
-                                    method: 'POST',
-                                    body: fnr,
-                                }
-                            )
-                            const body = await res.text()
+                        const res = await fetch(
+                            `/api/kafka/flex/testdata-reset/${uuidv4()}`,
+                            {
+                                method: 'POST',
+                                body: fnr,
+                            }
+                        )
+                        const body = await res.text()
+                        if (res.ok) {
                             setSuksess(body)
-                        } catch (e) {
-                            setError(JSON.stringify(e))
+                        } else {
+                            setError(body)
                         }
                         setResetter(false)
                     }}

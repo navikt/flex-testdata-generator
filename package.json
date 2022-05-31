@@ -1,5 +1,5 @@
 {
-  "name": "flex-testdata-kafka-producer",
+  "name": "flex-testdata-generator",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

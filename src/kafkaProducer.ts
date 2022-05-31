@@ -8,7 +8,7 @@ interface Opts {
 
 export async function sendToKafka(opts: Opts): Promise<RecordMetadata[]> {
     const kafkaConfig = {
-        clientId: 'flex-testdata-kafka-producer',
+        clientId: 'flex-testdata-generator',
         brokers: process.env.KAFKA_BROKERS!.split(','),
         ssl: {
             rejectUnauthorized: true,

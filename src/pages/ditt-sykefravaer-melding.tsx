@@ -1,11 +1,19 @@
-import { Alert, Button, ContentContainer, Heading, TextField } from '@navikt/ds-react'
+import {
+    Alert,
+    Button,
+    ContentContainer,
+    Heading,
+    TextField,
+} from '@navikt/ds-react'
 import Head from 'next/head'
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 const Index = () => {
     const [fnr, setFnr] = useState<string>()
-    const [tekst, setTekst] = useState<string>('En melding som tar deg til nav.no')
+    const [tekst, setTekst] = useState<string>(
+        'En melding som tar deg til nav.no'
+    )
     const [lenke, setLenke] = useState<string>('https://www.nav.no')
     const [uuid, setUuid] = useState<string>(uuidv4())
     const [resetter, setResetter] = useState<boolean>(false)
@@ -69,8 +77,8 @@ const Index = () => {
                             opprettMelding: {
                                 lenke,
                                 tekst,
-                                meldingType: 'testdata'
-                            }
+                                meldingType: 'testdata',
+                            },
                         }
                         const res = await fetch(
                             `/api/kafka/flex/ditt-sykefravaer-melding/${uuid}`,
@@ -102,20 +110,20 @@ const Index = () => {
                     </Alert>
                 )}
             </ContentContainer>
-        </>)
+        </>
+    )
 }
 
-
 export interface OpprettMelding {
-    tekst: string;
-    lenke: string;
-    meldingType: string;
-    synligFremTil?: Date;
+    tekst: string
+    lenke: string
+    meldingType: string
+    synligFremTil?: Date
 }
 
 export interface DittSykefravaerMelding {
-    opprettMelding: OpprettMelding;
-    fnr: string;
+    opprettMelding: OpprettMelding
+    fnr: string
 }
 
 export default Index

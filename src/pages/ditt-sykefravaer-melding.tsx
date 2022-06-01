@@ -3,6 +3,9 @@ import {
     Button,
     ContentContainer,
     Heading,
+    Radio,
+    RadioGroup,
+    Select,
     TextField,
 } from '@navikt/ds-react'
 import Head from 'next/head'
@@ -15,6 +18,8 @@ const Index = () => {
         'En melding som tar deg til nav.no'
     )
     const [lenke, setLenke] = useState<string>('https://www.nav.no')
+    const [variant, setVariant] = useState<string>('success')
+    const [lukkbar, setLukkbar] = useState<boolean>(true)
     const [uuid, setUuid] = useState<string>(uuidv4())
     const [resetter, setResetter] = useState<boolean>(false)
     const [error, setError] = useState<string | null>(null)
@@ -59,6 +64,26 @@ const Index = () => {
                     label="Lenke"
                     size="medium"
                 />
+                <Select
+                    label="Velg variant"
+                    value={variant}
+                    onChange={(w) => setVariant(w.target.value)}
+                >
+                    <option value="info">info</option>
+                    <option value="success">success</option>
+                    <option value="warning">warning</option>
+                    <option value="error">error</option>
+                </Select>
+
+                <RadioGroup
+                    legend={<div />}
+                    value={lukkbar}
+                    onChange={(v) => setLukkbar(v)}
+                >
+                    <Radio value={true}>Lukkbar</Radio>
+                    <Radio value={false}>Ikke lukkbar</Radio>
+                </RadioGroup>
+
                 <Button
                     style={{ marginTop: '1em' }}
                     loading={resetter}
@@ -77,6 +102,8 @@ const Index = () => {
                             opprettMelding: {
                                 lenke,
                                 tekst,
+                                variant,
+                                lukkbar,
                                 meldingType: 'testdata',
                             },
                         }
@@ -118,6 +145,8 @@ export interface OpprettMelding {
     tekst: string
     lenke: string
     meldingType: string
+    variant: string
+    lukkbar: boolean
     synligFremTil?: Date
 }
 

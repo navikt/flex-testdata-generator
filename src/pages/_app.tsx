@@ -10,7 +10,7 @@ import styles from '../style/App.module.css'
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     return (
         <>
-            <PageHeader>Flex testdata kafka producer</PageHeader>
+            <PageHeader>Flex testdata</PageHeader>
             <div className={styles.innholdsWrapper}>
                 <ul className={styles.sideMeny}>
                     <li>

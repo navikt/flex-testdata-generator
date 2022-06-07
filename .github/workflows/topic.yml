@@ -1,4 +1,4 @@
-name: "Deploy topic"
+name: 'Deploy topic'
 on:
   push:
     paths:

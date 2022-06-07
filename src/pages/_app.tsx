@@ -24,6 +24,9 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                             Ditt sykefravær melding
                         </Link>
                     </li>
+                    <li>
+                        <Link href="/spinnsyn">Spinnsyn</Link>
+                    </li>
                 </ul>
                 <div className={styles.innhold}>
                     <Component {...pageProps} />

@@ -6,7 +6,7 @@ const Index = () => {
     return (
         <>
             <Head>
-                <title>Flex testdata kafka producer</title>
+                <title>Flex testdata generator</title>
             </Head>
             <ContentContainer>
                 <Heading size="xlarge" level="1">

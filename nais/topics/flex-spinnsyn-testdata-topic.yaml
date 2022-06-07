@@ -1,7 +1,7 @@
 apiVersion: kafka.nais.io/v1
 kind: Topic
 metadata:
-  name: testdata-reset
+  name: spinnsyn-testdata
   namespace: flex
   labels:
     team: flex
@@ -16,22 +16,7 @@ spec:
     retentionHours: 72
   acl:
     - team: flex
-      application: syfosyketilfelle
-      access: read
-    - team: flex
-      application: flex-syketilfelle
-      access: read
-    - team: flex
       application: spinnsyn-backend
-      access: read
-    - team: flex
-      application: flex-juridisk-vurdering-test-backend
-      access: read
-    - team: flex
-      application: sykepengesoknad-backend
-      access: read
-    - team: flex
-      application: ditt-sykefravaer-backend
       access: read
     - team: flex
       application: flex-testdata-generator

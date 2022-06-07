@@ -1,0 +1,21 @@
+name: "Deploy topic"
+on:
+  push:
+    paths:
+      - nais/topics/**
+      - .github/workflows/topic.yml
+jobs:
+  deploy-topic-til-dev:
+    if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/heads/dev-')
+    name: Deploy topic to dev-gcp
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Deploy topic til dev-gcp
+        uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-gcp
+          RESOURCE: nais/topics/flex-testdata-reset-topic.yaml
+          VARS: nais/topics/dev.json

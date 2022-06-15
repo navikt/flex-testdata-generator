@@ -1,17 +1,22 @@
 import { LocalDate } from '@js-joda/core'
+import { Heading } from '@navikt/ds-react'
 import React, { Dispatch } from 'react'
-
-import { FomTom } from './VedtakV1'
 
 interface Props {
     fomTom: FomTom
     setFomTom: Dispatch<React.SetStateAction<FomTom>>
 }
 
+export interface FomTom {
+    fom: LocalDate
+    tom: LocalDate
+}
+
 function Datoer({ setFomTom, fomTom }: Props) {
     return (
-        <div style={{ border: '1px solid', padding: '1em' }}>
-            <div>
+        <>
+            <Heading size="xsmall">Vedtaksperiode</Heading>
+            <div style={{ paddingTop: '1em' }}>
                 <label>
                     FOM:
                     <input
@@ -41,7 +46,7 @@ function Datoer({ setFomTom, fomTom }: Props) {
                     />
                 </label>
             </div>
-        </div>
+        </>
     )
 }
 

@@ -8,11 +8,7 @@
  * Header[type]: Inntektsmeldingstatus
  */
 export interface Inntektsmeldingstatus {
-    status:
-        | 'MANGLER_INNTEKTSMELDING'
-        | 'HAR_INNTEKTSMELDING'
-        | 'TRENGER_IKKE_INNTEKTSMELDING'
-        | 'BEHANDLES_UTENFOR_SPLEIS'
+    status: InntektsmeldingstatusStatus
     /**
      * den sykmeldte identifisert med fnr, dnr eller npid
      */
@@ -42,3 +38,9 @@ export interface Inntektsmeldingstatus {
      */
     versjon: '1.0.0'
 }
+
+export type InntektsmeldingstatusStatus =
+    | 'MANGLER_INNTEKTSMELDING'
+    | 'HAR_INNTEKTSMELDING'
+    | 'TRENGER_IKKE_INNTEKTSMELDING'
+    | 'BEHANDLES_UTENFOR_SPLEIS'

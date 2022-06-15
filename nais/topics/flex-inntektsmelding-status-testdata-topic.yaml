@@ -16,7 +16,7 @@ spec:
     retentionHours: 72
   acl:
     - team: flex
-      application: inntektsmeldingstatus
+      application: flex-inntektsmelding-status
       access: read
     - team: flex
       application: flex-testdata-generator

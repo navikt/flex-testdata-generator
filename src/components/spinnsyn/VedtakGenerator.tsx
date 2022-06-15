@@ -1,8 +1,8 @@
 import { LocalDate } from '@js-joda/core'
 import React, { useState } from 'react'
 
+import Datoer, { FomTom } from '../datoer/Datoer'
 import AutomatiskBehandling from './AutomatiskBehandling'
-import Datoer from './Datoer'
 import { Fodselsnummer } from './Fodselsnummer'
 import { Inntekter } from './Inntekter'
 import { Orgnummer } from './Orgnummer'
@@ -12,7 +12,6 @@ import { SprefVariant } from './SprefVariant'
 import Sykedager from './Sykedager'
 import Utbetalingsdager from './Utbetalingsdager'
 import Utbetalingstype from './Utbetalingstype'
-import { FomTom } from './VedtakV1'
 import {
     Begrensning,
     GrunnlagForSykepengegrunnlagPerArbeidsgiver,
@@ -60,7 +59,9 @@ function VedtakGenerator() {
                 setFodselsnummer={setFodselsnummer}
             />
 
-            <Datoer fomTom={fomTom} setFomTom={setFomTom} />
+            <div style={{ border: '1px solid', padding: '1em' }}>
+                <Datoer fomTom={fomTom} setFomTom={setFomTom} />
+            </div>
             <Orgnummer orgnummer={orgnummer} setOrgnummer={setOrgnummer} />
             <Inntekter
                 orgnummer={orgnummer}

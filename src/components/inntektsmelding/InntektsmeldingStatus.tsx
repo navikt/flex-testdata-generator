@@ -111,7 +111,7 @@ export const InntektsmeldingStatus = (p: InntektsmeldingStatusProps) => {
                     const valid = validator.validate(request, p.skjema)
                     if (valid.valid) {
                         const res = await fetch(
-                            `/api/kafka/flex/flex-inntektsmelding-status/${vedtaksperiodeId}`,
+                            `/api/kafka/flex/inntektsmeldingstatus-testdata/${vedtaksperiodeId}`,
                             {
                                 method: 'POST',
                                 body: JSON.stringify(request),

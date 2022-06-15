@@ -2,9 +2,9 @@ import { DayOfWeek, LocalDate } from '@js-joda/core'
 import React, { Dispatch, useEffect, useState } from 'react'
 import { v4 } from 'uuid'
 
+import { FomTom } from '../datoer/Datoer'
 import { SprefVariant } from './SprefVariant'
 import { Utbetaling } from './Utbetaling'
-import { FomTom } from './VedtakV1'
 import { OppdragDto, UtbetalingslinjeDto } from './VedtakV2'
 
 interface Props {

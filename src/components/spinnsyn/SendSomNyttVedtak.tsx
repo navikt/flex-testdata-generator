@@ -2,7 +2,7 @@ import { LocalDate } from '@js-joda/core'
 import React, { useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
-import { FomTom } from './VedtakV1'
+import { FomTom } from '../datoer/Datoer'
 import {
     Begrensning,
     GrunnlagForSykepengegrunnlagPerArbeidsgiver,

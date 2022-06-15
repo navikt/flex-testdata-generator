@@ -1,10 +1,10 @@
 import React, { Dispatch, useEffect } from 'react'
 
+import { formaterValuta } from '../../utils/valutaformat'
 import {
     Begrensning,
     GrunnlagForSykepengegrunnlagPerArbeidsgiver,
-} from '../../types/VedtakV2'
-import { formaterValuta } from '../../utils/valutaformat'
+} from './VedtakV2'
 
 interface Props {
     månedsinntekt: number

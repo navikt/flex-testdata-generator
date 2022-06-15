@@ -26,3 +26,10 @@ jobs:
           CLUSTER: dev-gcp
           RESOURCE: nais/topics/flex-spinnsyn-testdata-topic.yaml
           VARS: nais/topics/dev.json
+      - name: Deploy topic til dev-gcp
+        uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-gcp
+          RESOURCE: nais/topics/flex-inntektsmelding-status-testdata-topic.yaml
+          VARS: nais/topics/dev.json

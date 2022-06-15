@@ -13,7 +13,7 @@ const Index = () => {
     return (
         <>
             <Head>
-                x<title>Spinnsyn testdata generator</title>
+                <title>Spinnsyn testdata generator</title>
             </Head>
             <ContentContainer>
                 <Heading size="xlarge" level="1" className="sidebanner__tittel">

@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "@js-joda/core": "^5.2.0",
-    "@navikt/ds-css": "^0.17.2",
-    "@navikt/ds-react": "^0.18.6",
+    "@navikt/ds-css": "^0.18.10",
+    "@navikt/ds-react": "^0.19.10",
     "@navikt/ds-tokens": "^0.9.1",
     "kafkajs": "^2.0.2",
     "react": "^18.1.0",

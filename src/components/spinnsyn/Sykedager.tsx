@@ -1,7 +1,7 @@
 import { DayOfWeek, LocalDate } from '@js-joda/core'
 import React, { Dispatch, useEffect } from 'react'
 
-import { FomTom } from '../../types/VedtakV1'
+import { FomTom } from './VedtakV1'
 
 interface Props {
     forbrukteSykedager: number

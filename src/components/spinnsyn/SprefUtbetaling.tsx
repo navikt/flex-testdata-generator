@@ -2,10 +2,10 @@ import { DayOfWeek, LocalDate } from '@js-joda/core'
 import React, { Dispatch, useEffect, useState } from 'react'
 import { v4 } from 'uuid'
 
-import { SprefVariant } from '../../types/SprefVariant'
-import { FomTom } from '../../types/VedtakV1'
-import { OppdragDto, UtbetalingslinjeDto } from '../../types/VedtakV2'
+import { SprefVariant } from './SprefVariant'
 import { Utbetaling } from './Utbetaling'
+import { FomTom } from './VedtakV1'
+import { OppdragDto, UtbetalingslinjeDto } from './VedtakV2'
 
 interface Props {
     dagsats: number

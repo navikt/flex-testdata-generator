@@ -27,6 +27,11 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                     <li>
                         <Link href="/spinnsyn">Spinnsyn</Link>
                     </li>
+                    <li>
+                        <Link href="/inntektsmeldingstatus">
+                            Inntektsmelding status
+                        </Link>
+                    </li>
                 </ul>
                 <div className={styles.innhold}>
                     <Component {...pageProps} />

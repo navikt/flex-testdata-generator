@@ -1,7 +1,7 @@
 import { LocalDate } from '@js-joda/core'
 import React, { Dispatch } from 'react'
 
-import { FomTom } from '../../types/VedtakV1'
+import { FomTom } from './VedtakV1'
 
 interface Props {
     fomTom: FomTom

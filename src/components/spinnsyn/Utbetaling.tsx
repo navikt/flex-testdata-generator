@@ -1,6 +1,6 @@
 import React, { Dispatch } from 'react'
 
-import { OppdragDto, UtbetalingslinjeDto } from '../../types/VedtakV2'
+import { OppdragDto, UtbetalingslinjeDto } from './VedtakV2'
 
 interface UtbetalingslinjeProps {
     idx: number

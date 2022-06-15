@@ -2,7 +2,7 @@ import { LocalDate } from '@js-joda/core'
 import React, { useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
-import { FomTom } from '../../types/VedtakV1'
+import { FomTom } from './VedtakV1'
 import {
     Begrensning,
     GrunnlagForSykepengegrunnlagPerArbeidsgiver,
@@ -10,7 +10,7 @@ import {
     UtbetalingdagDto,
     UtbetalingUtbetalt,
     VedtakFattetForEksternDto,
-} from '../../types/VedtakV2'
+} from './VedtakV2'
 
 interface Props {
     automatiskBehandling: boolean

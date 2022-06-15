@@ -1,14 +1,6 @@
 import { LocalDate } from '@js-joda/core'
 import React, { useState } from 'react'
 
-import { SprefVariant } from '../../types/SprefVariant'
-import { FomTom } from '../../types/VedtakV1'
-import {
-    Begrensning,
-    GrunnlagForSykepengegrunnlagPerArbeidsgiver,
-    OppdragDto,
-    UtbetalingdagDto,
-} from '../../types/VedtakV2'
 import AutomatiskBehandling from './AutomatiskBehandling'
 import Datoer from './Datoer'
 import { Fodselsnummer } from './Fodselsnummer'
@@ -16,9 +8,17 @@ import { Inntekter } from './Inntekter'
 import { Orgnummer } from './Orgnummer'
 import SendSomNyttVedtak from './SendSomNyttVedtak'
 import SprefUtbetaling from './SprefUtbetaling'
+import { SprefVariant } from './SprefVariant'
 import Sykedager from './Sykedager'
 import Utbetalingsdager from './Utbetalingsdager'
 import Utbetalingstype from './Utbetalingstype'
+import { FomTom } from './VedtakV1'
+import {
+    Begrensning,
+    GrunnlagForSykepengegrunnlagPerArbeidsgiver,
+    OppdragDto,
+    UtbetalingdagDto,
+} from './VedtakV2'
 
 function VedtakGenerator() {
     const [automatiskBehandling, setAutomatiskBehandling] =

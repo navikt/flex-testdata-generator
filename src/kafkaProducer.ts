@@ -1,4 +1,4 @@
-import { Kafka, RecordMetadata } from 'kafkajs'
+import { Kafka, Message, RecordMetadata } from 'kafkajs'
 
 interface Opts {
     topic: string
@@ -20,14 +20,18 @@ export async function sendToKafka(opts: Opts): Promise<RecordMetadata[]> {
     const client = new Kafka(kafkaConfig)
     const producer = client.producer()
     await producer.connect()
+    const message: Message = {
+        value: opts.value,
+        key: opts.key,
+    }
+    if (opts.topic === 'flex.inntektsmeldingstatus-testdata') {
+        message.headers = {
+            type: 'Inntektsmeldingstatus',
+        }
+    }
     const payload = {
         topic: opts.topic,
-        messages: [
-            {
-                value: opts.value,
-                key: opts.key,
-            },
-        ],
+        messages: [message],
     }
     const response = await producer.send(payload)
     producer.disconnect().catch((e) => console.error('Feil ved disconnect', e))

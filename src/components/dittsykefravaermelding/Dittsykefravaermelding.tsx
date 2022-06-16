@@ -1,5 +1,6 @@
+import { DateTimeFormatter, LocalDateTime, ZoneOffset } from '@js-joda/core'
 import { Button, Radio, RadioGroup, Select, TextField } from '@navikt/ds-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'
@@ -11,8 +12,18 @@ export const Dittsykefravaermelding = (p: FellesInputChildrenProps) => {
     const [lenke, setLenke] = useState<string>('https://www.nav.no')
     const [variant, setVariant] = useState<string>('success')
     const [lukkbar, setLukkbar] = useState<boolean>(true)
+    const [medSynligFremTil, setMedSynligFremTil] = useState<boolean>(true)
+    const [synligFremTil, setSynligFremTil] = useState<string>(
+        '2022-06-16T10:00:00'
+    )
+    const formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+
     const [uuid, setUuid] = useState<string>(uuidv4())
     const [resetter, setResetter] = useState<boolean>(false)
+
+    useEffect(() => {
+        setSynligFremTil(LocalDateTime.now().plusMinutes(2).format(formatter))
+    }, [formatter])
     return (
         <>
             <TextField
@@ -25,6 +36,7 @@ export const Dittsykefravaermelding = (p: FellesInputChildrenProps) => {
                 label="Tekst"
                 size="medium"
             />
+
             <TextField
                 onChange={(e) => {
                     setLenke(e.target.value)
@@ -45,7 +57,26 @@ export const Dittsykefravaermelding = (p: FellesInputChildrenProps) => {
                 <option value="warning">warning</option>
                 <option value="error">error</option>
             </Select>
+            <RadioGroup
+                legend={<div />}
+                value={medSynligFremTil}
+                onChange={(v) => setMedSynligFremTil(v)}
+            >
+                <Radio value={true}>Med synlig frem til</Radio>
+                <Radio value={false}>Uten synlig frem til</Radio>
+            </RadioGroup>
 
+            {medSynligFremTil && (
+                <TextField
+                    onChange={(e) => {
+                        setSynligFremTil(e.target.value)
+                    }}
+                    type={'datetime-local' as any}
+                    value={synligFremTil}
+                    label="Synlig frem til"
+                    size="medium"
+                />
+            )}
             <RadioGroup
                 legend={<div />}
                 value={lukkbar}
@@ -78,6 +109,14 @@ export const Dittsykefravaermelding = (p: FellesInputChildrenProps) => {
                             meldingType: 'testdata',
                         },
                     }
+                    if (medSynligFremTil) {
+                        request.opprettMelding.synligFremTil =
+                            LocalDateTime.parse(synligFremTil, formatter)
+                                .atZone(ZoneOffset.systemDefault())
+                                .toOffsetDateTime()
+                                .toInstant()
+                                .toString()
+                    }
                     const res = await fetch(
                         `/api/kafka/flex/ditt-sykefravaer-melding/${uuid}`,
                         {
@@ -107,7 +146,7 @@ export interface OpprettMelding {
     meldingType: string
     variant: string
     lukkbar: boolean
-    synligFremTil?: Date
+    synligFremTil?: string
 }
 
 export interface DittSykefravaerKafkaMelding {

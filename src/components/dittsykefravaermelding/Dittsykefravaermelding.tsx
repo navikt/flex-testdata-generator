@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'
 
+const formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+
 export const Dittsykefravaermelding = (p: FellesInputChildrenProps) => {
     const [tekst, setTekst] = useState<string>(
         'En melding som tar deg til nav.no'
@@ -16,14 +18,13 @@ export const Dittsykefravaermelding = (p: FellesInputChildrenProps) => {
     const [synligFremTil, setSynligFremTil] = useState<string>(
         '2022-06-16T10:00:00'
     )
-    const formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
 
     const [uuid, setUuid] = useState<string>(uuidv4())
     const [resetter, setResetter] = useState<boolean>(false)
 
     useEffect(() => {
         setSynligFremTil(LocalDateTime.now().plusMinutes(2).format(formatter))
-    }, [formatter])
+    }, [])
     return (
         <>
             <TextField

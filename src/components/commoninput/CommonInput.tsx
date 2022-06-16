@@ -1,6 +1,6 @@
 import { Alert, ContentContainer, Heading, TextField } from '@navikt/ds-react'
 import Head from 'next/head'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 interface FellesInputProps {
     header: string
@@ -19,6 +19,10 @@ export const CommonInput = (p: FellesInputProps) => {
     const [fnr, setFnr] = useState<string>()
     const [error, setError] = useState<string | null>(null)
     const [suksess, setSuksess] = useState<string | null>(null)
+
+    useEffect(() => {
+        setFnr(localStorage.getItem('flex-testdata-fnr') || '')
+    }, [])
     return (
         <>
             <Head>
@@ -32,6 +36,10 @@ export const CommonInput = (p: FellesInputProps) => {
                 <TextField
                     onChange={(e) => {
                         setFnr(e.target.value)
+                        localStorage.setItem(
+                            'flex-testdata-fnr',
+                            e.target.value
+                        )
                         setError(null)
                         setSuksess(null)
                     }}

@@ -13,9 +13,15 @@ export async function opprettJournalpost(opts: Opts): Promise<any> {
     const url =
         'https://dokarkiv-q1.nais.preprod.local/rest/journalpostapi/v1/journalpost'
 
+    console.log('process.env', process.env) // eslint-disable-line
+
     const token = await getAzureAdAccessToken(process.env.DOKARKIV_CLIENT_ID!)
 
+    console.log('token', token) // eslint-disable-line
+
     const request = opprettJournalpostPayload(opts)
+
+    console.log('request', request) // eslint-disable-line
 
     const response = await fetch(`${url}?forsoekFerdigstill=false`, {
         method: 'POST',

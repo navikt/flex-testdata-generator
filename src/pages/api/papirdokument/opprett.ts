@@ -11,12 +11,7 @@ const handler = async (
         await sleep(2000)
         res.status(200).json({ message: 'Fake response' })
     } else {
-        const response = await opprettJournalpost({
-            fnr: req.body.fnr,
-            tema: req.body.tema,
-            skjema: req.body.skjema,
-            tittel: req.body.tittel,
-        })
+        const response = await opprettJournalpost(JSON.parse(req.body))
         res.status(200).json({ message: "I'm alive", response })
     }
 }

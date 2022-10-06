@@ -28,6 +28,15 @@ spec:
     path: api/isReady
   kafka:
     pool: nav-dev
+  azure:
+    application:
+      enabled: true
+  accessPolicy:
+    outbound:
+      external:
+        - host: dokarkivHost
   env:
     - name: MOCK_BACKEND
       value: "false"
+    - name: DOKARKIV_CLIENT_ID
+      value: "api://dev-fss.teamdokumenthandtering.dokarkiv-q1/.default"

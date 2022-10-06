@@ -11,7 +11,7 @@ interface Opts {
 
 export async function opprettJournalpost(opts: Opts): Promise<any> {
     const url =
-        'https://dokarkiv-q1.nais.preprod.local/rest/journalpostapi/v1/journalpost'
+        'https://dokarkiv.dev-fss-pub.nais.io/rest/journalpostapi/v1/journalpost?forsoekFerdigstill=false'
 
     console.log('process.env', process.env) // eslint-disable-line
 
@@ -23,7 +23,7 @@ export async function opprettJournalpost(opts: Opts): Promise<any> {
 
     console.log('request', request) // eslint-disable-line
 
-    const response = await fetch(`${url}?forsoekFerdigstill=false`, {
+    const response = await fetch(url, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,

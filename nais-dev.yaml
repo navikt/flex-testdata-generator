@@ -34,7 +34,7 @@ spec:
   accessPolicy:
     outbound:
       external:
-        - host: dokarkivHost
+        - host: dokarkiv.dev-fss-pub.nais.io
   env:
     - name: MOCK_BACKEND
       value: "false"

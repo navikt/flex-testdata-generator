@@ -10,7 +10,9 @@ import styles from '../style/App.module.css'
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     return (
         <>
-            <Heading size="xlarge" className={styles.heading}>Flex testdata</Heading>
+            <Heading size="xlarge" className={styles.heading}>
+                Flex testdata
+            </Heading>
             <div className={styles.innholdsWrapper}>
                 <ul className={styles.sideMeny}>
                     <li>

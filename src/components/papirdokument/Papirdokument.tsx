@@ -67,6 +67,10 @@ export const Papirdokument = (p: FellesInputChildrenProps) => {
                         body: JSON.stringify(request),
                     })
                     const response = await res.text()
+
+                    console.log('res.json', res.json()) // eslint-disable-line
+                    console.log('response', response) // eslint-disable-line
+
                     if (res.ok) {
                         p.setSuksess('Papir dokument opprettet')
                     } else {

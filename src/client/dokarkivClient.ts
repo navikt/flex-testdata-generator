@@ -13,8 +13,6 @@ export async function opprettJournalpost(opts: Opts): Promise<any> {
     const url =
         'https://dokarkiv.dev-fss-pub.nais.io/rest/journalpostapi/v1/journalpost?forsoekFerdigstill=false'
 
-    console.log('process.env', process.env) // eslint-disable-line
-
     const token = await getAzureAdAccessToken(process.env.DOKARKIV_CLIENT_ID!)
 
     console.log('token', token) // eslint-disable-line
@@ -32,6 +30,8 @@ export async function opprettJournalpost(opts: Opts): Promise<any> {
         },
         body: JSON.stringify(request),
     })
+
+    console.log('response', response) // eslint-disable-line
 
     return response
 }

@@ -12,7 +12,7 @@ const handler = async (
         res.status(200).json({ message: 'Fake response' })
     } else {
         const response = await opprettJournalpost(JSON.parse(req.body))
-        res.status(200).json({ message: "I'm alive", response })
+        res.status(response.status).json({ message: 'Response :', response })
     }
 }
 

@@ -72,7 +72,7 @@ export const Papirdokument = (p: FellesInputChildrenProps) => {
                     console.log('response', response) // eslint-disable-line
 
                     if (res.ok) {
-                        p.setSuksess('Papir dokument opprettet')
+                        p.setSuksess(response)
                     } else {
                         p.setError(response)
                     }

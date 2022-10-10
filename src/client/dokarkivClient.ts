@@ -15,11 +15,7 @@ export async function opprettJournalpost(opts: Opts): Promise<any> {
 
     const token = await getAzureAdAccessToken(process.env.DOKARKIV_CLIENT_ID!)
 
-    console.log('token', token) // eslint-disable-line
-
     const request = opprettJournalpostPayload(opts)
-
-    console.log('request', request) // eslint-disable-line
 
     const response = await fetch(url, {
         method: 'POST',
@@ -30,8 +26,6 @@ export async function opprettJournalpost(opts: Opts): Promise<any> {
         },
         body: JSON.stringify(request),
     })
-
-    console.log('response', response) // eslint-disable-line
 
     return response
 }

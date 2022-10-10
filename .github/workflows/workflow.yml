@@ -35,18 +35,18 @@ jobs:
       - name: Build application
         run: npm run build
       - name: Docker login
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master' || startsWith(github.ref_name, 'dev-')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: docker login ghcr.io -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
       - name: Bygg og push Docker image
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/master' || startsWith(github.ref_name, 'dev-')
         run: |
           docker build . -f Dockerfile -t ${IMAGE}
           docker push ${IMAGE}
 
   deploy-to-dev-gcp:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master' || startsWith(github.ref_name, 'dev-')
     name: Deploy to dev-gcp
     needs: build-and-publish
     runs-on: ubuntu-latest

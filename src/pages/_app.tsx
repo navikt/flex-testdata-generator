@@ -34,6 +34,9 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                             Inntektsmelding status
                         </Link>
                     </li>
+                    <li>
+                        <Link href="/papir-dokument">Papir dokument</Link>
+                    </li>
                 </ul>
                 <div className={styles.innhold}>
                     <Component {...pageProps} />

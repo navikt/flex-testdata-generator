@@ -1,6 +1,6 @@
 import '../style/global.css'
 
-import { PageHeader } from '@navikt/ds-react'
+import { Heading } from '@navikt/ds-react'
 import type { AppProps } from 'next/app'
 import Link from 'next/link'
 import React from 'react'
@@ -10,7 +10,7 @@ import styles from '../style/App.module.css'
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     return (
         <>
-            <PageHeader>Flex testdata</PageHeader>
+            <Heading size="xlarge" className={styles.heading}>Flex testdata</Heading>
             <div className={styles.innholdsWrapper}>
                 <ul className={styles.sideMeny}>
                     <li>

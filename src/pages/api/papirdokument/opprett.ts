@@ -12,7 +12,13 @@ const handler = async (
         res.status(200).json({ message: 'Fake response' })
     } else {
         const response = await opprettJournalpost(JSON.parse(req.body))
-        res.status(response.status).json(response.json())
+
+        let body = response.json()
+        if (Object.keys(body).length === 0) {
+            body = response.statusText
+        }
+
+        res.status(response.status).json(body)
     }
 }
 

@@ -14,13 +14,14 @@ export async function opprettJournalpost(opts: Opts): Promise<any> {
         'https://dokarkiv.dev-fss-pub.nais.io/rest/journalpostapi/v1/journalpost?forsoekFerdigstill=false'
 
     const token = await getAzureAdAccessToken(process.env.DOKARKIV_CLIENT_ID!)
+    const access_token = token.access_token
 
     const request = opprettJournalpostPayload(opts)
 
     const response = await fetch(url, {
         method: 'POST',
         headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${access_token}`,
             'Nav-Callid': uuid(),
             'Content-Type': 'application/json',
         },

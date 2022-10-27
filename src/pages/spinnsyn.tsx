@@ -4,12 +4,9 @@ import Head from 'next/head'
 import React from 'react'
 
 const Index = () => {
-    const VedtakGenerator = dynamic(
-        () => import('../components/spinnsyn/VedtakGenerator'),
-        {
-            ssr: false,
-        }
-    )
+    const VedtakGenerator = dynamic(() => import('../components/spinnsyn/VedtakGenerator'), {
+        ssr: false,
+    })
     return (
         <>
             <Head>

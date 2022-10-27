@@ -5,7 +5,7 @@ interface Props {
     setAutomatiskBehandling: Dispatch<React.SetStateAction<boolean>>
 }
 
-export default ({ automatiskBehandling, setAutomatiskBehandling }: Props) => {
+const automatiskBehandling = ({ automatiskBehandling, setAutomatiskBehandling }: Props) => {
     return (
         <div style={{ border: '1px solid', padding: '1em' }}>
             <label>
@@ -21,3 +21,4 @@ export default ({ automatiskBehandling, setAutomatiskBehandling }: Props) => {
         </div>
     )
 }
+export default automatiskBehandling

@@ -6,10 +6,8 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'
 import Datoer, { FomTom } from '../datoer/Datoer'
-import {
-    Inntektsmeldingstatus,
-    InntektsmeldingstatusStatus,
-} from './InntektsmeldingStatusTyper'
+
+import { Inntektsmeldingstatus, InntektsmeldingstatusStatus } from './InntektsmeldingStatusTyper'
 
 const validator = new jsonschema.Validator()
 
@@ -18,9 +16,7 @@ export interface InntektsmeldingStatusProps extends FellesInputChildrenProps {
 }
 
 export const InntektsmeldingStatus = (p: InntektsmeldingStatusProps) => {
-    const [status, setStatus] = useState<InntektsmeldingstatusStatus>(
-        'MANGLER_INNTEKTSMELDING'
-    )
+    const [status, setStatus] = useState<InntektsmeldingstatusStatus>('MANGLER_INNTEKTSMELDING')
     const [orgnummer, setOrgnummer] = useState<string>('967170232')
 
     const [fomTom, setFomTom] = useState<FomTom>({
@@ -32,21 +28,11 @@ export const InntektsmeldingStatus = (p: InntektsmeldingStatusProps) => {
 
     return (
         <>
-            <Select
-                label="Velg status"
-                value={status}
-                onChange={(w) => setStatus(w.target.value as any)}
-            >
-                <option value="MANGLER_INNTEKTSMELDING">
-                    MANGLER_INNTEKTSMELDING
-                </option>
+            <Select label="Velg status" value={status} onChange={(w) => setStatus(w.target.value as any)}>
+                <option value="MANGLER_INNTEKTSMELDING">MANGLER_INNTEKTSMELDING</option>
                 <option value="HAR_INNTEKTSMELDING">HAR_INNTEKTSMELDING</option>
-                <option value="TRENGER_IKKE_INNTEKTSMELDING">
-                    TRENGER_IKKE_INNTEKTSMELDING
-                </option>
-                <option value="BEHANDLES_UTENFOR_SPLEIS">
-                    BEHANDLES_UTENFOR_SPLEIS
-                </option>
+                <option value="TRENGER_IKKE_INNTEKTSMELDING">TRENGER_IKKE_INNTEKTSMELDING</option>
+                <option value="BEHANDLES_UTENFOR_SPLEIS">BEHANDLES_UTENFOR_SPLEIS</option>
                 <option value="UGYLDIG">Ugyldig option</option>
             </Select>
             <TextField
@@ -110,13 +96,10 @@ export const InntektsmeldingStatus = (p: InntektsmeldingStatusProps) => {
                     }
                     const valid = validator.validate(request, p.skjema)
                     if (valid.valid) {
-                        const res = await fetch(
-                            `/api/kafka/flex/inntektsmeldingstatus-testdata/${vedtaksperiodeId}`,
-                            {
-                                method: 'POST',
-                                body: JSON.stringify(request),
-                            }
-                        )
+                        const res = await fetch(`/api/kafka/flex/inntektsmeldingstatus-testdata/${vedtaksperiodeId}`, {
+                            method: 'POST',
+                            body: JSON.stringify(request),
+                        })
                         const response = await res.text()
                         if (res.ok) {
                             p.setSuksess(`Statusmelding med id ${id} opprettet`)

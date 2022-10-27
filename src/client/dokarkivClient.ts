@@ -10,8 +10,7 @@ interface Opts {
 }
 
 export async function opprettJournalpost(opts: Opts): Promise<any> {
-    const url =
-        'https://dokarkiv.dev-fss-pub.nais.io/rest/journalpostapi/v1/journalpost?forsoekFerdigstill=false'
+    const url = 'https://dokarkiv.dev-fss-pub.nais.io/rest/journalpostapi/v1/journalpost?forsoekFerdigstill=false'
 
     const token = await getAzureAdAccessToken(process.env.DOKARKIV_CLIENT_ID!)
     const access_token = token.access_token
@@ -57,18 +56,6 @@ function opprettJournalpostPayload(opts: Opts): JournalpostRequest {
             },
         ],
     }
-}
-
-interface JournalpostResponse {
-    dokumenter: DokumentInfo[]
-    journalpostId: string
-    journalpostferdigstilt: boolean
-}
-
-interface DokumentInfo {
-    brevkode?: string
-    dokumentInfoId?: string
-    tittel?: string
 }
 
 interface JournalpostRequest {

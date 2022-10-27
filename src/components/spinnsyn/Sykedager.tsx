@@ -8,9 +8,7 @@ interface Props {
     setForbrukteSykedager: Dispatch<React.SetStateAction<number>>
     gjenstaendeSykedager: number
     setGjenstaendeSykedager: Dispatch<React.SetStateAction<number>>
-    setForeløpigBeregnetSluttPåSykepenger: Dispatch<
-        React.SetStateAction<LocalDate>
-    >
+    setForeløpigBeregnetSluttPåSykepenger: Dispatch<React.SetStateAction<LocalDate>>
     foreløpigBeregnetSluttPåSykepenger: LocalDate
     fomTom: FomTom
 }
@@ -34,10 +32,7 @@ function Sykedager({
         let dagerTilSlutt = gjenstaendeSykedager
         let dato = fomTom.tom
         while (dagerTilSlutt > 0) {
-            if (
-                dato.dayOfWeek() !== DayOfWeek.SATURDAY &&
-                dato.dayOfWeek() !== DayOfWeek.SUNDAY
-            ) {
+            if (dato.dayOfWeek() !== DayOfWeek.SATURDAY && dato.dayOfWeek() !== DayOfWeek.SUNDAY) {
                 dagerTilSlutt--
             }
             dato = dato.plusDays(1)

@@ -2,6 +2,7 @@ import { Button, Select } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'
+
 import { TemaSkjema } from './Temaskjema'
 
 export const Papirdokument = (p: FellesInputChildrenProps) => {
@@ -11,29 +12,15 @@ export const Papirdokument = (p: FellesInputChildrenProps) => {
 
     return (
         <>
-            <Select
-                label="Tema"
-                value={tema}
-                onChange={(w) => setTema(w.target.value)}
-            >
+            <Select label="Tema" value={tema} onChange={(w) => setTema(w.target.value)}>
                 {TemaSkjema.map((tema) => (
-                    <option
-                        value={tema.value}
-                        key={tema.value}
-                    >{`${tema.value} - ${tema.label}`}</option>
+                    <option value={tema.value} key={tema.value}>{`${tema.value} - ${tema.label}`}</option>
                 ))}
             </Select>
 
-            <Select
-                label="Skjema"
-                value={brevkode}
-                onChange={(w) => setBrevkode(w.target.value)}
-            >
+            <Select label="Skjema" value={brevkode} onChange={(w) => setBrevkode(w.target.value)}>
                 {TemaSkjema.find((t) => t.value === tema)?.skjema?.map((s) => (
-                    <option
-                        value={s.brevkode}
-                        key={s.brevkode}
-                    >{`${s.brevkode} - ${s.tittel}`}</option>
+                    <option value={s.brevkode} key={s.brevkode}>{`${s.brevkode} - ${s.tittel}`}</option>
                 ))}
             </Select>
 
@@ -52,9 +39,9 @@ export const Papirdokument = (p: FellesInputChildrenProps) => {
 
                     setResetter(true)
 
-                    const tittel = TemaSkjema.find(
-                        (t) => t.value === tema
-                    )!.skjema.find((s) => s.brevkode === brevkode)!.tittel
+                    const tittel = TemaSkjema.find((t) => t.value === tema)!.skjema.find(
+                        (s) => s.brevkode === brevkode,
+                    )!.tittel
 
                     const request: PapirDokumentRequest = {
                         fnr: p.fnr,

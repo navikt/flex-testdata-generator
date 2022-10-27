@@ -22,17 +22,13 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                         <Link href="/reset">Reset testdata</Link>
                     </li>
                     <li>
-                        <Link href="/ditt-sykefravaer-melding">
-                            Ditt sykefravær melding
-                        </Link>
+                        <Link href="/ditt-sykefravaer-melding">Ditt sykefravær melding</Link>
                     </li>
                     <li>
                         <Link href="/spinnsyn">Spinnsyn</Link>
                     </li>
                     <li>
-                        <Link href="/inntektsmeldingstatus">
-                            Inntektsmelding status
-                        </Link>
+                        <Link href="/inntektsmeldingstatus">Inntektsmelding status</Link>
                     </li>
                     <li>
                         <Link href="/papir-dokument">Papir dokument</Link>

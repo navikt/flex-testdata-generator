@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
 import { FomTom } from '../datoer/Datoer'
+
 import {
     Begrensning,
     GrunnlagForSykepengegrunnlagPerArbeidsgiver,
@@ -61,8 +62,7 @@ function SendSomNyttVedtak({
             fom: fomTom.fom,
             tom: fomTom.tom,
             antallVedtak: 1,
-            foreløpigBeregnetSluttPåSykepenger:
-                foreløpigBeregnetSluttPåSykepenger,
+            foreløpigBeregnetSluttPåSykepenger: foreløpigBeregnetSluttPåSykepenger,
             forbrukteSykedager: forbrukteSykedager,
             gjenståendeSykedager: gjenstaendeSykedager,
             automatiskBehandling: automatiskBehandling,
@@ -90,8 +90,7 @@ function SendSomNyttVedtak({
             utbetalingId: utbetalingUtbetalt.utbetalingId,
             vedtakFattetTidspunkt: vedtakFattetTidspunkt,
         }
-        vedtak.grunnlagForSykepengegrunnlagPerArbeidsgiver![orgnummer] =
-            månedsinntekt * 12
+        vedtak.grunnlagForSykepengegrunnlagPerArbeidsgiver![orgnummer] = månedsinntekt * 12
 
         return {
             vedtak: vedtak,
@@ -111,16 +110,13 @@ function SendSomNyttVedtak({
                 onClick={async () => {
                     const vedtak = genererVedtakV2()
 
-                    const res = await fetch(
-                        `/api/kafka/flex/spinnsyn-testdata/${fodselsnummer}`,
-                        {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                vedtak: JSON.stringify(vedtak.vedtak),
-                                utbetaling: JSON.stringify(vedtak.utbetaling),
-                            }),
-                        }
-                    )
+                    const res = await fetch(`/api/kafka/flex/spinnsyn-testdata/${fodselsnummer}`, {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            vedtak: JSON.stringify(vedtak.vedtak),
+                            utbetaling: JSON.stringify(vedtak.utbetaling),
+                        }),
+                    })
                     const response = await res.text()
                     if (res.ok) {
                         window.alert(`Melding ${uuid} opprettet`)

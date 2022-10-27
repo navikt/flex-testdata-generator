@@ -1,10 +1,8 @@
 import React, { Dispatch, useEffect } from 'react'
 
 import { formaterValuta } from '../../utils/valutaformat'
-import {
-    Begrensning,
-    GrunnlagForSykepengegrunnlagPerArbeidsgiver,
-} from './VedtakV2'
+
+import { Begrensning, GrunnlagForSykepengegrunnlagPerArbeidsgiver } from './VedtakV2'
 
 interface Props {
     månedsinntekt: number
@@ -17,9 +15,7 @@ interface Props {
     setBegrensning: Dispatch<React.SetStateAction<Begrensning>>
     orgnummer: string
     ekstraArbeidsgivere: GrunnlagForSykepengegrunnlagPerArbeidsgiver
-    setEkstraArbeidsgivere: Dispatch<
-        React.SetStateAction<GrunnlagForSykepengegrunnlagPerArbeidsgiver>
-    >
+    setEkstraArbeidsgivere: Dispatch<React.SetStateAction<GrunnlagForSykepengegrunnlagPerArbeidsgiver>>
     dagsats: number
     setDagsats: Dispatch<React.SetStateAction<number>>
 }
@@ -45,10 +41,7 @@ export const Inntekter = ({
         const orgnummer = orgnr[Math.floor(Math.random() * orgnr.length)]
 
         const valgtOrgnr = prompt('Orgnummer?', orgnummer)
-        const valgtInntekt = prompt(
-            'Inntekt?',
-            Math.floor(Math.random() * 500000).toString()
-        )
+        const valgtInntekt = prompt('Inntekt?', Math.floor(Math.random() * 500000).toString())
         if (!valgtOrgnr || !valgtInntekt) {
             alert('Du gjorde noe feil')
             return
@@ -104,10 +97,7 @@ export const Inntekter = ({
         ['6G', formaterValuta(6 * G)],
         ['Dagsats', formaterValuta(dagsats)],
         ['Sykepengegrunnlag', formaterValuta(sykepengegrunnlag)],
-        [
-            'Grunnlag for sykepengegrunnlag:',
-            formaterValuta(grunnlagForSykepengegrunnlag),
-        ],
+        ['Grunnlag for sykepengegrunnlag:', formaterValuta(grunnlagForSykepengegrunnlag)],
         ['Begrensning', begrensning],
     ]
 

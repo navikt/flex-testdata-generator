@@ -22,9 +22,7 @@ function erIkkeUtlopt(tokenset: TokesetAndExp) {
     return tokenset.expiresAt > now()
 }
 
-export const getAzureAdAccessToken = async (
-    scope: string
-): Promise<TokenSet> => {
+export const getAzureAdAccessToken = async (scope: string): Promise<TokenSet> => {
     const eksisterendeToken = tokens[scope]
     if (eksisterendeToken && erIkkeUtlopt(eksisterendeToken)) {
         return eksisterendeToken.tokenset

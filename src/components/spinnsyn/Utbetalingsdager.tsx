@@ -2,6 +2,7 @@ import { DayOfWeek } from '@js-joda/core'
 import React, { Dispatch, useEffect } from 'react'
 
 import { FomTom } from '../datoer/Datoer'
+
 import { OppdragDto, UtbetalingdagDto, UtbetalingslinjeDto } from './VedtakV2'
 
 interface Props {
@@ -11,12 +12,7 @@ interface Props {
     fomTom: FomTom
 }
 
-export default ({
-    utbetalingsdager,
-    setUtbetalingsdager,
-    oppdrag,
-    fomTom,
-}: Props) => {
+const Utbetalingsdager = ({ utbetalingsdager, setUtbetalingsdager, oppdrag, fomTom }: Props) => {
     useEffect(() => {
         const utbetalingsLinjer = oppdrag.flatMap((o) => o.utbetalingslinjer)
         setUtbetalingsdager(skapUtbetalingsdager(utbetalingsLinjer))
@@ -24,19 +20,14 @@ export default ({
         // eslint-disable-next-line
     }, [setUtbetalingsdager, oppdrag])
 
-    function skapUtbetalingsdager(
-        utbetalingslinjer: UtbetalingslinjeDto[]
-    ): UtbetalingdagDto[] {
+    function skapUtbetalingsdager(utbetalingslinjer: UtbetalingslinjeDto[]): UtbetalingdagDto[] {
         const dager: UtbetalingdagDto[] = []
         let dag = fomTom.fom
 
         utbetalingslinjer.forEach((linje) => {
             dag = linje.fom
             while (dag.equals(linje.tom) || dag.isBefore(linje.tom)) {
-                if (
-                    dag.dayOfWeek() === DayOfWeek.SATURDAY ||
-                    dag.dayOfWeek() === DayOfWeek.SUNDAY
-                ) {
+                if (dag.dayOfWeek() === DayOfWeek.SATURDAY || dag.dayOfWeek() === DayOfWeek.SUNDAY) {
                     dager.push({
                         dato: dag,
                         type: 'NavHelgDag',
@@ -70,83 +61,48 @@ export default ({
                                 id={ut.dato.toString()}
                                 defaultValue={ut.type}
                                 onChange={(event) => {
-                                    const nyeDager = utbetalingsdager.map(
-                                        (dag) => {
-                                            if (
-                                                dag.dato.toString() ===
-                                                event.target.id
-                                            ) {
-                                                dag.type = event.target.value
-                                                if (dag.type === 'AvvistDag') {
-                                                    dag.begrunnelser = [
-                                                        event.target
-                                                            .selectedOptions[0]
-                                                            .id,
-                                                    ]
-                                                }
+                                    const nyeDager = utbetalingsdager.map((dag) => {
+                                        if (dag.dato.toString() === event.target.id) {
+                                            dag.type = event.target.value
+                                            if (dag.type === 'AvvistDag') {
+                                                dag.begrunnelser = [event.target.selectedOptions[0].id]
                                             }
-                                            return dag
                                         }
-                                    )
+                                        return dag
+                                    })
                                     setUtbetalingsdager(nyeDager)
                                 }}
                             >
                                 <option value="NavDag">NavDag</option>
                                 <option value="NavHelgDag">NavHelgDag</option>
-                                <option value="ArbeidsgiverperiodeDag">
-                                    ArbeidsgiverperiodeDag
-                                </option>
+                                <option value="ArbeidsgiverperiodeDag">ArbeidsgiverperiodeDag</option>
                                 <option value="Arbeidsdag">Arbeidsdag</option>
                                 <option value="Fridag">Fridag</option>
                                 <option value="Feriedag">Feriedag</option>
-                                <option value="Permisjonsdag">
-                                    Permisjonsdag
-                                </option>
+                                <option value="Permisjonsdag">Permisjonsdag</option>
                                 <option value="ForeldetDag">ForeldetDag</option>
-                                <option
-                                    value="AvvistDag"
-                                    id="SykepengedagerOppbrukt"
-                                >
+                                <option value="AvvistDag" id="SykepengedagerOppbrukt">
                                     Avvist - SykepengedagerOppbrukt
                                 </option>
-                                <option
-                                    value="AvvistDag"
-                                    id="SykepengedagerOppbruktOver67"
-                                >
+                                <option value="AvvistDag" id="SykepengedagerOppbruktOver67">
                                     Avvist - SykepengedagerOppbrukt - Over 67
                                 </option>
                                 <option value="AvvistDag" id="MinimumInntekt">
                                     Avvist - MinimumInntekt
                                 </option>
-                                <option
-                                    value="AvvistDag"
-                                    id="MinimumInntektOver67"
-                                >
+                                <option value="AvvistDag" id="MinimumInntektOver67">
                                     Avvist - MinimumInntekt - Over 67
                                 </option>
-                                <option
-                                    value="AvvistDag"
-                                    id="EgenmeldingUtenforArbeidsgiverperiode"
-                                >
-                                    Avvist -
-                                    EgenmeldingUtenforArbeidsgiverperiode
+                                <option value="AvvistDag" id="EgenmeldingUtenforArbeidsgiverperiode">
+                                    Avvist - EgenmeldingUtenforArbeidsgiverperiode
                                 </option>
-                                <option
-                                    value="AvvistDag"
-                                    id="MinimumSykdomsgrad"
-                                >
+                                <option value="AvvistDag" id="MinimumSykdomsgrad">
                                     Avvist - MinimumSykdomsgrad
                                 </option>
-                                <option
-                                    value="AvvistDag"
-                                    id="ManglerOpptjening"
-                                >
+                                <option value="AvvistDag" id="ManglerOpptjening">
                                     Avvist - ManglerOpptjening
                                 </option>
-                                <option
-                                    value="AvvistDag"
-                                    id="ManglerMedlemskap"
-                                >
+                                <option value="AvvistDag" id="ManglerMedlemskap">
                                     Avvist - ManglerMedlemskap
                                 </option>
                                 <option value="AvvistDag" id="EtterDødsdato">
@@ -164,3 +120,4 @@ export default ({
         </div>
     )
 }
+export default Utbetalingsdager

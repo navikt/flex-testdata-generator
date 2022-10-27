@@ -18,7 +18,7 @@ const Inntektsmeldingstatus: NextPage<Props> = ({ skjema }) => {
 
 Inntektsmeldingstatus.getInitialProps = async () => {
     const res = await fetch(
-        'https://raw.githubusercontent.com/navikt/helse-sporbar/master/src/test/resources/json-schema/tbd.inntektsmeldingstatus.json'
+        'https://raw.githubusercontent.com/navikt/helse-sporbar/master/src/test/resources/json-schema/tbd.inntektsmeldingstatus.json',
     )
     const skjema = await res.json()
     return { skjema }

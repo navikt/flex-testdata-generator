@@ -36,10 +36,7 @@ export const CommonInput = (p: FellesInputProps) => {
                 <TextField
                     onChange={(e) => {
                         setFnr(e.target.value)
-                        localStorage.setItem(
-                            'flex-testdata-fnr',
-                            e.target.value
-                        )
+                        localStorage.setItem('flex-testdata-fnr', e.target.value)
                         setError(null)
                         setSuksess(null)
                     }}

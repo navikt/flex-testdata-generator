@@ -8,11 +8,7 @@ interface UtbetalingslinjeProps {
     onByttMottaker: (idx: number) => void // eslint-disable-line
 }
 
-function Utbetalingslinje({
-    idx,
-    utbetalingslinje,
-    onByttMottaker,
-}: UtbetalingslinjeProps) {
+function Utbetalingslinje({ idx, utbetalingslinje, onByttMottaker }: UtbetalingslinjeProps) {
     const style = { marginBlockEnd: 0, marginBlockStart: 0 }
 
     return (
@@ -58,9 +54,7 @@ function Utbetalingslinje({
                     alignItems: 'center',
                 }}
             >
-                <button onClick={() => onByttMottaker(idx)}>
-                    Bytt mottaker
-                </button>
+                <button onClick={() => onByttMottaker(idx)}>Bytt mottaker</button>
             </div>
         </div>
     )
@@ -72,11 +66,7 @@ interface UtbetalingProps {
     setUtbetalingFordeling: Dispatch<React.SetStateAction<string[]>>
 }
 
-export function Utbetaling({
-    oppdrag,
-    utbetalingFordeling,
-    setUtbetalingFordeling,
-}: UtbetalingProps) {
+export function Utbetaling({ oppdrag, utbetalingFordeling, setUtbetalingFordeling }: UtbetalingProps) {
     if (!oppdrag || oppdrag.utbetalingslinjer.length === 0) return null
 
     const onByttMottaker = (idx: number) => {
@@ -106,12 +96,7 @@ export function Utbetaling({
             </p>
             <h3 style={{ display: 'inline' }}>Utbetalingslinjer</h3>
             {oppdrag.utbetalingslinjer.map((ul, idx) => (
-                <Utbetalingslinje
-                    key={idx}
-                    idx={idx}
-                    utbetalingslinje={ul}
-                    onByttMottaker={onByttMottaker}
-                />
+                <Utbetalingslinje key={idx} idx={idx} utbetalingslinje={ul} onByttMottaker={onByttMottaker} />
             ))}
         </div>
     )

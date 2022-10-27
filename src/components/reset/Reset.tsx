@@ -1,4 +1,4 @@
-import { Button, Radio, RadioGroup, Select, TextField } from '@navikt/ds-react'
+import { Button } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -17,13 +17,10 @@ export const Reset = (p: FellesInputChildrenProps) => {
                     return
                 }
                 setResetter(true)
-                const res = await fetch(
-                    `/api/kafka/flex/testdata-reset/${uuidv4()}`,
-                    {
-                        method: 'POST',
-                        body: p.fnr,
-                    }
-                )
+                const res = await fetch(`/api/kafka/flex/testdata-reset/${uuidv4()}`, {
+                    method: 'POST',
+                    body: p.fnr,
+                })
                 const body = await res.text()
                 if (res.ok) {
                     p.setSuksess(body)

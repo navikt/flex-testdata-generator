@@ -8,16 +8,12 @@ import { FellesInputChildrenProps } from '../commoninput/CommonInput'
 const formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
 
 export const Dittsykefravaermelding = (p: FellesInputChildrenProps) => {
-    const [tekst, setTekst] = useState<string>(
-        'En melding som tar deg til nav.no'
-    )
+    const [tekst, setTekst] = useState<string>('En melding som tar deg til nav.no')
     const [lenke, setLenke] = useState<string>('https://www.nav.no')
     const [variant, setVariant] = useState<string>('success')
     const [lukkbar, setLukkbar] = useState<boolean>(true)
     const [medSynligFremTil, setMedSynligFremTil] = useState<boolean>(true)
-    const [synligFremTil, setSynligFremTil] = useState<string>(
-        '2022-06-16T10:00:00'
-    )
+    const [synligFremTil, setSynligFremTil] = useState<string>('2022-06-16T10:00:00')
 
     const [uuid, setUuid] = useState<string>(uuidv4())
     const [resetter, setResetter] = useState<boolean>(false)
@@ -48,21 +44,13 @@ export const Dittsykefravaermelding = (p: FellesInputChildrenProps) => {
                 label="Lenke"
                 size="medium"
             />
-            <Select
-                label="Velg variant"
-                value={variant}
-                onChange={(w) => setVariant(w.target.value)}
-            >
+            <Select label="Velg variant" value={variant} onChange={(w) => setVariant(w.target.value)}>
                 <option value="info">info</option>
                 <option value="success">success</option>
                 <option value="warning">warning</option>
                 <option value="error">error</option>
             </Select>
-            <RadioGroup
-                legend={<div />}
-                value={medSynligFremTil}
-                onChange={(v) => setMedSynligFremTil(v)}
-            >
+            <RadioGroup legend={<div />} value={medSynligFremTil} onChange={(v) => setMedSynligFremTil(v)}>
                 <Radio value={true}>Med synlig frem til</Radio>
                 <Radio value={false}>Uten synlig frem til</Radio>
             </RadioGroup>
@@ -78,11 +66,7 @@ export const Dittsykefravaermelding = (p: FellesInputChildrenProps) => {
                     size="medium"
                 />
             )}
-            <RadioGroup
-                legend={<div />}
-                value={lukkbar}
-                onChange={(v) => setLukkbar(v)}
-            >
+            <RadioGroup legend={<div />} value={lukkbar} onChange={(v) => setLukkbar(v)}>
                 <Radio value={true}>Lukkbar</Radio>
                 <Radio value={false}>Ikke lukkbar</Radio>
             </RadioGroup>
@@ -111,20 +95,16 @@ export const Dittsykefravaermelding = (p: FellesInputChildrenProps) => {
                         },
                     }
                     if (medSynligFremTil) {
-                        request.opprettMelding.synligFremTil =
-                            LocalDateTime.parse(synligFremTil, formatter)
-                                .atZone(ZoneOffset.systemDefault())
-                                .toOffsetDateTime()
-                                .toInstant()
-                                .toString()
+                        request.opprettMelding.synligFremTil = LocalDateTime.parse(synligFremTil, formatter)
+                            .atZone(ZoneOffset.systemDefault())
+                            .toOffsetDateTime()
+                            .toInstant()
+                            .toString()
                     }
-                    const res = await fetch(
-                        `/api/kafka/flex/ditt-sykefravaer-melding/${uuid}`,
-                        {
-                            method: 'POST',
-                            body: JSON.stringify(request),
-                        }
-                    )
+                    const res = await fetch(`/api/kafka/flex/ditt-sykefravaer-melding/${uuid}`, {
+                        method: 'POST',
+                        body: JSON.stringify(request),
+                    })
                     const response = await res.text()
                     if (res.ok) {
                         p.setSuksess(`Melding ${uuid} opprettet`)

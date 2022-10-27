@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                         <Link href="/">Hjem</Link>
                     </li>
                     <li>
-                        <Link href="/reset">Reset testdata</Link>
+                        <Link href="/Users/havard/git/flex-testdata-kafka-producer/src/app/reset/reset">Reset testdata</Link>
                     </li>
                     <li>
                         <Link href="/ditt-sykefravaer-melding">Ditt sykefravær melding</Link>

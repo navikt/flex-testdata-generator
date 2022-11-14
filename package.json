@@ -35,7 +35,7 @@
     "next": "^12.3.1",
     "prettier": "^2.7.1",
     "typescript": "^4.8.4",
-    "openid-client": "^5.1.9"
+    "openid-client": "^5.3.0"
   },
   "scripts": {
     "dev": "next dev -p 8080",

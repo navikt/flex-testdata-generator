@@ -1,4 +1,4 @@
-import { Button, Select } from '@navikt/ds-react'
+import { Button, Select, TextField } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'
@@ -7,6 +7,9 @@ import { TemaSkjema } from './Temaskjema'
 export const Papirdokument = (p: FellesInputChildrenProps) => {
     const [tema, setTema] = useState<string>('SYK')
     const [brevkode, setBrevkode] = useState<string>('NAV 08-07.04D')
+    const [journalforendeEnhet, setJournalforendeEnhet] = useState<
+        string | undefined
+    >(undefined)
     const [resetter, setResetter] = useState<boolean>(false)
 
     return (
@@ -37,6 +40,17 @@ export const Papirdokument = (p: FellesInputChildrenProps) => {
                 ))}
             </Select>
 
+            <TextField
+                onChange={(e) => {
+                    const value = e.target.value
+                    if (value.length === 0) setJournalforendeEnhet(undefined)
+                    else setJournalforendeEnhet(value)
+                }}
+                value={journalforendeEnhet}
+                label="Overstyr journalforende enhet"
+                size="medium"
+            />
+
             <Button
                 style={{ marginTop: '1em' }}
                 loading={resetter}
@@ -61,6 +75,7 @@ export const Papirdokument = (p: FellesInputChildrenProps) => {
                         tema: tema,
                         skjema: brevkode,
                         tittel: tittel,
+                        journalforendeEnhet: journalforendeEnhet,
                     }
                     const res = await fetch('/api/papirdokument/opprett', {
                         method: 'POST',
@@ -87,4 +102,5 @@ export interface PapirDokumentRequest {
     tema: string
     skjema: string
     tittel: string
+    journalforendeEnhet?: string
 }

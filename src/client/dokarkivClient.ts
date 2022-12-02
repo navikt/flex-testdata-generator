@@ -7,6 +7,7 @@ interface Opts {
     tema: string
     skjema: string
     tittel: string
+    journalforendeEnhet?: string
 }
 
 export async function opprettJournalpost(opts: Opts): Promise<any> {

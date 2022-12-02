@@ -39,6 +39,7 @@ function opprettJournalpostPayload(opts: Opts): JournalpostRequest {
         tittel: opts.tittel,
         kanal: 'SKAN_IM',
         journalpostType: 'INNGAAENDE',
+        journalfoerendeEnhet: opts.journalforendeEnhet,
         bruker: {
             id: opts.fnr,
             idType: 'FNR',

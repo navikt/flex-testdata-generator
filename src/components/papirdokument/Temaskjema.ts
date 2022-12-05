@@ -71,6 +71,10 @@ export const TemaSkjema = [
                 brevkode: 'NAV 08-20.20',
                 tittel: 'Søknad om unntak fra arbeidsgiveransvar for sykepenger til en arbeidstaker som har sykefravær pga. svangerskap, og som ikke kan omplasseres til annet arbeid i virksomheten',
             },
+            {
+                brevkode: 'NAV 96-01.01',
+                tittel: 'Rettskjennelse fra Trygderetten',
+            },
         ],
     },
     {

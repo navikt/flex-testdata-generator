@@ -6,7 +6,7 @@
     "@js-joda/core": "^5.5.2",
     "@navikt/ds-css": "^2.0.17",
     "@navikt/ds-react": "^2.0.16",
-    "@navikt/ds-tokens": "^2.0.16",
+    "@navikt/ds-tokens": "^2.0.17",
     "jsonschema": "^1.4.1",
     "kafkajs": "^2.2.3",
     "react": "^18.2.0",

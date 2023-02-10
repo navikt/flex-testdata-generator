@@ -5,7 +5,7 @@
   "dependencies": {
     "@js-joda/core": "^5.5.2",
     "@navikt/ds-css": "^2.1.6",
-    "@navikt/ds-react": "^2.1.6",
+    "@navikt/ds-react": "^2.1.7",
     "@navikt/ds-tokens": "^2.1.6",
     "jsonschema": "^1.4.1",
     "kafkajs": "^2.2.3",

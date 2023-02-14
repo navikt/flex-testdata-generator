@@ -31,5 +31,8 @@ spec:
       application: ditt-sykefravaer-backend
       access: read
     - team: flex
+      application: syfosoknadbrukernotifikasjon
+      access: read
+    - team: flex
       application: flex-testdata-generator
       access: write

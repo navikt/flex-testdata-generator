@@ -34,5 +34,8 @@ spec:
       application: syfosoknadbrukernotifikasjon
       access: read
     - team: flex
+      application: spinnsyn-brukernotifikasjon
+      access: read
+    - team: flex
       application: flex-testdata-generator
       access: write

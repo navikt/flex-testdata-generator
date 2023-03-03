@@ -8,7 +8,7 @@
     "@navikt/ds-react": "^2.6.0",
     "@navikt/ds-tokens": "^2.6.0",
     "jsonschema": "^1.4.1",
-    "kafkajs": "^2.2.3",
+    "kafkajs": "^2.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-modal": "^3.16.1",

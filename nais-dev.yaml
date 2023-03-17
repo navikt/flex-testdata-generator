@@ -9,8 +9,7 @@ spec:
   image: {{image}}
   port: 8080
   ingresses:
-    - "https://flex-testdata-generator.dev.nav.no"
-    - "https://flex-vedtak-mock.dev.nav.no"
+    - "https://flex-testdata-generator.intern.dev.nav.no"
   replicas:
     min: 1
     max: 1

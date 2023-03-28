@@ -34,7 +34,7 @@
     "eslint-plugin-simple-import-sort": "^8.0.0",
     "next": "^13.2.4",
     "prettier": "^2.8.4",
-    "typescript": "^4.9.5",
+    "typescript": "^5.0.2",
     "openid-client": "^5.4.0"
   },
   "scripts": {

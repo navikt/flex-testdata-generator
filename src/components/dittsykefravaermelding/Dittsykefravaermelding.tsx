@@ -53,10 +53,10 @@ export const Dittsykefravaermelding = (p: FellesInputChildrenProps) => {
                 value={variant}
                 onChange={(w) => setVariant(w.target.value)}
             >
-                <option value="info">info</option>
-                <option value="success">success</option>
-                <option value="warning">warning</option>
-                <option value="error">error</option>
+                <option value="INFO">INFO</option>
+                <option value="SUCCESS">SUCCESS</option>
+                <option value="WARNING">WARNING</option>
+                <option value="ERROR">ERROR</option>
             </Select>
             <RadioGroup
                 legend={<div />}

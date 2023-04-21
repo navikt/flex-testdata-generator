@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@js-joda/core": "^5.5.3",
-    "@navikt/ds-css": "^2.8.13",
+    "@navikt/ds-css": "^2.8.14",
     "@navikt/ds-react": "^2.8.14",
     "@navikt/ds-tokens": "^2.8.14",
     "jsonschema": "^1.4.1",

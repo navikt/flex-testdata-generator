@@ -1,4 +1,5 @@
 import React, { Dispatch, useEffect } from 'react'
+import { Button, Heading, TextField } from '@navikt/ds-react'
 
 import { formaterValuta } from '../../utils/valutaformat'
 
@@ -113,22 +114,21 @@ export const Inntekter = ({
     ]
 
     return (
-        <div style={{ border: '1px solid', padding: '1em' }}>
-            <label>
-                Månedsinntekt hos {orgnummer} :
-                <input
-                    type="number"
-                    min={0}
-                    step={1}
-                    max={200000}
-                    value={månedsinntekt}
-                    onChange={(e) => {
-                        setMånedsinntekt(Number(e.target.value))
-                    }}
-                />
-            </label>
-            <br />
-            <table style={{ border: '1px solid', marginTop: '1em' }}>
+        <>
+            <TextField
+                className="mt-4 w-1/2"
+                label={`Månedsinntekt hos ${orgnummer}`}
+                value={månedsinntekt}
+                type="number"
+                min={0}
+                step={1}
+                max={200000}
+                onChange={(e) => {
+                    setMånedsinntekt(Number(e.target.value))
+                }}
+            />
+
+            <table className="mt-4">
                 <tbody>
                     {tabellInnhold.map((e, idx) => {
                         return (
@@ -143,16 +143,20 @@ export const Inntekter = ({
                 </tbody>
             </table>
 
-            <h3>Andre arbeidsgivere</h3>
+            <Heading size="xsmall" level="3" className="mt-4">
+                Andre arbeidsgivere
+            </Heading>
             {Object.entries(ekstraArbeidsgivere).map((e, idx) => {
                 return (
-                    <p key={idx}>
+                    <p key={idx} className="my-4">
                         <strong>{e[0]}:</strong> {e[1]} kr
                     </p>
                 )
             })}
-            <button onClick={leggTilArbeidsgiver}>Legg til arbeidsgiver</button>
-        </div>
+            <Button variant="secondary-neutral" onClick={leggTilArbeidsgiver}>
+                Legg til arbeidsgiver
+            </Button>
+        </>
     )
 }
 

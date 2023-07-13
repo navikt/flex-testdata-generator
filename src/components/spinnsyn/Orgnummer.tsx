@@ -1,4 +1,5 @@
 import React, { Dispatch } from 'react'
+import { TextField } from '@navikt/ds-react'
 
 interface Props {
     orgnummer: string
@@ -7,16 +8,12 @@ interface Props {
 
 export const Orgnummer = ({ setOrgnummer, orgnummer }: Props) => {
     return (
-        <div style={{ border: '1px solid', padding: '1em' }}>
-            <label>
-                Orgnummer:
-                <input
-                    value={orgnummer}
-                    onChange={(e) => {
-                        setOrgnummer(e.target.value)
-                    }}
-                />
-            </label>
-        </div>
+        <TextField
+            label="Orgnummer"
+            value={orgnummer}
+            onChange={(e) => {
+                setOrgnummer(e.target.value)
+            }}
+        ></TextField>
     )
 }

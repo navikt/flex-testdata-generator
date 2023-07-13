@@ -11,15 +11,14 @@ export const AutomatiskBehandling = ({
     setAutomatiskBehandling,
 }: Props) => {
     return (
-        <div style={{ border: '1px solid', padding: '1em' }}>
-            <Switch
-                checked={automatiskBehandling}
-                onChange={(e) => {
-                    setAutomatiskBehandling(e.target.checked)
-                }}
-            >
-                Automatisk behandling
-            </Switch>
-        </div>
+        <Switch
+            className="mt-4"
+            checked={automatiskBehandling}
+            onChange={(e) => {
+                setAutomatiskBehandling(e.target.checked)
+            }}
+        >
+            Automatisk behandling
+        </Switch>
     )
 }

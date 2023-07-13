@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid'
 import { Button } from '@navikt/ds-react'
 
 import { FomTom } from '../datoer/Datoer'
+import { diffInPercentage } from '../../utils/diffInPercentage'
 
 import {
     Begrensning,
@@ -27,10 +28,14 @@ interface Props {
     oppdrag: OppdragDto[]
     utbetalingsdager: UtbetalingdagDto[]
     sykepengegrunnlag: number
-    grunnlagForSykepengegrunnag: number
+    grunnlagForSykepengegrunnlag: number
     begrensning: Begrensning
     foreløpigBeregnetSluttPåSykepenger: LocalDate
     vedtakFattetTidspunkt: LocalDate
+    skjønnsfastsatt: boolean
+    skjønnsfastsattÅrsinntekt: number
+    årsinntektFraAordningen: number
+    begrunnelse: string
 }
 
 function SendSomNyttVedtak({
@@ -46,10 +51,14 @@ function SendSomNyttVedtak({
     oppdrag,
     utbetalingsdager,
     sykepengegrunnlag,
-    grunnlagForSykepengegrunnag,
+    grunnlagForSykepengegrunnlag,
     begrensning,
     foreløpigBeregnetSluttPåSykepenger,
     vedtakFattetTidspunkt,
+    skjønnsfastsatt,
+    skjønnsfastsattÅrsinntekt,
+    årsinntektFraAordningen,
+    begrunnelse,
 }: Props) {
     const [sender, setSender] = useState<boolean>(false)
 
@@ -87,10 +96,35 @@ function SendSomNyttVedtak({
             dokumenter: [],
             inntekt: månedsinntekt,
             sykepengegrunnlag: sykepengegrunnlag,
-            grunnlagForSykepengegrunnlag: grunnlagForSykepengegrunnag,
+            grunnlagForSykepengegrunnlag: grunnlagForSykepengegrunnlag,
             begrensning: begrensning,
             utbetalingId: utbetalingUtbetalt.utbetalingId,
             vedtakFattetTidspunkt: vedtakFattetTidspunkt,
+        }
+        if (skjønnsfastsatt) {
+            vedtak.begrunnelser = [
+                {
+                    begrunnelse: begrunnelse,
+                    årsak: 'SkjønnsfastsattSykepengegrunnlag',
+                    perioder: [],
+                },
+            ]
+            vedtak.sykepengegrunnlagsfakta = {
+                fastsatt: 'EtterSkjønn',
+                skjønnsfastsatt: skjønnsfastsattÅrsinntekt,
+                arbeidsgivere: [], //TODO fikse på sikt
+                omregnetÅrsinntekt: grunnlagForSykepengegrunnlag,
+                innrapportertÅrsinntekt: årsinntektFraAordningen,
+                avviksprosent: diffInPercentage(
+                    årsinntektFraAordningen,
+                    grunnlagForSykepengegrunnlag
+                ),
+                '6G': 668862.0,
+                tags: [],
+            }
+            if (begrensning == 'ER_6G_BEGRENSET') {
+                vedtak.sykepengegrunnlagsfakta.tags = ['6GBegrenset']
+            }
         }
         vedtak.grunnlagForSykepengegrunnlagPerArbeidsgiver![orgnummer] =
             månedsinntekt * 12
@@ -106,40 +140,38 @@ function SendSomNyttVedtak({
     }
 
     return (
-        <div style={{ paddingTop: '1em' }}>
-            <Button
-                disabled={sender}
-                style={{ fontSize: 40 }}
-                onClick={async () => {
-                    const vedtak = genererVedtakV2()
+        <Button
+            className="block my-4"
+            disabled={sender}
+            onClick={async () => {
+                const vedtak = genererVedtakV2()
 
-                    const res = await fetch(
-                        `/api/kafka/flex/spinnsyn-testdata/${fodselsnummer}`,
-                        {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                vedtak: JSON.stringify(vedtak.vedtak),
-                                utbetaling: JSON.stringify(vedtak.utbetaling),
-                            }),
-                        }
-                    )
-                    const response = await res.text()
-                    if (res.ok) {
-                        window.alert(
-                            `Melding ${vedtak.vedtak.utbetalingId} opprettet`
-                        )
-                    } else {
-                        window.alert(response)
+                const res = await fetch(
+                    `/api/kafka/flex/spinnsyn-testdata/${fodselsnummer}`,
+                    {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            vedtak: JSON.stringify(vedtak.vedtak),
+                            utbetaling: JSON.stringify(vedtak.utbetaling),
+                        }),
                     }
-                    setSender(false)
-                }}
-            >
-                Send vedtak{' '}
-                <span role="img" aria-label="Judge">
-                    👨‍⚖️
-                </span>
-            </Button>
-        </div>
+                )
+                const response = await res.text()
+                if (res.ok) {
+                    window.alert(
+                        `Melding ${vedtak.vedtak.utbetalingId} opprettet`
+                    )
+                } else {
+                    window.alert(response)
+                }
+                setSender(false)
+            }}
+        >
+            Send vedtak{' '}
+            <span role="img" aria-label="Judge">
+                👨‍⚖️
+            </span>
+        </Button>
     )
 }
 

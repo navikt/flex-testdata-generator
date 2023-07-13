@@ -98,6 +98,7 @@ function VedtakGenerator(p: FellesInputChildrenProps) {
                 setBegrunnelse={setBegrunnelse}
                 årsinntektFraAordningen={årsinntektFraAordningen}
                 setÅrsinntektFraAordningen={setÅrsinntektFraAordningen}
+                grunnlagForSykepengegrunnlag={grunnlagForSykepengegrunnlag}
             ></SkjønnsfastsattSykepengegrunnlag>
             <SprefUtbetaling
                 setOppdrag={setOppdrag}
@@ -147,12 +148,16 @@ function VedtakGenerator(p: FellesInputChildrenProps) {
                 oppdrag={oppdrag}
                 utbetalingsdager={utbetalingsdager}
                 sykepengegrunnlag={sykepengegrunnlag}
-                grunnlagForSykepengegrunnag={grunnlagForSykepengegrunnlag}
+                grunnlagForSykepengegrunnlag={grunnlagForSykepengegrunnlag}
                 begrensning={begrensning}
                 foreløpigBeregnetSluttPåSykepenger={
                     foreløpigBeregnetSluttPåSykepenger
                 }
                 vedtakFattetTidspunkt={vedtakFattetTidspunkt}
+                skjønnsfastsatt={skjønnsfastsatt}
+                skjønnsfastsattÅrsinntekt={skjønnsfastsattÅrsinntekt}
+                begrunnelse={begrunnelse}
+                årsinntektFraAordningen={årsinntektFraAordningen}
             />
         </div>
     )

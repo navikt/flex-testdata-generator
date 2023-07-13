@@ -1,5 +1,6 @@
 import { DayOfWeek } from '@js-joda/core'
 import React, { Dispatch, useEffect } from 'react'
+import { Select } from '@navikt/ds-react'
 
 import { FomTom } from '../datoer/Datoer'
 
@@ -66,8 +67,8 @@ export const Utbetalingsdager = ({
                                 display: 'grid',
                             }}
                         >
-                            {ut.dato.toString()}
-                            <select
+                            <Select
+                                label={ut.dato.toString()}
                                 id={ut.dato.toString()}
                                 defaultValue={ut.type}
                                 onChange={(event) => {
@@ -157,7 +158,7 @@ export const Utbetalingsdager = ({
                                     Avvist - Over70
                                 </option>
                                 <option value="UkjentDag">UkjentDag</option>
-                            </select>
+                            </Select>
                         </div>
                     )
                 })}

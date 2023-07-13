@@ -1,6 +1,7 @@
 import { LocalDate } from '@js-joda/core'
 import React, { useState } from 'react'
 import { v4 as uuid } from 'uuid'
+import { Button } from '@navikt/ds-react'
 
 import { FomTom } from '../datoer/Datoer'
 
@@ -106,7 +107,7 @@ function SendSomNyttVedtak({
 
     return (
         <div style={{ paddingTop: '1em' }}>
-            <button
+            <Button
                 disabled={sender}
                 style={{ fontSize: 40 }}
                 onClick={async () => {
@@ -124,7 +125,9 @@ function SendSomNyttVedtak({
                     )
                     const response = await res.text()
                     if (res.ok) {
-                        window.alert(`Melding ${uuid} opprettet`)
+                        window.alert(
+                            `Melding ${vedtak.vedtak.utbetalingId} opprettet`
+                        )
                     } else {
                         window.alert(response)
                     }
@@ -135,7 +138,7 @@ function SendSomNyttVedtak({
                 <span role="img" aria-label="Judge">
                     👨‍⚖️
                 </span>
-            </button>
+            </Button>
         </div>
     )
 }

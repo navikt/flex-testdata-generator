@@ -15,6 +15,8 @@ export interface VedtakFattetForEksternDto {
     grunnlagForSykepengegrunnlagPerArbeidsgiver: GrunnlagForSykepengegrunnlagPerArbeidsgiver
     begrensning: Begrensning
     vedtakFattetTidspunkt: LocalDate
+    sykepengegrunnlagsfakta?: Sykepengegrunnlagsfakta | null
+    begrunnelser?: Begrunnelse[]
 }
 
 export type Begrensning =
@@ -121,4 +123,47 @@ export interface RSUtbetalingslinje {
 interface RSUtbetalingdag {
     dato: string
     type: string
+}
+
+type Sykepengegrunnlagsfakta =
+    | {
+          fastsatt: 'IInfotrygd'
+          omregnetÅrsinntekt: number
+      }
+    | {
+          fastsatt: 'EtterHovedregel'
+          arbeidsgivere: Arbeidsgiver[]
+      }
+    | ({
+          fastsatt: 'EtterSkjønn'
+          skjønnsfastsatt: number
+          arbeidsgivere: ArbeidsgiverMedSkjønn[]
+      } & SpleisSykepengegrunnlag)
+
+type Arbeidsgiver = {
+    arbeidsgiver: string
+    omregnetÅrsinntekt: number
+}
+
+type ArbeidsgiverMedSkjønn = Arbeidsgiver & {
+    skjønnsfastsatt: number
+}
+
+export type SpleisSykepengegrunnlag = {
+    omregnetÅrsinntekt: number
+    innrapportertÅrsinntekt: number
+    avviksprosent: number
+    '6G': number
+    tags: '6GBegrenset'[]
+}
+
+type Begrunnelse = {
+    årsak: 'SkjønnsfastsattSykepengegrunnlag'
+    begrunnelse: string
+    perioder: Periode[]
+}
+
+type Periode = {
+    fom: string
+    tom: string
 }

@@ -1,5 +1,7 @@
 import React, { Dispatch } from 'react'
-import { Switch, Textarea, TextField } from '@navikt/ds-react'
+import { Label, Switch, Textarea, TextField } from '@navikt/ds-react'
+
+import { diffInPercentage } from '../../utils/diffInPercentage'
 
 interface Props {
     skjønnsfastsatt: boolean
@@ -10,6 +12,7 @@ interface Props {
     setÅrsinntektFraAordningen: Dispatch<React.SetStateAction<number>>
     begrunnelse: string
     setBegrunnelse: Dispatch<React.SetStateAction<string>>
+    grunnlagForSykepengegrunnlag: number
 }
 
 export const SkjønnsfastsattSykepengegrunnlag = ({
@@ -21,10 +24,12 @@ export const SkjønnsfastsattSykepengegrunnlag = ({
     setÅrsinntektFraAordningen,
     skjønnsfastsattÅrsinntekt,
     setSkjønnsfastsattÅrsinntekt,
+    grunnlagForSykepengegrunnlag,
 }: Props) => {
     return (
         <>
             <Switch
+                className="my-4"
                 checked={skjønnsfastsatt}
                 onChange={(e) => {
                     setSkjønnsfastsatt(e.target.checked)
@@ -35,7 +40,7 @@ export const SkjønnsfastsattSykepengegrunnlag = ({
             {skjønnsfastsatt && (
                 <>
                     <TextField
-                        className="pt-4"
+                        className="my-4"
                         label="Årsinntekt fra A-Ordningen"
                         value={årsinntektFraAordningen}
                         type="number"
@@ -44,7 +49,7 @@ export const SkjønnsfastsattSykepengegrunnlag = ({
                         }
                     ></TextField>
                     <TextField
-                        className="pt-4"
+                        className="my-4"
                         label="Skjønnsfastsatt årsinntekt"
                         value={skjønnsfastsattÅrsinntekt}
                         type="number"
@@ -52,8 +57,16 @@ export const SkjønnsfastsattSykepengegrunnlag = ({
                             setSkjønnsfastsattÅrsinntekt(Number(e.target.value))
                         }
                     ></TextField>
+                    <Label className="my-4">
+                        {`Utregnet avvik ${formatOneDecimal(
+                            diffInPercentage(
+                                årsinntektFraAordningen,
+                                grunnlagForSykepengegrunnlag
+                            )
+                        )}%`}
+                    </Label>
                     <Textarea
-                        className="pt-4"
+                        className="my-4"
                         label="Begrunnelse for skjønnsfastsettelse fra saksbehandler"
                         value={begrunnelse}
                         onChange={(e) => setBegrunnelse(e.target.value)}
@@ -62,4 +75,8 @@ export const SkjønnsfastsattSykepengegrunnlag = ({
             )}
         </>
     )
+}
+
+function formatOneDecimal(value: number) {
+    return value.toFixed(1).replace('.', ',')
 }

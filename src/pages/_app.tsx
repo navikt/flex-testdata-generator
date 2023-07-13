@@ -1,44 +1,65 @@
 import '../style/global.css'
 
-import { Heading } from '@navikt/ds-react'
+import { Heading, Link } from '@navikt/ds-react'
 import type { AppProps } from 'next/app'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import React from 'react'
-
-import styles from '../style/App.module.css'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     return (
         <>
-            <Heading size="xlarge" className={styles.heading}>
+            <Heading
+                className="flex py-4 pl-72 border-b-2 border-black mb-4"
+                size="xlarge"
+            >
                 Flex testdata
             </Heading>
-            <div className={styles.innholdsWrapper}>
-                <ul className={styles.sideMeny}>
+            <div className="flex">
+                <ul className="w-72 pl-4">
                     <li>
-                        <Link href="/">Hjem</Link>
+                        <NextLink legacyBehavior passHref href="/">
+                            <Link>Hjem</Link>
+                        </NextLink>
                     </li>
                     <li>
-                        <Link href="/reset">Reset testdata</Link>
+                        <NextLink legacyBehavior passHref href="/reset">
+                            <Link>Reset testdata</Link>
+                        </NextLink>
                     </li>
                     <li>
-                        <Link href="/ditt-sykefravaer-melding">
-                            Ditt sykefravær melding
-                        </Link>
+                        <NextLink
+                            legacyBehavior
+                            passHref
+                            href="/ditt-sykefravaer-melding"
+                        >
+                            <Link>Ditt sykefravær melding</Link>
+                        </NextLink>
                     </li>
                     <li>
-                        <Link href="/spinnsyn">Spinnsyn</Link>
+                        <NextLink legacyBehavior passHref href="/spinnsyn">
+                            <Link>Spinnsyn</Link>
+                        </NextLink>
                     </li>
                     <li>
-                        <Link href="/inntektsmeldingstatus">
-                            Inntektsmelding status
-                        </Link>
+                        <NextLink
+                            legacyBehavior
+                            passHref
+                            href="/inntektsmeldingstatus"
+                        >
+                            <Link>Inntektsmelding status</Link>
+                        </NextLink>
                     </li>
                     <li>
-                        <Link href="/papir-dokument">Papir dokument</Link>
+                        <NextLink
+                            legacyBehavior
+                            passHref
+                            href="/papir-dokument"
+                        >
+                            <Link>Papir dokument</Link>
+                        </NextLink>
                     </li>
                 </ul>
-                <div className={styles.innhold}>
+                <div className="flex-auto">
                     <Component {...pageProps} />
                 </div>
             </div>

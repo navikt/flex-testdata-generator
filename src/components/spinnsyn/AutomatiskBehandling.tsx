@@ -1,4 +1,5 @@
 import React, { Dispatch } from 'react'
+import { Switch } from '@navikt/ds-react'
 
 interface Props {
     automatiskBehandling: boolean
@@ -11,16 +12,14 @@ export const AutomatiskBehandling = ({
 }: Props) => {
     return (
         <div style={{ border: '1px solid', padding: '1em' }}>
-            <label>
-                Automatisk behandling:
-                <input
-                    type="checkbox"
-                    checked={automatiskBehandling}
-                    onChange={(e) => {
-                        setAutomatiskBehandling(e.target.checked)
-                    }}
-                />
-            </label>
+            <Switch
+                checked={automatiskBehandling}
+                onChange={(e) => {
+                    setAutomatiskBehandling(e.target.checked)
+                }}
+            >
+                Automatisk behandling
+            </Switch>
         </div>
     )
 }

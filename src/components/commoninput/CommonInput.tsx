@@ -29,11 +29,12 @@ export const CommonInput = (p: FellesInputProps) => {
                 <title>{p.header}</title>
             </Head>
             <ContentContainer>
-                <Heading size="xlarge" level="1" className="sidebanner__tittel">
+                <Heading size="xlarge" level="1">
                     {p.header}
                 </Heading>
 
                 <TextField
+                    className="mt-4"
                     onChange={(e) => {
                         setFnr(e.target.value)
                         localStorage.setItem(

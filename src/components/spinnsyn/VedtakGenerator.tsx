@@ -57,7 +57,7 @@ function VedtakGenerator(p: FellesInputChildrenProps) {
         return <Alert variant="info">Du må fylle inn fødselsnummer</Alert>
     }
     return (
-        <div style={{ paddingTop: '10px' }}>
+        <div className="mt-4">
             <div style={{ border: '1px solid', padding: '1em' }}>
                 <Datoer fomTom={fomTom} setFomTom={setFomTom} />
             </div>

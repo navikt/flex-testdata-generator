@@ -61,18 +61,6 @@ function opprettJournalpostPayload(opts: Opts): JournalpostRequest {
     }
 }
 
-interface JournalpostResponse {
-    dokumenter: DokumentInfo[]
-    journalpostId: string
-    journalpostferdigstilt: boolean
-}
-
-interface DokumentInfo {
-    brevkode?: string
-    dokumentInfoId?: string
-    tittel?: string
-}
-
 interface JournalpostRequest {
     avsenderMottaker?: {
         id?: string

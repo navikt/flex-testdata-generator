@@ -50,12 +50,12 @@ export const CommonInput = (p: FellesInputProps) => {
                 {p.children({ fnr, setError, setSuksess })}
 
                 {error && (
-                    <Alert style={{ marginTop: '1em' }} variant={'error'}>
+                    <Alert style={{ marginTop: '1em' }} variant="error">
                         {error}
                     </Alert>
                 )}
                 {suksess && (
-                    <Alert style={{ marginTop: '1em' }} variant={'success'}>
+                    <Alert style={{ marginTop: '1em' }} variant="success">
                         {suksess}
                     </Alert>
                 )}

@@ -3,6 +3,7 @@ import React, { Dispatch, useEffect, useState } from 'react'
 import { v4 } from 'uuid'
 
 import { FomTom } from '../datoer/Datoer'
+
 import { SprefVariant } from './SprefVariant'
 import { Utbetaling } from './Utbetaling'
 import { OppdragDto, UtbetalingslinjeDto } from './VedtakV2'
@@ -215,15 +216,15 @@ function SprefUtbetaling({
         <div style={{ border: '1px solid', padding: '1em' }}>
             <h2 style={{ display: 'inline' }}>Utbetaling til arbeidsgiver</h2>
             <form style={{ paddingTop: '1em' }}>
-                <RadioValg navn={'100% uten opphold'} sprefVariant={'100%'} />
-                <RadioValg navn={'80% uten opphold'} sprefVariant={'80%'} />
+                <RadioValg navn="100% uten opphold" sprefVariant="100%" />
+                <RadioValg navn="80% uten opphold" sprefVariant="80%" />
                 <RadioValg
-                    navn={'Opphold midt i 100%'}
-                    sprefVariant={'opphold-midt-i'}
+                    navn="Opphold midt i 100%"
+                    sprefVariant="opphold-midt-i"
                 />
                 <RadioValg
-                    navn={'Kombinert 80 og 100%'}
-                    sprefVariant={'80% og 100%'}
+                    navn="Kombinert 80 og 100%"
+                    sprefVariant="80% og 100%"
                 />
             </form>
 

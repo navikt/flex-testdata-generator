@@ -5,7 +5,7 @@ import { Dittsykefravaermelding } from '../components/dittsykefravaermelding/Dit
 
 const DittSykefravaerMeldingPage = () => {
     return (
-        <CommonInput header={'Ditt sykefravær melding'}>
+        <CommonInput header="Ditt sykefravær melding">
             {(p) => <Dittsykefravaermelding {...p} />}
         </CommonInput>
     )

@@ -5,7 +5,7 @@ interface Props {
     setUtbetalingstype: Dispatch<React.SetStateAction<string>>
 }
 
-export default ({ utbetalingstype, setUtbetalingstype }: Props) => {
+const Utbetalingstype = ({ utbetalingstype, setUtbetalingstype }: Props) => {
     return (
         <div style={{ border: '1px solid', padding: '1em' }}>
             <label>
@@ -25,3 +25,4 @@ export default ({ utbetalingstype, setUtbetalingstype }: Props) => {
         </div>
     )
 }
+export default Utbetalingstype

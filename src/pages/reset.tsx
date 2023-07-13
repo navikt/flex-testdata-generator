@@ -5,7 +5,7 @@ import { Reset } from '../components/reset/Reset'
 
 const ResetPage = () => {
     return (
-        <CommonInput header={'Reset Testdata'}>
+        <CommonInput header="Reset Testdata">
             {(p) => <Reset {...p} />}
         </CommonInput>
     )

@@ -1,4 +1,4 @@
-import { Button, Radio, RadioGroup, Select, TextField } from '@navikt/ds-react'
+import { Button } from '@navikt/ds-react'
 import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 

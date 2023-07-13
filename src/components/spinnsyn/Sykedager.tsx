@@ -52,7 +52,7 @@ function Sykedager({
                     Forbrukte sykedager:
                     <input
                         value={forbrukteSykedager}
-                        type={'number'}
+                        type="number"
                         min={0}
                         max={10000}
                         onChange={(e) => {
@@ -66,7 +66,7 @@ function Sykedager({
                     Gjenstående sykedager:
                     <input
                         value={gjenstaendeSykedager}
-                        type={'number'}
+                        type="number"
                         min={0}
                         max={10000}
                         onChange={(e) => {

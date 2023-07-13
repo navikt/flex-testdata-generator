@@ -5,13 +5,16 @@ interface Props {
     setAutomatiskBehandling: Dispatch<React.SetStateAction<boolean>>
 }
 
-export default ({ automatiskBehandling, setAutomatiskBehandling }: Props) => {
+export const AutomatiskBehandling = ({
+    automatiskBehandling,
+    setAutomatiskBehandling,
+}: Props) => {
     return (
         <div style={{ border: '1px solid', padding: '1em' }}>
             <label>
                 Automatisk behandling:
                 <input
-                    type={'checkbox'}
+                    type="checkbox"
                     checked={automatiskBehandling}
                     onChange={(e) => {
                         setAutomatiskBehandling(e.target.checked)

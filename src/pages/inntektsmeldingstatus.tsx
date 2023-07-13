@@ -10,7 +10,7 @@ interface Props {
 
 const Inntektsmeldingstatus: NextPage<Props> = ({ skjema }) => {
     return (
-        <CommonInput header={'Inntektsmelding status'}>
+        <CommonInput header="Inntektsmelding status">
             {(p) => <InntektsmeldingStatus {...p} skjema={skjema} />}
         </CommonInput>
     )

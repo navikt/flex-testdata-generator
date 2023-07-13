@@ -34,6 +34,7 @@ export async function sendToKafka(opts: Opts): Promise<RecordMetadata[]> {
         messages: [message],
     }
     const response = await producer.send(payload)
+    // eslint-disable-next-line no-console
     producer.disconnect().catch((e) => console.error('Feil ved disconnect', e))
     return response
 }

@@ -1,16 +1,17 @@
 import { LocalDate } from '@js-joda/core'
+import { Alert } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
+import { FellesInputChildrenProps } from '../commoninput/CommonInput'
 import Datoer, { FomTom } from '../datoer/Datoer'
-import AutomatiskBehandling from './AutomatiskBehandling'
-import { Fodselsnummer } from './Fodselsnummer'
+
+import { AutomatiskBehandling } from './AutomatiskBehandling'
 import { Inntekter } from './Inntekter'
 import { Orgnummer } from './Orgnummer'
 import SendSomNyttVedtak from './SendSomNyttVedtak'
 import SprefUtbetaling from './SprefUtbetaling'
 import { SprefVariant } from './SprefVariant'
 import Sykedager from './Sykedager'
-import Utbetalingsdager from './Utbetalingsdager'
 import Utbetalingstype from './Utbetalingstype'
 import {
     Begrensning,
@@ -18,8 +19,9 @@ import {
     OppdragDto,
     UtbetalingdagDto,
 } from './VedtakV2'
+import { Utbetalingsdager } from './Utbetalingsdager'
 
-function VedtakGenerator() {
+function VedtakGenerator(p: FellesInputChildrenProps) {
     const [automatiskBehandling, setAutomatiskBehandling] =
         useState<boolean>(true)
     const [månedsinntekt, setMånedsinntekt] = useState<number>(37500)
@@ -31,7 +33,6 @@ function VedtakGenerator() {
         useState<number>(0)
     const [begrensning, setBegrensning] = useState<Begrensning>('VET_IKKE')
     const [orgnummer, setOrgnummer] = useState<string>('967170232')
-    const [fodselsnummer, setFodselsnummer] = useState<string>('BYTTMEG')
     const [sprefvariant, setSprefvariant] = useState<SprefVariant>('100%')
     const [forbrukteSykedager, setForbrukteSykedager] = useState<number>(0)
     const [gjenstaendeSykedager, setGjenstaendeSykedager] =
@@ -52,13 +53,11 @@ function VedtakGenerator() {
         tom: LocalDate.now().minusDays(2),
     })
 
+    if (!p.fnr) {
+        return <Alert variant="info">Du må fylle inn fødselsnummer</Alert>
+    }
     return (
-        <div>
-            <Fodselsnummer
-                fodselsnummer={fodselsnummer}
-                setFodselsnummer={setFodselsnummer}
-            />
-
+        <div style={{ paddingTop: '10px' }}>
             <div style={{ border: '1px solid', padding: '1em' }}>
                 <Datoer fomTom={fomTom} setFomTom={setFomTom} />
             </div>
@@ -90,7 +89,7 @@ function VedtakGenerator() {
                 setForbrukteSykedager={setForbrukteSykedager}
                 dagsats={dagsats}
                 orgnr={orgnummer}
-                fodselsnummer={fodselsnummer}
+                fodselsnummer={p.fnr}
                 forbrukteSykedager={forbrukteSykedager}
                 fomTom={fomTom}
                 setSprefvariant={setSprefvariant}
@@ -126,7 +125,7 @@ function VedtakGenerator() {
                 ekstraArbeidsgivere={ekstraArbeidsgivere}
                 gjenstaendeSykedager={gjenstaendeSykedager}
                 utbetalingstype={utbetalingstype}
-                fodselsnummer={fodselsnummer}
+                fodselsnummer={p.fnr}
                 fomTom={fomTom}
                 orgnummer={orgnummer}
                 oppdrag={oppdrag}

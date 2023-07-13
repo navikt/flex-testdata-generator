@@ -1,5 +1,4 @@
-import { Client, ClientMetadata, Issuer } from 'openid-client'
-import { ResponseType } from 'openid-client'
+import { Client, ClientMetadata, Issuer, ResponseType } from 'openid-client'
 
 let client: Client | null = null
 

@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'
 import Datoer, { FomTom } from '../datoer/Datoer'
+
 import {
     Inntektsmeldingstatus,
     InntektsmeldingstatusStatus,
@@ -72,7 +73,7 @@ export const InntektsmeldingStatus = (p: InntektsmeldingStatusProps) => {
                 size="medium"
             ></TextField>
             <Button
-                variant={'tertiary'}
+                variant="tertiary"
                 onClick={async () => {
                     setVedtaksperiodeId(uuidv4())
                 }}

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { v4 as uuid } from 'uuid'
 
 import { FomTom } from '../datoer/Datoer'
+
 import {
     Begrensning,
     GrunnlagForSykepengegrunnlagPerArbeidsgiver,
@@ -131,7 +132,7 @@ function SendSomNyttVedtak({
                 }}
             >
                 Send vedtak{' '}
-                <span role={'img'} aria-label={'Judge'}>
+                <span role="img" aria-label="Judge">
                     👨‍⚖️
                 </span>
             </button>

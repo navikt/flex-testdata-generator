@@ -2,6 +2,7 @@ import { Button, Select, TextField } from '@navikt/ds-react'
 import React, { useState } from 'react'
 
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'
+
 import { TemaSkjema } from './Temaskjema'
 
 export const Papirdokument = (p: FellesInputChildrenProps) => {

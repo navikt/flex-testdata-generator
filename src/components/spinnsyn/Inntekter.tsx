@@ -1,6 +1,7 @@
 import React, { Dispatch, useEffect } from 'react'
 
 import { formaterValuta } from '../../utils/valutaformat'
+
 import {
     Begrensning,
     GrunnlagForSykepengegrunnlagPerArbeidsgiver,
@@ -116,7 +117,7 @@ export const Inntekter = ({
             <label>
                 Månedsinntekt hos {orgnummer} :
                 <input
-                    type={'number'}
+                    type="number"
                     min={0}
                     step={1}
                     max={200000}
@@ -128,16 +129,18 @@ export const Inntekter = ({
             </label>
             <br />
             <table style={{ border: '1px solid', marginTop: '1em' }}>
-                {tabellInnhold.map((e, idx) => {
-                    return (
-                        <tr key={idx}>
-                            <td>
-                                <strong>{e[0]}</strong>
-                            </td>
-                            <td style={{ textAlign: 'right' }}>{e[1]}</td>
-                        </tr>
-                    )
-                })}
+                <tbody>
+                    {tabellInnhold.map((e, idx) => {
+                        return (
+                            <tr key={idx}>
+                                <td>
+                                    <strong>{e[0]}</strong>
+                                </td>
+                                <td style={{ textAlign: 'right' }}>{e[1]}</td>
+                            </tr>
+                        )
+                    })}
+                </tbody>
             </table>
 
             <h3>Andre arbeidsgivere</h3>

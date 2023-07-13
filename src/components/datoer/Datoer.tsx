@@ -21,7 +21,7 @@ function Datoer({ setFomTom, fomTom }: Props) {
                     FOM:
                     <input
                         value={fomTom.fom.toString()}
-                        type={'date'}
+                        type="date"
                         onChange={(e) => {
                             const fom = LocalDate.parse(e.target.value)
                             if (!fom.isAfter(fomTom.tom)) {
@@ -36,7 +36,7 @@ function Datoer({ setFomTom, fomTom }: Props) {
                     TOM:
                     <input
                         value={fomTom.tom.toString()}
-                        type={'date'}
+                        type="date"
                         onChange={(e) => {
                             const tom = LocalDate.parse(e.target.value)
                             if (!tom.isBefore(fomTom.fom)) {

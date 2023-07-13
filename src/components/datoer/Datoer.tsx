@@ -1,5 +1,5 @@
 import { LocalDate } from '@js-joda/core'
-import { Heading } from '@navikt/ds-react'
+import { DatePicker, useRangeDatepicker } from '@navikt/ds-react'
 import React, { Dispatch } from 'react'
 
 interface Props {
@@ -13,40 +13,36 @@ export interface FomTom {
 }
 
 function Datoer({ setFomTom, fomTom }: Props) {
+    const { datepickerProps, toInputProps, fromInputProps } =
+        useRangeDatepicker({
+            defaultSelected: {
+                from: new Date(fomTom.fom.toString()),
+                to: new Date(fomTom.tom.toString()),
+            },
+            onRangeChange: (daterange) => {
+                if (daterange && daterange.from && daterange.to) {
+                    setFomTom({
+                        fom: LocalDate.of(
+                            daterange.from.getFullYear(),
+                            daterange.from.getMonth() + 1,
+                            daterange.from.getDate()
+                        ),
+                        tom: LocalDate.of(
+                            daterange.to.getFullYear(),
+                            daterange.to.getMonth() + 1,
+                            daterange.to.getDate()
+                        ),
+                    })
+                }
+            },
+        })
     return (
-        <>
-            <Heading size="xsmall">Vedtaksperiode</Heading>
-            <div style={{ paddingTop: '1em' }}>
-                <label>
-                    FOM:
-                    <input
-                        value={fomTom.fom.toString()}
-                        type="date"
-                        onChange={(e) => {
-                            const fom = LocalDate.parse(e.target.value)
-                            if (!fom.isAfter(fomTom.tom)) {
-                                setFomTom({ fom: fom, tom: fomTom.tom })
-                            }
-                        }}
-                    />
-                </label>
+        <DatePicker {...datepickerProps}>
+            <div className="flex flex-wrap justify-center gap-4 my-4">
+                <DatePicker.Input {...fromInputProps} label="Vedtak fra" />
+                <DatePicker.Input {...toInputProps} label="Vedtak til" />
             </div>
-            <div style={{ paddingTop: '1em' }}>
-                <label>
-                    TOM:
-                    <input
-                        value={fomTom.tom.toString()}
-                        type="date"
-                        onChange={(e) => {
-                            const tom = LocalDate.parse(e.target.value)
-                            if (!tom.isBefore(fomTom.fom)) {
-                                setFomTom({ tom: tom, fom: fomTom.fom })
-                            }
-                        }}
-                    />
-                </label>
-            </div>
-        </>
+        </DatePicker>
     )
 }
 

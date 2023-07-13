@@ -20,10 +20,18 @@ import {
     UtbetalingdagDto,
 } from './VedtakV2'
 import { Utbetalingsdager } from './Utbetalingsdager'
+import { SkjønnsfastsattSykepengegrunnlag } from './SkjønnsfastsattSykepengegrunnlag'
 
 function VedtakGenerator(p: FellesInputChildrenProps) {
     const [automatiskBehandling, setAutomatiskBehandling] =
         useState<boolean>(true)
+    const [skjønnsfastsatt, setSkjønnsfastsatt] = useState<boolean>(true)
+    const [begrunnelse, setBegrunnelse] = useState<string>('Begrunnelse')
+    const [skjønnsfastsattÅrsinntekt, setSkjønnsfastsattÅrsinntekt] =
+        useState<number>(888000)
+    const [årsinntektFraAordningen, setÅrsinntektFraAordningen] =
+        useState<number>(350000)
+
     const [månedsinntekt, setMånedsinntekt] = useState<number>(37500)
     const [ekstraArbeidsgivere, setEkstraArbeidsgivere] =
         useState<GrunnlagForSykepengegrunnlagPerArbeidsgiver>({})
@@ -58,9 +66,7 @@ function VedtakGenerator(p: FellesInputChildrenProps) {
     }
     return (
         <div className="mt-4">
-            <div style={{ border: '1px solid', padding: '1em' }}>
-                <Datoer fomTom={fomTom} setFomTom={setFomTom} />
-            </div>
+            <Datoer fomTom={fomTom} setFomTom={setFomTom} />
             <Orgnummer orgnummer={orgnummer} setOrgnummer={setOrgnummer} />
             <Inntekter
                 orgnummer={orgnummer}
@@ -83,6 +89,16 @@ function VedtakGenerator(p: FellesInputChildrenProps) {
                 automatiskBehandling={automatiskBehandling}
                 setAutomatiskBehandling={setAutomatiskBehandling}
             />
+            <SkjønnsfastsattSykepengegrunnlag
+                skjønnsfastsatt={skjønnsfastsatt}
+                setSkjønnsfastsatt={setSkjønnsfastsatt}
+                skjønnsfastsattÅrsinntekt={skjønnsfastsattÅrsinntekt}
+                setSkjønnsfastsattÅrsinntekt={setSkjønnsfastsattÅrsinntekt}
+                begrunnelse={begrunnelse}
+                setBegrunnelse={setBegrunnelse}
+                årsinntektFraAordningen={årsinntektFraAordningen}
+                setÅrsinntektFraAordningen={setÅrsinntektFraAordningen}
+            ></SkjønnsfastsattSykepengegrunnlag>
             <SprefUtbetaling
                 setOppdrag={setOppdrag}
                 oppdrag={oppdrag}

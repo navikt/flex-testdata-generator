@@ -1,4 +1,5 @@
 import React, { Dispatch } from 'react'
+import { Button } from '@navikt/ds-react'
 
 import { OppdragDto, UtbetalingslinjeDto } from './VedtakV2'
 
@@ -16,14 +17,7 @@ function Utbetalingslinje({
     const style = { marginBlockEnd: 0, marginBlockStart: 0 }
 
     return (
-        <div
-            style={{
-                border: '1px solid',
-                padding: '1em',
-                fontSize: 12,
-                display: 'flex',
-            }}
-        >
+        <>
             <div style={{ width: '75%', padding: '0.5em', marginBlockEnd: 0 }}>
                 <p style={style}>
                     <strong>Totalbeløp:</strong>
@@ -58,11 +52,14 @@ function Utbetalingslinje({
                     alignItems: 'center',
                 }}
             >
-                <button onClick={() => onByttMottaker(idx)}>
+                <Button
+                    variant="secondary-neutral"
+                    onClick={() => onByttMottaker(idx)}
+                >
                     Bytt mottaker
-                </button>
+                </Button>
             </div>
-        </div>
+        </>
     )
 }
 

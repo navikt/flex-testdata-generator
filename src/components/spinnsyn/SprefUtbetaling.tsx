@@ -1,6 +1,7 @@
 import { DayOfWeek, LocalDate } from '@js-joda/core'
 import React, { Dispatch, useEffect, useState } from 'react'
 import { v4 } from 'uuid'
+import { Label } from '@navikt/ds-react'
 
 import { FomTom } from '../datoer/Datoer'
 
@@ -213,8 +214,8 @@ function SprefUtbetaling({
     }
 
     return (
-        <div style={{ border: '1px solid', padding: '1em' }}>
-            <h2 style={{ display: 'inline' }}>Utbetaling til arbeidsgiver</h2>
+        <div className="my-4">
+            <Label>Utbetaling til arbeidsgiver</Label>
             <form style={{ paddingTop: '1em' }}>
                 <RadioValg navn="100% uten opphold" sprefVariant="100%" />
                 <RadioValg navn="80% uten opphold" sprefVariant="80%" />

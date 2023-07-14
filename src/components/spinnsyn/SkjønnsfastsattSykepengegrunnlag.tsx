@@ -40,7 +40,7 @@ export const SkjønnsfastsattSykepengegrunnlag = ({
             {skjønnsfastsatt && (
                 <>
                     <TextField
-                        className="my-4"
+                        className="my-4 w-1/5"
                         label="Årsinntekt fra A-Ordningen"
                         value={årsinntektFraAordningen}
                         type="number"
@@ -49,7 +49,7 @@ export const SkjønnsfastsattSykepengegrunnlag = ({
                         }
                     ></TextField>
                     <TextField
-                        className="my-4"
+                        className="my-4 w-1/5"
                         label="Skjønnsfastsatt årsinntekt"
                         value={skjønnsfastsattÅrsinntekt}
                         type="number"
@@ -57,7 +57,7 @@ export const SkjønnsfastsattSykepengegrunnlag = ({
                             setSkjønnsfastsattÅrsinntekt(Number(e.target.value))
                         }
                     ></TextField>
-                    <Label className="my-4">
+                    <Label className="my-4 w-1/5">
                         {`Utregnet avvik ${formatOneDecimal(
                             diffInPercentage(
                                 årsinntektFraAordningen,
@@ -66,7 +66,7 @@ export const SkjønnsfastsattSykepengegrunnlag = ({
                         )}%`}
                     </Label>
                     <Textarea
-                        className="my-4"
+                        className="my-4  w-3/5"
                         label="Begrunnelse for skjønnsfastsettelse fra saksbehandler"
                         value={begrunnelse}
                         onChange={(e) => setBegrunnelse(e.target.value)}

@@ -9,7 +9,8 @@ interface Props {
 const Utbetalingstype = ({ utbetalingstype, setUtbetalingstype }: Props) => {
     return (
         <Select
-            label="        Utbetalingstype:"
+            label="Utbetalingstype:"
+            className="w-1/5"
             defaultValue={utbetalingstype}
             onChange={(event) => {
                 setUtbetalingstype(event.target.value)

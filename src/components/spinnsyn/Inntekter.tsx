@@ -116,7 +116,7 @@ export const Inntekter = ({
     return (
         <>
             <TextField
-                className="mt-4 w-1/2"
+                className="mt-4 w-1/5"
                 label={`Månedsinntekt hos ${orgnummer}`}
                 value={månedsinntekt}
                 type="number"

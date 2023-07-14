@@ -34,7 +34,7 @@ export const CommonInput = (p: FellesInputProps) => {
                 </Heading>
 
                 <TextField
-                    className="mt-4"
+                    className="mt-4 w-1/5"
                     onChange={(e) => {
                         setFnr(e.target.value)
                         localStorage.setItem(

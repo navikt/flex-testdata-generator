@@ -1,6 +1,6 @@
 import { DayOfWeek } from '@js-joda/core'
 import React, { Dispatch, useEffect } from 'react'
-import { Select } from '@navikt/ds-react'
+import { ExpansionCard, Heading, Select } from '@navikt/ds-react'
 
 import { FomTom } from '../datoer/Datoer'
 
@@ -55,93 +55,140 @@ export const Utbetalingsdager = ({
     }
 
     return (
-        <div className="my-4" style={{ display: 'flex', flexWrap: 'wrap' }}>
-            {utbetalingsdager.map((ut, idx) => {
-                return (
-                    <div
-                        key={idx}
-                        style={{
-                            border: '1px solid',
-                            padding: '1em',
-                            display: 'grid',
-                        }}
-                    >
-                        <Select
-                            label={ut.dato.toString()}
-                            id={ut.dato.toString()}
-                            defaultValue={ut.type}
-                            onChange={(event) => {
-                                const nyeDager = utbetalingsdager.map((dag) => {
-                                    if (
-                                        dag.dato.toString() === event.target.id
-                                    ) {
-                                        dag.type = event.target.value
-                                        if (dag.type === 'AvvistDag') {
-                                            dag.begrunnelser = [
-                                                event.target.selectedOptions[0]
-                                                    .id,
-                                            ]
-                                        }
-                                    }
-                                    return dag
-                                })
-                                setUtbetalingsdager(nyeDager)
-                            }}
-                        >
-                            <option value="NavDag">NavDag</option>
-                            <option value="NavHelgDag">NavHelgDag</option>
-                            <option value="ArbeidsgiverperiodeDag">
-                                ArbeidsgiverperiodeDag
-                            </option>
-                            <option value="Arbeidsdag">Arbeidsdag</option>
-                            <option value="Fridag">Fridag</option>
-                            <option value="Feriedag">Feriedag</option>
-                            <option value="Permisjonsdag">Permisjonsdag</option>
-                            <option value="ForeldetDag">ForeldetDag</option>
-                            <option
-                                value="AvvistDag"
-                                id="SykepengedagerOppbrukt"
+        <ExpansionCard aria-label="Utbetalingsdager" className="my-4">
+            <ExpansionCard.Header className="flex items-center py-2">
+                <Heading size="small" level="2">
+                    Utbetalingsdager
+                </Heading>
+            </ExpansionCard.Header>
+            <ExpansionCard.Content>
+                <div
+                    className="my-4"
+                    style={{ display: 'flex', flexWrap: 'wrap' }}
+                >
+                    {utbetalingsdager.map((ut, idx) => {
+                        return (
+                            <div
+                                key={idx}
+                                style={{
+                                    border: '1px solid',
+                                    padding: '1em',
+                                    display: 'grid',
+                                }}
                             >
-                                Avvist - SykepengedagerOppbrukt
-                            </option>
-                            <option
-                                value="AvvistDag"
-                                id="SykepengedagerOppbruktOver67"
-                            >
-                                Avvist - SykepengedagerOppbrukt - Over 67
-                            </option>
-                            <option value="AvvistDag" id="MinimumInntekt">
-                                Avvist - MinimumInntekt
-                            </option>
-                            <option value="AvvistDag" id="MinimumInntektOver67">
-                                Avvist - MinimumInntekt - Over 67
-                            </option>
-                            <option
-                                value="AvvistDag"
-                                id="EgenmeldingUtenforArbeidsgiverperiode"
-                            >
-                                Avvist - EgenmeldingUtenforArbeidsgiverperiode
-                            </option>
-                            <option value="AvvistDag" id="MinimumSykdomsgrad">
-                                Avvist - MinimumSykdomsgrad
-                            </option>
-                            <option value="AvvistDag" id="ManglerOpptjening">
-                                Avvist - ManglerOpptjening
-                            </option>
-                            <option value="AvvistDag" id="ManglerMedlemskap">
-                                Avvist - ManglerMedlemskap
-                            </option>
-                            <option value="AvvistDag" id="EtterDødsdato">
-                                Avvist - EtterDødsdato
-                            </option>
-                            <option value="AvvistDag" id="Over70">
-                                Avvist - Over70
-                            </option>
-                            <option value="UkjentDag">UkjentDag</option>
-                        </Select>
-                    </div>
-                )
-            })}
-        </div>
+                                <Select
+                                    label={ut.dato.toString()}
+                                    id={ut.dato.toString()}
+                                    defaultValue={ut.type}
+                                    onChange={(event) => {
+                                        const nyeDager = utbetalingsdager.map(
+                                            (dag) => {
+                                                if (
+                                                    dag.dato.toString() ===
+                                                    event.target.id
+                                                ) {
+                                                    dag.type =
+                                                        event.target.value
+                                                    if (
+                                                        dag.type === 'AvvistDag'
+                                                    ) {
+                                                        dag.begrunnelser = [
+                                                            event.target
+                                                                .selectedOptions[0]
+                                                                .id,
+                                                        ]
+                                                    }
+                                                }
+                                                return dag
+                                            }
+                                        )
+                                        setUtbetalingsdager(nyeDager)
+                                    }}
+                                >
+                                    <option value="NavDag">NavDag</option>
+                                    <option value="NavHelgDag">
+                                        NavHelgDag
+                                    </option>
+                                    <option value="ArbeidsgiverperiodeDag">
+                                        ArbeidsgiverperiodeDag
+                                    </option>
+                                    <option value="Arbeidsdag">
+                                        Arbeidsdag
+                                    </option>
+                                    <option value="Fridag">Fridag</option>
+                                    <option value="Feriedag">Feriedag</option>
+                                    <option value="Permisjonsdag">
+                                        Permisjonsdag
+                                    </option>
+                                    <option value="ForeldetDag">
+                                        ForeldetDag
+                                    </option>
+                                    <option
+                                        value="AvvistDag"
+                                        id="SykepengedagerOppbrukt"
+                                    >
+                                        Avvist - SykepengedagerOppbrukt
+                                    </option>
+                                    <option
+                                        value="AvvistDag"
+                                        id="SykepengedagerOppbruktOver67"
+                                    >
+                                        Avvist - SykepengedagerOppbrukt - Over
+                                        67
+                                    </option>
+                                    <option
+                                        value="AvvistDag"
+                                        id="MinimumInntekt"
+                                    >
+                                        Avvist - MinimumInntekt
+                                    </option>
+                                    <option
+                                        value="AvvistDag"
+                                        id="MinimumInntektOver67"
+                                    >
+                                        Avvist - MinimumInntekt - Over 67
+                                    </option>
+                                    <option
+                                        value="AvvistDag"
+                                        id="EgenmeldingUtenforArbeidsgiverperiode"
+                                    >
+                                        Avvist -
+                                        EgenmeldingUtenforArbeidsgiverperiode
+                                    </option>
+                                    <option
+                                        value="AvvistDag"
+                                        id="MinimumSykdomsgrad"
+                                    >
+                                        Avvist - MinimumSykdomsgrad
+                                    </option>
+                                    <option
+                                        value="AvvistDag"
+                                        id="ManglerOpptjening"
+                                    >
+                                        Avvist - ManglerOpptjening
+                                    </option>
+                                    <option
+                                        value="AvvistDag"
+                                        id="ManglerMedlemskap"
+                                    >
+                                        Avvist - ManglerMedlemskap
+                                    </option>
+                                    <option
+                                        value="AvvistDag"
+                                        id="EtterDødsdato"
+                                    >
+                                        Avvist - EtterDødsdato
+                                    </option>
+                                    <option value="AvvistDag" id="Over70">
+                                        Avvist - Over70
+                                    </option>
+                                    <option value="UkjentDag">UkjentDag</option>
+                                </Select>
+                            </div>
+                        )
+                    })}
+                </div>
+            </ExpansionCard.Content>
+        </ExpansionCard>
     )
 }

@@ -71,8 +71,7 @@ function Sykedager({
                 }}
             />
             <Label className="my-4">
-                Foreløpig beregnet slutt på sykepenger:
-                {foreløpigBeregnetSluttPåSykepenger.toString()}
+                {`Foreløpig beregnet slutt på sykepenger: ${foreløpigBeregnetSluttPåSykepenger.toString()}`}
             </Label>
         </>
     )

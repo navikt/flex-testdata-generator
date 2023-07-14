@@ -1,5 +1,5 @@
 import React, { Dispatch } from 'react'
-import { Button } from '@navikt/ds-react'
+import { Button, Panel } from '@navikt/ds-react'
 
 import { OppdragDto, UtbetalingslinjeDto } from './VedtakV2'
 
@@ -18,47 +18,38 @@ function Utbetalingslinje({
 
     return (
         <>
-            <div style={{ width: '75%', padding: '0.5em', marginBlockEnd: 0 }}>
-                <p style={style}>
-                    <strong>Totalbeløp:</strong>
-                    {utbetalingslinje.totalbeløp}
-                </p>
-                <p style={style}>
-                    <strong>Dagsats:</strong>
-                    {utbetalingslinje.dagsats}
-                </p>
-                <p style={style}>
-                    <strong>Grad:</strong>
-                    {utbetalingslinje.grad}
-                </p>
-                <p style={style}>
-                    <strong>Stønadsdager:</strong>
-                    {utbetalingslinje.stønadsdager}
-                </p>
-                <p style={style}>
-                    <strong>FOM:</strong>
-                    {utbetalingslinje.fom.toString()}
-                </p>
-                <p style={style}>
-                    <strong>TOM:</strong>
-                    {utbetalingslinje.tom.toString()}
-                </p>
-            </div>
-            <div
-                style={{
-                    width: '25%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                }}
+            <p style={style}>
+                <strong>Totalbeløp:</strong>
+                {utbetalingslinje.totalbeløp}
+            </p>
+            <p style={style}>
+                <strong>Dagsats:</strong>
+                {utbetalingslinje.dagsats}
+            </p>
+            <p style={style}>
+                <strong>Grad:</strong>
+                {utbetalingslinje.grad}
+            </p>
+            <p style={style}>
+                <strong>Stønadsdager:</strong>
+                {utbetalingslinje.stønadsdager}
+            </p>
+            <p style={style}>
+                <strong>FOM:</strong>
+                {utbetalingslinje.fom.toString()}
+            </p>
+            <p style={style}>
+                <strong>TOM:</strong>
+                {utbetalingslinje.tom.toString()}
+            </p>
+
+            <Button
+                className="mt-4"
+                variant="secondary-neutral"
+                onClick={() => onByttMottaker(idx)}
             >
-                <Button
-                    variant="secondary-neutral"
-                    onClick={() => onByttMottaker(idx)}
-                >
-                    Bytt mottaker
-                </Button>
-            </div>
+                Bytt mottaker
+            </Button>
         </>
     )
 }
@@ -88,7 +79,7 @@ export function Utbetaling({
     }
 
     return (
-        <div style={{ border: '1px solid', padding: '1em', marginTop: '1em' }}>
+        <Panel border className="my-4">
             <p>
                 <strong>Fagområde:</strong>
                 {oppdrag.fagområde}
@@ -110,6 +101,6 @@ export function Utbetaling({
                     onByttMottaker={onByttMottaker}
                 />
             ))}
-        </div>
+        </Panel>
     )
 }

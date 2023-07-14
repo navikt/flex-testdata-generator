@@ -9,6 +9,7 @@ interface Props {
 export const Orgnummer = ({ setOrgnummer, orgnummer }: Props) => {
     return (
         <TextField
+            className="w-1/5"
             label="Orgnummer"
             value={orgnummer}
             onChange={(e) => {

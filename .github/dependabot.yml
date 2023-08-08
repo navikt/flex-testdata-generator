@@ -27,3 +27,14 @@ updates:
       time: '03:00'
     open-pull-requests-limit: 20
     registries: '*'
+    groups:
+      aksel-dependencies:
+        patterns:
+          - '@navikt/aksel*'
+          - '@navikt/ds*'
+      react-dependencies:
+        patterns:
+          - 'react'
+          - 'react-dom'
+          - '@types/react'
+          - '@types/react-dom'

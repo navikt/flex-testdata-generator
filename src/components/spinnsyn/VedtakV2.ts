@@ -158,7 +158,10 @@ export type SpleisSykepengegrunnlag = {
 }
 
 type Begrunnelse = {
-    årsak: 'SkjønnsfastsattSykepengegrunnlag'
+    type:
+        | 'SkjønnsfastsattSykepengegrunnlagFritekst'
+        | 'SkjønnsfastsattSykepengegrunnlagMal'
+        | 'SkjønnsfastsattSykepengegrunnlagKonklusjon'
     begrunnelse: string
     perioder: Periode[]
 }

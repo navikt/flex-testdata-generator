@@ -15,7 +15,7 @@ jobs:
       image: ${{ steps.docker-build-push.outputs.image }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup node
         uses: actions/setup-node@v3
         with:
@@ -47,7 +47,7 @@ jobs:
     concurrency: deploy-to-dev-gcp
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - uses: nais/deploy/actions/deploy@v1
         name: Deploy to dev-gcp
         env:

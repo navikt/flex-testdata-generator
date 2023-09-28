@@ -1,4 +1,4 @@
-FROM gcr.io/distroless/nodejs18-debian11@sha256:13a2e3e503bba93f569316fd1606a6cbd4edd24e7d22023f433f9342cc68d7a9
+FROM gcr.io/distroless/nodejs18-debian12@sha256:ee36c135f8391f1facc373d9e9c0445fde06b0ab45c514ef33b84163fe7ec14b
 
 ENV NODE_ENV production
 

@@ -75,10 +75,6 @@ export const TemaSkjema = [
                 brevkode: 'NAV 96-01.01',
                 tittel: 'Rettskjennelse fra Trygderetten',
             },
-            {
-                brevkode: 'NAV 02-08.05',
-                tittel: 'Søknad om medlemskap i folketrygden under opphold utenfor Norge',
-            },
         ],
     },
     {
@@ -88,6 +84,16 @@ export const TemaSkjema = [
             {
                 brevkode: '900023',
                 tittel: 'Sykmelding - Utland',
+            },
+        ],
+    },
+    {
+        value: 'MED',
+        label: 'Medlemskap i folketrygden',
+        skjema: [
+            {
+                brevkode: 'NAV 02-08.05',
+                tittel: 'Søknad om medlemskap i folketrygden under opphold utenfor Norge',
             },
         ],
     },

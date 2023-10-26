@@ -24,7 +24,7 @@
     "@types/uuid": "^9.0.5",
     "eslint": "^8.51.0",
     "eslint-config-next": "^13.5.6",
-    "next": "^13.5.4",
+    "next": "^13.5.6",
     "openid-client": "^5.6.1",
     "prettier": "^3.0.3",
     "typescript": "^5.2.2"

@@ -33,12 +33,13 @@ export async function opprettJournalpost(opts: Opts): Promise<any> {
 }
 
 function opprettJournalpostPayload(opts: Opts): JournalpostRequest {
-    const bruker = opts.fnr
-        ? {
-              id: opts.fnr,
-              idType: 'FNR',
-          }
-        : undefined
+    const bruker =
+        opts.fnr === ''
+            ? {
+                  id: opts.fnr,
+                  idType: 'FNR',
+              }
+            : undefined
 
     return {
         eksternReferanseId: uuid(),

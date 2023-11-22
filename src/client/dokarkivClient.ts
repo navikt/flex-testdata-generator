@@ -1,4 +1,5 @@
 import { v4 as uuid } from 'uuid'
+import { Response } from 'next/dist/compiled/@edge-runtime/primitives'
 
 import { getAzureAdAccessToken } from './getAzureAdAccessToken'
 
@@ -10,7 +11,7 @@ interface Opts {
     journalforendeEnhet?: string
 }
 
-export async function opprettJournalpost(opts: Opts): Promise<any> {
+export async function opprettJournalpost(opts: Opts): Promise<Response> {
     const url =
         'https://dokarkiv.dev-fss-pub.nais.io/rest/journalpostapi/v1/journalpost?forsoekFerdigstill=false'
 

@@ -56,7 +56,7 @@ export const Papirdokument = (p: FellesInputChildrenProps) => {
                 style={{ marginTop: '1em' }}
                 loading={resetter}
                 onClick={async () => {
-                    if (p.fnr?.length != 11) {
+                    if (p.fnr?.length != 11 && p.fnr != undefined) {
                         p.setError('Forventer 11 siffer')
                         return
                     }
@@ -99,7 +99,7 @@ export const Papirdokument = (p: FellesInputChildrenProps) => {
 }
 
 export interface PapirDokumentRequest {
-    fnr: string
+    fnr?: string
     tema: string
     skjema: string
     tittel: string

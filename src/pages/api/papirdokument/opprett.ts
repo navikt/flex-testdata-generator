@@ -13,7 +13,7 @@ const handler = async (
     } else {
         const response = await opprettJournalpost(JSON.parse(req.body))
 
-        let body = response.json()
+        let body = await response.json()
         if (Object.keys(body).length === 0) {
             body = response.statusText
         }

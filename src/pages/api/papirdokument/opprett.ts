@@ -12,8 +12,11 @@ const handler = async (
         res.status(200).json({ message: 'Fake response' })
     } else {
         const response = await opprettJournalpost(JSON.parse(req.body))
-
         let body = response.json()
+
+        console.log(`Response: ${response}`) // eslint-disable-line no-console
+        console.log(`Body: ${body}`) // eslint-disable-line no-console
+
         if (Object.keys(body).length === 0) {
             body = response.statusText
         }

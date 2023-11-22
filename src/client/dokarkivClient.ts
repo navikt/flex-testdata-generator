@@ -34,14 +34,6 @@ export async function opprettJournalpost(opts: Opts): Promise<Response> {
 }
 
 function opprettJournalpostPayload(opts: Opts): JournalpostRequest {
-    const bruker =
-        opts.fnr === ''
-            ? {
-                  id: opts.fnr,
-                  idType: 'FNR',
-              }
-            : null
-
     return {
         eksternReferanseId: uuid(),
         tema: opts.tema,
@@ -49,7 +41,10 @@ function opprettJournalpostPayload(opts: Opts): JournalpostRequest {
         kanal: 'SKAN_IM',
         journalpostType: 'INNGAAENDE',
         journalfoerendeEnhet: opts.journalforendeEnhet,
-        bruker: bruker,
+        bruker: {
+            id: opts.fnr,
+            idType: 'FNR',
+        },
         dokumenter: [
             {
                 tittel: opts.tittel,
@@ -78,7 +73,7 @@ interface JournalpostRequest {
     bruker: {
         id: string
         idType: string
-    } | null
+    }
     dokumenter: Dokument[]
     eksternReferanseId: string
     journalfoerendeEnhet?: string

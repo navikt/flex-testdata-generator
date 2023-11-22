@@ -36,10 +36,12 @@ function opprettJournalpostPayload(opts: Opts): JournalpostRequest {
     const bruker =
         opts.fnr === ''
             ? {
-                  id: opts.fnr,
-                  idType: 'FNR',
+                  bruker: {
+                      id: opts.fnr,
+                      idType: 'FNR',
+                  },
               }
-            : undefined
+            : {}
 
     return {
         eksternReferanseId: uuid(),
@@ -48,7 +50,6 @@ function opprettJournalpostPayload(opts: Opts): JournalpostRequest {
         kanal: 'SKAN_IM',
         journalpostType: 'INNGAAENDE',
         journalfoerendeEnhet: opts.journalforendeEnhet,
-        bruker: bruker,
         dokumenter: [
             {
                 tittel: opts.tittel,
@@ -63,6 +64,7 @@ function opprettJournalpostPayload(opts: Opts): JournalpostRequest {
                 ],
             },
         ],
+        ...bruker,
     }
 }
 

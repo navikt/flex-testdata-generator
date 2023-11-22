@@ -14,8 +14,8 @@ const handler = async (
         const response = await opprettJournalpost(JSON.parse(req.body))
         let body = response.json()
 
-        console.log(`Response: ${response}`) // eslint-disable-line no-console
-        console.log(`Body: ${body}`) // eslint-disable-line no-console
+        console.log('Response: ' + JSON.stringify(response)) // eslint-disable-line no-console
+        console.log('Body: ' + JSON.stringify(body)) // eslint-disable-line no-console
 
         if (Object.keys(body).length === 0) {
             body = response.statusText

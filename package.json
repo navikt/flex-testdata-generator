@@ -27,7 +27,7 @@
     "next": "^13.5.6",
     "openid-client": "^5.6.1",
     "prettier": "^3.1.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.2"
   },
   "eslintConfig": {
     "extends": [

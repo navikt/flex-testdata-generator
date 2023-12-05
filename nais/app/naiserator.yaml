@@ -9,7 +9,7 @@ spec:
   image: {{image}}
   port: 8080
   ingresses:
-    - "https://flex-testdata-generator.intern.dev.nav.no"
+    - {{ingress}}
   replicas:
     min: 1
     max: 1

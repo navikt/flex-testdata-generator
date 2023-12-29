@@ -2,6 +2,9 @@
   "name": "flex-testdata-generator",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "20"
+  },
   "dependencies": {
     "@js-joda/core": "^5.6.1",
     "@navikt/ds-css": "^5.12.1",

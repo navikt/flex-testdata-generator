@@ -1,4 +1,4 @@
-import { ContentContainer, Heading } from '@navikt/ds-react'
+import { Page, Heading } from '@navikt/ds-react'
 import Head from 'next/head'
 import React from 'react'
 
@@ -8,11 +8,15 @@ const Index = () => {
             <Head>
                 <title>Flex testdata generator</title>
             </Head>
-            <ContentContainer>
-                <Heading size="xlarge" level="1">
-                    💪
-                </Heading>
-            </ContentContainer>
+            <Page>
+                <Page.Block width="xl">
+                    <div>Det oppsto en uforventet feil</div>
+
+                    <Heading size="xlarge" level="1">
+                        💪
+                    </Heading>
+                </Page.Block>
+            </Page>
         </>
     )
 }

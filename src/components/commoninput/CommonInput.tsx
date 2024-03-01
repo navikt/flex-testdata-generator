@@ -1,4 +1,4 @@
-import { Alert, ContentContainer, Heading, TextField } from '@navikt/ds-react'
+import { Alert, Page, Heading, TextField } from '@navikt/ds-react'
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 
@@ -28,39 +28,41 @@ export const CommonInput = (p: FellesInputProps) => {
             <Head>
                 <title>{p.header}</title>
             </Head>
-            <ContentContainer>
-                <Heading size="xlarge" level="1">
-                    {p.header}
-                </Heading>
+            <Page>
+                <Page.Block width="xl">
+                    <Heading size="xlarge" level="1">
+                        {p.header}
+                    </Heading>
 
-                <TextField
-                    className="mt-4 w-1/5"
-                    onChange={(e) => {
-                        setFnr(e.target.value)
-                        localStorage.setItem(
-                            'flex-testdata-fnr',
-                            e.target.value
-                        )
-                        setError(null)
-                        setSuksess(null)
-                    }}
-                    value={fnr}
-                    label="Fødselsnummer"
-                    size="medium"
-                />
-                {p.children({ fnr, setError, setSuksess })}
+                    <TextField
+                        className="mt-4 w-1/5"
+                        onChange={(e) => {
+                            setFnr(e.target.value)
+                            localStorage.setItem(
+                                'flex-testdata-fnr',
+                                e.target.value
+                            )
+                            setError(null)
+                            setSuksess(null)
+                        }}
+                        value={fnr}
+                        label="Fødselsnummer"
+                        size="medium"
+                    />
+                    {p.children({ fnr, setError, setSuksess })}
 
-                {error && (
-                    <Alert style={{ marginTop: '1em' }} variant="error">
-                        {error}
-                    </Alert>
-                )}
-                {suksess && (
-                    <Alert style={{ marginTop: '1em' }} variant="success">
-                        {suksess}
-                    </Alert>
-                )}
-            </ContentContainer>
+                    {error && (
+                        <Alert style={{ marginTop: '1em' }} variant="error">
+                            {error}
+                        </Alert>
+                    )}
+                    {suksess && (
+                        <Alert style={{ marginTop: '1em' }} variant="success">
+                            {suksess}
+                        </Alert>
+                    )}
+                </Page.Block>
+            </Page>
         </>
     )
 }

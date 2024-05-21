@@ -36,20 +36,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                         </NextLink>
                     </li>
                     <li>
-                        <NextLink legacyBehavior passHref href="/spinnsyn">
-                            <Link>Spinnsyn</Link>
-                        </NextLink>
-                    </li>
-                    <li>
-                        <NextLink
-                            legacyBehavior
-                            passHref
-                            href="/inntektsmeldingstatus"
-                        >
-                            <Link>Inntektsmelding status</Link>
-                        </NextLink>
-                    </li>
-                    <li>
                         <NextLink
                             legacyBehavior
                             passHref

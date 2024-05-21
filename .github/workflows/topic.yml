@@ -20,15 +20,3 @@ jobs:
           CLUSTER: dev-gcp
           RESOURCE: nais/topics/flex-testdata-reset-topic.yaml
           VARS: nais/topics/dev.json
-      - name: Deploy topic til dev-gcp
-        uses: nais/deploy/actions/deploy@v2
-        env:
-          CLUSTER: dev-gcp
-          RESOURCE: nais/topics/flex-spinnsyn-testdata-topic.yaml
-          VARS: nais/topics/dev.json
-      - name: Deploy topic til dev-gcp
-        uses: nais/deploy/actions/deploy@v2
-        env:
-          CLUSTER: dev-gcp
-          RESOURCE: nais/topics/flex-inntektsmelding-status-testdata-topic.yaml
-          VARS: nais/topics/dev.json

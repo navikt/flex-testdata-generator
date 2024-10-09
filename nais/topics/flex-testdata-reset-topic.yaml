@@ -37,5 +37,8 @@ spec:
       application: spinnsyn-brukernotifikasjon
       access: read
     - team: flex
+      application: flex-sykmeldinger-backend
+      access: read
+    - team: flex
       application: flex-testdata-generator
       access: write

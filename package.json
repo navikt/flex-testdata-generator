@@ -20,7 +20,7 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
-    "@navikt/eslint-config-teamsykmelding": "^6.6.0",
+    "@navikt/eslint-config-teamsykmelding": "^7.0.0",
     "@types/node": "^20.14.10",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",

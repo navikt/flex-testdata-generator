@@ -29,7 +29,7 @@
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.15",
     "openid-client": "^5.7.0",
-    "prettier": "^3.3.3",
+    "prettier": "^3.4.1",
     "typescript": "^5.7.2"
   },
   "eslintConfig": {

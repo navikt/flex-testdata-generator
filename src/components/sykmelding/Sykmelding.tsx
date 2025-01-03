@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 import Datoer, { FomTom } from '../datoer/Datoer'
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'
+import { defaultSykmeldingInput, SykmeldingInput } from './sykmeldingData'
 
 // const formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
 
@@ -15,6 +16,9 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
         fom: LocalDate.now(),
         tom: LocalDate.now(),
     })
+    const [sykmeldingInput, setSykmeldingInput] = useState<SykmeldingInput>(
+        defaultSykmeldingInput()
+    )
     return (
         <>
             <Select label="Aktivitetstype" className="mt-4">

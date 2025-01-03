@@ -14,9 +14,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Deploy topic til dev-gcp
+      - name: Deploy testdata-reset topic til dev-gcp
         uses: nais/deploy/actions/deploy@v2
         env:
           CLUSTER: dev-gcp
           RESOURCE: nais/topics/flex-testdata-reset-topic.yaml
+          VARS: nais/topics/dev.json
+      - name: Deploy test-sykmelding topic til dev-gcp
+        uses: nais/deploy/actions/deploy@v2
+        env:
+          CLUSTER: dev-gcp
+          RESOURCE: nais/topics/flex-test-sykmelding-topic.yaml
           VARS: nais/topics/dev.json

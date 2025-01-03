@@ -44,6 +44,15 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                             <Link>Papir dokument</Link>
                         </NextLink>
                     </li>
+                    <li>
+                        <NextLink
+                            legacyBehavior
+                            passHref
+                            href="/sykmelding"
+                        >
+                            <Link>Sykmelding</Link>
+                        </NextLink>
+                    </li>
                 </ul>
                 <div className="flex-auto">
                     <Component {...pageProps} />

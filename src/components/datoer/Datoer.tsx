@@ -39,8 +39,8 @@ function Datoer({ setFomTom, fomTom }: Props) {
     return (
         <DatePicker {...datepickerProps}>
             <div className="flex flex-wrap justify-center gap-4 my-4">
-                <DatePicker.Input {...fromInputProps} label="Vedtak fra" />
-                <DatePicker.Input {...toInputProps} label="Vedtak til" />
+                <DatePicker.Input {...fromInputProps} label="Fra" />
+                <DatePicker.Input {...toInputProps} label="Til" />
             </div>
         </DatePicker>
     )

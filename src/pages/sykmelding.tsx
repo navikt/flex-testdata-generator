@@ -1,5 +1,6 @@
-import { CommonInput } from '../components/commoninput/CommonInput'
 import React from 'react'
+
+import { CommonInput } from '../components/commoninput/CommonInput'
 import { Sykmelding } from '../components/sykmelding/Sykmelding'
 
 const SykmeldingPage = () => {

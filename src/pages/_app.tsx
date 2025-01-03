@@ -45,11 +45,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                         </NextLink>
                     </li>
                     <li>
-                        <NextLink
-                            legacyBehavior
-                            passHref
-                            href="/sykmelding"
-                        >
+                        <NextLink legacyBehavior passHref href="/sykmelding">
                             <Link>Sykmelding</Link>
                         </NextLink>
                     </li>

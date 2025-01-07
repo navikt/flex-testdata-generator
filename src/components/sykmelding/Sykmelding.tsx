@@ -12,7 +12,7 @@ import {
     SykmeldingInput,
 } from './sykmeldingData'
 
-import { Aktivitet } from './Aktiviteter'
+import { Aktiviteter } from './Aktiviteter'
 
 export const standardAktivitet: AktivitetInput = {
     type: AktivitetInputType.AKTIVITET_IKKE_MULIG,
@@ -66,7 +66,7 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
         <>
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
-                    <Aktivitet />
+                    <Aktiviteter />
                     <DatePicker>
                         <DatePicker.Input
                             {...register('syketilfelleStartDato')}

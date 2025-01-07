@@ -1,11 +1,4 @@
-import {
-    LocalDate,
-    LocalDateTime,
-    LocalTime,
-    OffsetDateTime,
-    ZoneId,
-    ZoneOffset,
-} from '@js-joda/core'
+import { LocalDate, LocalTime, OffsetDateTime, ZoneOffset } from '@js-joda/core'
 import { v4 as uuidv4 } from 'uuid'
 
 export type SykmeldingInput = {

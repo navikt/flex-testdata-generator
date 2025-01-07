@@ -35,8 +35,6 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
     const { register } = methods
 
     const onSubmit = async (sykmeldingInput: SykmeldingInput) => {
-        console.log(sykmeldingInput)
-
         const fnr = p.fnr
         if (fnr == null || fnr.length != 11) {
             p.setError('Forventer 11 siffer')

@@ -38,7 +38,7 @@ export function genererSykmeldingMedBehandlingsutfallKafkaMelding(
     input: SykmeldingInput
 ): Record<string, any> {
     return {
-        ...genererKomplettSykmelding(input),
+        sykmelding: genererKomplettSykmelding(input),
         validation: {
             status: 'OK',
             timestamp: LocalDate.now(),

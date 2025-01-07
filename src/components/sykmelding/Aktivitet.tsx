@@ -36,11 +36,14 @@ export const Aktivitet = ({}: AktivitetProps) => {
         const currentFom = getValues(`aktivitet.${index}.fom`)
         const currentTom = getValues(`aktivitet.${index}.tom`)
         return (
-            <div key={field.id}>
+            <div
+                key={field.id}
+                className="flex flex-row shrink items-center space-x-6"
+            >
                 <Select
                     {...register(`aktivitet.${index}.type`)}
                     label="Aktivitetstype"
-                    className="mt-4"
+                    className="max-w-full"
                 >
                     {aktivitetOptions()}
                 </Select>

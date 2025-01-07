@@ -16,11 +16,6 @@ export type AktivitetInput = {
     tom: LocalDate
 }
 
-// export type DateRange = {
-//     tom: LocalDate
-//     fom: LocalDate
-// }
-
 export enum AktivitetInputType {
     AKTIVITET_IKKE_MULIG = 'AKTIVITET_IKKE_MULIG',
     AVVENTENDE = 'AVVENTENDE',

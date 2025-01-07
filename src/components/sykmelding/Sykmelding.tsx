@@ -9,15 +9,17 @@ import { FellesInputChildrenProps } from '../commoninput/CommonInput'
 import {
     AktivitetInput,
     AktivitetInputType,
+    genererSykmeldingMedBehandlingsutfallKafkaMelding,
     SykmeldingInput,
 } from './sykmeldingData'
-
 import { Aktiviteter } from './Aktiviteter'
 
 export const standardAktivitet: AktivitetInput = {
     type: AktivitetInputType.AKTIVITET_IKKE_MULIG,
-    fom: LocalDate.now().minusDays(8),
-    tom: LocalDate.now().minusDays(1),
+    periode: {
+        fom: LocalDate.now().minusDays(8),
+        tom: LocalDate.now().minusDays(1),
+    },
 }
 
 export const Sykmelding = (p: FellesInputChildrenProps) => {
@@ -35,28 +37,31 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
     })
     const { register } = methods
 
-    const onSubmit = async (data: SykmeldingInput) => {
-        console.log(data)
-        if (p.fnr?.length != 11) {
+    const onSubmit = async (sykmeldingInput: SykmeldingInput) => {
+        console.log(sykmeldingInput)
+
+        const fnr = p.fnr
+        if (fnr == null || fnr.length != 11) {
             p.setError('Forventer 11 siffer')
             return
         }
-        const request = {
-            fnr: p.fnr,
-            sykmelding: {
-                //TODO
-            },
-        }
+
+        const kafkaMelding = genererSykmeldingMedBehandlingsutfallKafkaMelding({
+            ...sykmeldingInput,
+            fnr: fnr,
+        })
+
+        const meldingId = sykmeldingInput.id
         const res = await fetch(
-            `/api/kafka/flex/ditt-sykefravaer-melding/${data.id}`,
+            `/api/kafka/flex/ditt-sykefravaer-melding/${meldingId}`,
             {
                 method: 'POST',
-                body: JSON.stringify(request),
+                body: JSON.stringify(kafkaMelding),
             }
         )
         const response = await res.text()
         if (res.ok) {
-            p.setSuksess(`Melding ${data.id} opprettet`)
+            p.setSuksess(`Melding ${meldingId} opprettet`)
         } else {
             p.setError(response)
         }

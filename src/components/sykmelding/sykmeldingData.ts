@@ -1,7 +1,6 @@
 import { LocalDate } from '@js-joda/core'
 import { v4 as uuidv4 } from 'uuid'
 
-
 export type SykmeldingInput = {
     id: string
     fnr: string
@@ -13,50 +12,41 @@ export type SykmeldingInput = {
 
 export type AktivitetInput = {
     type: AktivitetInputType
-    fom: LocalDate
+    periode: DateRange
+}
+
+export type DateRange = {
     tom: LocalDate
+    fom: LocalDate
 }
 
 export enum AktivitetInputType {
-    AKTIVITET_IKKE_MULIG,
-    AVVENTENDE,
-    BEHANDLINGSDAGER_1,
-    BEHANDLINGSDAGER_2,
-    GRADERT_80,
-    GRADERT_60,
-    GRADERT_40,
-    GRADERT_20,
-    GRADERT_10,
-    REISETILSKUDD,
+    AKTIVITET_IKKE_MULIG = 'AKTIVITET_IKKE_MULIG',
+    AVVENTENDE = 'AVVENTENDE',
+    BEHANDLINGSDAGER_1 = 'BEHANDLINGSDAGER_1',
+    BEHANDLINGSDAGER_2 = 'BEHANDLINGSDAGER_2',
+    GRADERT_80 = 'GRADERT_80',
+    GRADERT_60 = 'GRADERT_60',
+    GRADERT_40 = 'GRADERT_40',
+    GRADERT_20 = 'GRADERT_20',
+    GRADERT_10 = 'GRADERT_10',
+    REISETILSKUDD = 'REISETILSKUDD',
 }
 
-function mapAktivitetInput(aktivitet: AktivitetInput): any {
-    const baseVerdier = {fom: aktivitet.fom, tom: aktivitet.tom}
-    switch (aktivitet.type) {
-        case AktivitetInputType.AKTIVITET_IKKE_MULIG:
-            return {type: "AKTIVITET_IKKE_MULIG", ...baseVerdier}
-        case AktivitetInputType.AVVENTENDE:
-            return {type: "AVVENTENDE", innspillTilArbeidsgiver: "dummy innspill", ...baseVerdier}
-        case AktivitetInputType.BEHANDLINGSDAGER_1:
-            return {type: "BEHANDLINGSDAGER", antallBehandlingsdager: 1, ...baseVerdier}
-        case AktivitetInputType.BEHANDLINGSDAGER_2:
-            return {type: "BEHANDLINGSDAGER", antallBehandlingsdager: 2, ...baseVerdier}
-        case AktivitetInputType.GRADERT_80:
-            return {type: "GRADERT", grad: 80, ...baseVerdier}
-        case AktivitetInputType.GRADERT_60:
-            return {type: "GRADERT", grad: 60, ...baseVerdier}
-        case AktivitetInputType.GRADERT_40:
-            return {type: "GRADERT", grad: 40,...baseVerdier}
-        case AktivitetInputType.GRADERT_20:
-            return {type: "GRADERT", grad: 20, ...baseVerdier}
-        case AktivitetInputType.GRADERT_10:
-            return {type: "GRADERT", grad: 10, ...baseVerdier}
-        case AktivitetInputType.REISETILSKUDD:
-            return {type: "REISETILSKUDD", ...baseVerdier}
+export function genererSykmeldingMedBehandlingsutfallKafkaMelding(
+    input: SykmeldingInput
+): Record<string, any> {
+    return {
+        ...genererKomplettSykmelding(input),
+        validation: {
+            status: 'OK',
+            timestamp: LocalDate.now(),
+            rules: [],
+        },
     }
 }
 
-function genererSykmelding(input: SykmeldingInput): any {
+export function genererKomplettSykmelding(input: SykmeldingInput): any {
     const standardSykmelding = lagStandardSykmelding()
     return {
         ...standardSykmelding,
@@ -72,6 +62,47 @@ function genererSykmelding(input: SykmeldingInput): any {
     }
 }
 
+function mapAktivitetInput(aktivitet: AktivitetInput): any {
+    const baseVerdier = {
+        fom: aktivitet.periode.fom,
+        tom: aktivitet.periode.tom,
+    }
+    switch (aktivitet.type) {
+        case AktivitetInputType.AKTIVITET_IKKE_MULIG:
+            return { type: 'AKTIVITET_IKKE_MULIG', ...baseVerdier }
+        case AktivitetInputType.AVVENTENDE:
+            return {
+                type: 'AVVENTENDE',
+                innspillTilArbeidsgiver: 'dummy innspill',
+                ...baseVerdier,
+            }
+        case AktivitetInputType.BEHANDLINGSDAGER_1:
+            return {
+                type: 'BEHANDLINGSDAGER',
+                antallBehandlingsdager: 1,
+                ...baseVerdier,
+            }
+        case AktivitetInputType.BEHANDLINGSDAGER_2:
+            return {
+                type: 'BEHANDLINGSDAGER',
+                antallBehandlingsdager: 2,
+                ...baseVerdier,
+            }
+        case AktivitetInputType.GRADERT_80:
+            return { type: 'GRADERT', grad: 80, ...baseVerdier }
+        case AktivitetInputType.GRADERT_60:
+            return { type: 'GRADERT', grad: 60, ...baseVerdier }
+        case AktivitetInputType.GRADERT_40:
+            return { type: 'GRADERT', grad: 40, ...baseVerdier }
+        case AktivitetInputType.GRADERT_20:
+            return { type: 'GRADERT', grad: 20, ...baseVerdier }
+        case AktivitetInputType.GRADERT_10:
+            return { type: 'GRADERT', grad: 10, ...baseVerdier }
+        case AktivitetInputType.REISETILSKUDD:
+            return { type: 'REISETILSKUDD', ...baseVerdier }
+    }
+}
+
 function lagStandardSykmelding(): any {
     return {
         id: uuidv4(),
@@ -79,34 +110,30 @@ function lagStandardSykmelding(): any {
             mottattDato: LocalDate.now(),
             genDate: LocalDate.now().minusDays(1),
             behandletTidspunkt: LocalDate.now().minusDays(2),
-            regelsettVersjon: "1.0",
+            regelsettVersjon: '1.0',
             avsenderSystem: {
-                navn: "EPJSystem",
-                versjon: "2.1.0",
+                navn: 'EPJSystem',
+                versjon: '2.1.0',
             },
-            strekkode: "ABC12345",
+            strekkode: 'ABC12345',
         },
         pasient: {
-            fnr: "01010112345",
+            fnr: '01010112345',
             navn: {
-                fornavn: "Ola",
+                fornavn: 'Ola',
                 mellomnavn: null,
-                etternavn: "Nordmann",
+                etternavn: 'Nordmann',
             },
-            kontaktinfo: [
-                { type: "TLF", value: "11111111" },
-            ],
+            kontaktinfo: [{ type: 'TLF', value: '11111111' }],
             navKontor: null,
             navnFastlege: null,
         },
         medisinskVurdering: {
             hovedDiagnose: {
-                system: "ICPC2",
-                kode: "R51",
+                system: 'ICPC2',
+                kode: 'R51',
             },
-            biDiagnoser: [
-                { system: "ICD10", kode: "J06.9" },
-            ],
+            biDiagnoser: [{ system: 'ICD10', kode: 'J06.9' }],
             svangerskap: false,
             annenFraversArsak: null,
             yrkesskade: null,
@@ -116,8 +143,8 @@ function lagStandardSykmelding(): any {
         aktivitet: [
             {
                 medisinskArsak: {
-                    arsak: "TILSTAND_HINDRER_AKTIVITET",
-                    beskrivelse: "Pasient er syk",
+                    arsak: 'TILSTAND_HINDRER_AKTIVITET',
+                    beskrivelse: 'Pasient er syk',
                 },
                 arbeidsrelatertArsak: null,
                 fom: LocalDate.now().minusDays(1),
@@ -125,34 +152,30 @@ function lagStandardSykmelding(): any {
             },
         ],
         behandler: {
-            ids: [
-                { id: "00000000000", type: "FNR" },
-            ],
+            ids: [{ id: '00000000000', type: 'FNR' }],
             navn: {
-                fornavn: "Kari",
+                fornavn: 'Kari',
                 mellomnavn: null,
-                etternavn: "Hansen",
+                etternavn: 'Hansen',
             },
             kontaktinfo: [{ type: 'TLF', value: '11111111' }],
             adresse: {
-                type: "BOSTEDSADRESSE",
-                gateadresse: "Hovedgaten 1",
-                postnummer: "0101",
-                poststed: "Oslo",
+                type: 'BOSTEDSADRESSE',
+                gateadresse: 'Hovedgaten 1',
+                postnummer: '0101',
+                poststed: 'Oslo',
                 postboks: null,
-                kommune: "Oslo",
-                land: "Norge",
+                kommune: 'Oslo',
+                land: 'Norge',
             },
         },
         arbeidsgiver: {
-            meldingTilArbeidsgiver: "Melding til arbeidsgiver",
-            tiltakArbeidsplassen: "Dette er et tiltak",
+            meldingTilArbeidsgiver: 'Melding til arbeidsgiver',
+            tiltakArbeidsplassen: 'Dette er et tiltak',
         },
         signerendeBehandler: {
-            ids: [
-                { id: "00000000000", type: "FNR" },
-            ],
-            helsepersonellKategori: "LEGE",
+            ids: [{ id: '00000000000', type: 'FNR' }],
+            helsepersonellKategori: 'LEGE',
         },
         prognose: undefined,
         tiltak: undefined,

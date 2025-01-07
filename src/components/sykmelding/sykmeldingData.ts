@@ -1,4 +1,11 @@
-import { LocalDate } from '@js-joda/core'
+import {
+    LocalDate,
+    LocalDateTime,
+    LocalTime,
+    OffsetDateTime,
+    ZoneId,
+    ZoneOffset,
+} from '@js-joda/core'
 import { v4 as uuidv4 } from 'uuid'
 
 export type SykmeldingInput = {
@@ -41,7 +48,7 @@ export function genererSykmeldingMedBehandlingsutfallKafkaMelding(
         sykmelding: genererKomplettSykmelding(input),
         validation: {
             status: 'OK',
-            timestamp: LocalDate.now(),
+            timestamp: OffsetDateTime.now(),
             rules: [],
         },
     }
@@ -59,6 +66,14 @@ export function genererKomplettSykmelding(input: SykmeldingInput): any {
         medisinskVurdering: {
             ...standardSykmelding.medisinskVurdering,
             syketilfelletStartDato: input.syketilfelleStartDato,
+        },
+        metadata: {
+            ...standardSykmelding.metadata,
+            behandletTidspunkt: OffsetDateTime.of(
+                input.behandlingsDato,
+                LocalTime.NOON,
+                ZoneOffset.UTC
+            ),
         },
     }
 }
@@ -107,10 +122,11 @@ function mapAktivitetInput(aktivitet: AktivitetInput): any {
 function lagStandardSykmelding(): any {
     return {
         id: uuidv4(),
+        type: 'SYKMELDING',
         metadata: {
-            mottattDato: LocalDate.now(),
-            genDate: LocalDate.now().minusDays(1),
-            behandletTidspunkt: LocalDate.now().minusDays(2),
+            mottattDato: OffsetDateTime.now().minusDays(1),
+            genDate: OffsetDateTime.now().minusDays(1),
+            behandletTidspunkt: OffsetDateTime.now().minusDays(1).minusDays(2),
             regelsettVersjon: '1.0',
             avsenderSystem: {
                 navn: 'EPJSystem',
@@ -171,6 +187,7 @@ function lagStandardSykmelding(): any {
             },
         },
         arbeidsgiver: {
+            type: 'EN_ARBEIDSGIVER',
             meldingTilArbeidsgiver: 'Melding til arbeidsgiver',
             tiltakArbeidsplassen: 'Dette er et tiltak',
         },

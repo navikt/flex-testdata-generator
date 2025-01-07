@@ -12,13 +12,14 @@ export type SykmeldingInput = {
 
 export type AktivitetInput = {
     type: AktivitetInputType
-    periode: DateRange
+    fom: LocalDate
+    tom: LocalDate
 }
 
-export type DateRange = {
-    tom: LocalDate
-    fom: LocalDate
-}
+// export type DateRange = {
+//     tom: LocalDate
+//     fom: LocalDate
+// }
 
 export enum AktivitetInputType {
     AKTIVITET_IKKE_MULIG = 'AKTIVITET_IKKE_MULIG',
@@ -64,8 +65,8 @@ export function genererKomplettSykmelding(input: SykmeldingInput): any {
 
 function mapAktivitetInput(aktivitet: AktivitetInput): any {
     const baseVerdier = {
-        fom: aktivitet.periode.fom,
-        tom: aktivitet.periode.tom,
+        fom: aktivitet.fom,
+        tom: aktivitet.tom,
     }
     switch (aktivitet.type) {
         case AktivitetInputType.AKTIVITET_IKKE_MULIG:

@@ -16,10 +16,8 @@ import { Aktiviteter } from './Aktiviteter'
 
 export const standardAktivitet: AktivitetInput = {
     type: AktivitetInputType.AKTIVITET_IKKE_MULIG,
-    periode: {
-        fom: LocalDate.now().minusDays(8),
-        tom: LocalDate.now().minusDays(1),
-    },
+    fom: LocalDate.now().minusDays(8),
+    tom: LocalDate.now().minusDays(1),
 }
 
 export const Sykmelding = (p: FellesInputChildrenProps) => {
@@ -32,7 +30,6 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
             syketilfelleStartDato: LocalDate.now().minusDays(8),
             behandlingsDato: LocalDate.now().minusDays(8),
             arbeidsgiver: 'Kiosken AS',
-            id: uuidv4(),
         },
     })
     const { register } = methods
@@ -51,9 +48,9 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
             fnr: fnr,
         })
 
-        const meldingId = sykmeldingInput.id
+        const meldingId = kafkaMelding.id
         const res = await fetch(
-            `/api/kafka/flex/ditt-sykefravaer-melding/${meldingId}`,
+            `/api/kafka/flex/test-sykmelding/${meldingId}`,
             {
                 method: 'POST',
                 body: JSON.stringify(kafkaMelding),

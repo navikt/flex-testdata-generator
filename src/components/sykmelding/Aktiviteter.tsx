@@ -1,6 +1,6 @@
 import { Controller, useFieldArray, useFormContext } from 'react-hook-form'
 import { Button, Select } from '@navikt/ds-react'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import Datoer from '../datoer/Datoer'
 
@@ -8,7 +8,7 @@ import { AktivitetInputType } from './sykmeldingData'
 import { standardAktivitet } from './Sykmelding'
 
 export const Aktiviteter = ({}: AktivitetProps) => {
-    const { register, control, setValue, getValues, reset } = useFormContext()
+    const { register, control } = useFormContext()
     const { fields, append, remove } = useFieldArray({
         control,
         name: 'aktivitet', // unique name for your Field Array
@@ -30,21 +30,37 @@ export const Aktiviteter = ({}: AktivitetProps) => {
                         key={field.id}
                         className="flex flex-row shrink items-center space-x-6"
                     >
-                        <Select
-                            {...register(`aktivitet.${index}.type`)}
-                            label="Aktivitetstype"
-                            className="max-w-full"
-                        >
-                            {aktivitetOptions()}
-                        </Select>
                         <Controller
-                            name={`aktivitet.${index}.periode`}
+                            name={`aktivitet.${index}`}
                             control={control}
                             render={({ field }) => (
-                                <Datoer
-                                    fomTom={field.value}
-                                    setFomTom={field.onChange}
-                                />
+                                <>
+                                    <Select
+                                        label="Aktivitetstype"
+                                        className="max-w-full"
+                                        onChange={(event) => {
+                                            field.onChange({
+                                                ...field.value, // Spread existing properties
+                                                type: event.target.value,
+                                            })
+                                        }}
+                                    >
+                                        {aktivitetOptions()}
+                                    </Select>
+                                    <Datoer
+                                        fomTom={{
+                                            fom: field.value.fom,
+                                            tom: field.value.tom,
+                                        }}
+                                        setFomTom={(fomTom) => {
+                                            field.onChange({
+                                                ...field.value, // Spread existing properties
+                                                fom: fomTom.fom, // Update FOM
+                                                tom: fomTom.tom, // Update TOM
+                                            })
+                                        }}
+                                    />
+                                </>
                             )}
                         />
                         {index > 0 && (

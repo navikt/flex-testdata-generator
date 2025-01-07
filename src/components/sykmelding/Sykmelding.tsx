@@ -84,10 +84,10 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
                     <TextField
                         {...register('arbeidsgiver')}
                         label="Arbeidsgiver"
-                        className="mt-4"
+                        className="mt-4 w-1/2 min-w-64"
                     />
                     <Button className="mt-4" type="submit">
-                        Opprett
+                        Opprett sykmelding
                     </Button>
                 </form>
             </FormProvider>

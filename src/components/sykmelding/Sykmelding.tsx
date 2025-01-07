@@ -11,9 +11,10 @@ import {
     AktivitetInputType,
     SykmeldingInput,
 } from './sykmeldingData'
-import { Aktivitet } from './Aktivitet'
 
-const standardAktivitet: AktivitetInput = {
+import { Aktivitet } from './Aktiviteter'
+
+export const standardAktivitet: AktivitetInput = {
     type: AktivitetInputType.AKTIVITET_IKKE_MULIG,
     fom: LocalDate.now().minusDays(8),
     tom: LocalDate.now().minusDays(1),
@@ -32,7 +33,7 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
             id: uuidv4(),
         },
     })
-    const { register, getValues, setValue } = methods
+    const { register } = methods
 
     const onSubmit = async (data: SykmeldingInput) => {
         console.log(data)
@@ -60,20 +61,12 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
             p.setError(response)
         }
     }
-    const leggTilAktivitet = (event: React.MouseEvent) => {
-        event.preventDefault()
-        const eksisterendeAktiviteter = getValues('aktivitet')
-        setValue('aktivitet', [...eksisterendeAktiviteter, standardAktivitet])
-    }
 
     return (
         <>
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
                     <Aktivitet />
-                    <Button onClick={leggTilAktivitet}>
-                        Legg til aktivitet
-                    </Button>
                     <DatePicker>
                         <DatePicker.Input
                             {...register('syketilfelleStartDato')}

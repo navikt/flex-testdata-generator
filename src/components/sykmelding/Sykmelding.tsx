@@ -1,6 +1,5 @@
 import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { v4 as uuidv4 } from 'uuid'
 import { Button, DatePicker, TextField } from '@navikt/ds-react'
 import { LocalDate } from '@js-joda/core'
 

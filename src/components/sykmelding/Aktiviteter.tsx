@@ -7,8 +7,8 @@ import Datoer from '../datoer/Datoer'
 import { AktivitetInputType } from './sykmeldingData'
 import { standardAktivitet } from './Sykmelding'
 
-export const Aktiviteter = ({}: AktivitetProps) => {
-    const { register, control } = useFormContext()
+export const Aktiviteter = () => {
+    const { control } = useFormContext()
     const { fields, append, remove } = useFieldArray({
         control,
         name: 'aktivitet', // unique name for your Field Array

@@ -1,10 +1,10 @@
 import { LocalDate } from '@js-joda/core'
 import { DatePicker, useRangeDatepicker } from '@navikt/ds-react'
-import React, { Dispatch } from 'react'
+import React from 'react'
 
 interface Props {
     fomTom: FomTom
-    setFomTom: Dispatch<React.SetStateAction<FomTom>>
+    setFomTom: (fomtom: FomTom) => void
 }
 
 export interface FomTom {
@@ -16,8 +16,8 @@ function Datoer({ setFomTom, fomTom }: Props) {
     const { datepickerProps, toInputProps, fromInputProps } =
         useRangeDatepicker({
             defaultSelected: {
-                from: new Date(fomTom.fom.toString()),
-                to: new Date(fomTom.tom.toString()),
+                from: fomTom.fom ? new Date(fomTom.fom.toString()) : undefined,
+                to: fomTom.tom ? new Date(fomTom.tom.toString()) : undefined,
             },
             onRangeChange: (daterange) => {
                 if (daterange && daterange.from && daterange.to) {

@@ -1,77 +1,103 @@
-import { LocalDate } from '@js-joda/core'
-import React, { useState } from 'react'
-import { Button, DatePicker, Select, TextField } from '@navikt/ds-react'
+import React from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 import { v4 as uuidv4 } from 'uuid'
+import { Button, DatePicker, TextField } from '@navikt/ds-react'
+import { LocalDate } from '@js-joda/core'
 
-import Datoer, { FomTom } from '../datoer/Datoer'
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'
-import { defaultSykmeldingInput, SykmeldingInput } from './sykmeldingData'
 
-// const formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss")
+import {
+    AktivitetInput,
+    AktivitetInputType,
+    SykmeldingInput,
+} from './sykmeldingData'
+import { Aktivitet } from './Aktivitet'
+
+const standardAktivitet: AktivitetInput = {
+    type: AktivitetInputType.AKTIVITET_IKKE_MULIG,
+    fom: LocalDate.now().minusDays(8),
+    tom: LocalDate.now().minusDays(1),
+}
 
 export const Sykmelding = (p: FellesInputChildrenProps) => {
-    const [uuid, setUuid] = useState<string>(uuidv4())
-    const [resetter, setResetter] = useState<boolean>(false)
-    const [fomtom, setFomTom] = useState<FomTom>({
-        fom: LocalDate.now(),
-        tom: LocalDate.now(),
+    const methods = useForm<SykmeldingInput>({
+        mode: 'onSubmit',
+        reValidateMode: 'onChange',
+        shouldUnregister: true,
+        defaultValues: {
+            aktivitet: [standardAktivitet],
+            syketilfelleStartDato: LocalDate.now().minusDays(8),
+            behandlingsDato: LocalDate.now().minusDays(8),
+            arbeidsgiver: 'Kiosken AS',
+            id: uuidv4(),
+        },
     })
-    const [sykmeldingInput, setSykmeldingInput] = useState<SykmeldingInput>(
-        defaultSykmeldingInput()
-    )
+    const { register, getValues, setValue } = methods
+
+    const onSubmit = async (data: SykmeldingInput) => {
+        console.log(data)
+        if (p.fnr?.length != 11) {
+            p.setError('Forventer 11 siffer')
+            return
+        }
+        const request = {
+            fnr: p.fnr,
+            sykmelding: {
+                //TODO
+            },
+        }
+        const res = await fetch(
+            `/api/kafka/flex/ditt-sykefravaer-melding/${data.id}`,
+            {
+                method: 'POST',
+                body: JSON.stringify(request),
+            }
+        )
+        const response = await res.text()
+        if (res.ok) {
+            p.setSuksess(`Melding ${data.id} opprettet`)
+        } else {
+            p.setError(response)
+        }
+    }
+    const leggTilAktivitet = (event: React.MouseEvent) => {
+        event.preventDefault()
+        const eksisterendeAktiviteter = getValues('aktivitet')
+        setValue('aktivitet', [...eksisterendeAktiviteter, standardAktivitet])
+    }
+
     return (
         <>
-            <Select label="Aktivitetstype" className="mt-4">
-                <option value="HUNDREPROSENT">HUNDREPROSENT</option>
-                <option value="REISETILSKUDD">REISETILSKUDD</option>
-                <option value="BEHANDLINGSDAGER">BEHANDLINGSDAGER</option>
-                <option value="GRADERT_80">GRADERT_80</option>
-            </Select>
-            <Datoer fomTom={fomtom} setFomTom={setFomTom}></Datoer>
-            <Button>Legg til aktivitet</Button>
-            <DatePicker>
-                <DatePicker.Input
-                    label="Startdato på syketilfelle"
-                    className="mt-4"
-                />
-            </DatePicker>
-            <DatePicker>
-                <DatePicker.Input label="Behandlingsdato" className="mt-4" />
-            </DatePicker>
-            <TextField label="Arbeidsgiver" className="mt-4" />
-            <Button
-                className="mt-4"
-                loading={resetter}
-                onClick={async () => {
-                    if (p.fnr?.length != 11) {
-                        p.setError('Forventer 11 siffer')
-                        return
-                    }
-                    const request = {
-                        fnr: p.fnr,
-                        sykmelding: {
-                            //TODO
-                        },
-                    }
-                    const res = await fetch(
-                        `/api/kafka/flex/ditt-sykefravaer-melding/${uuid}`,
-                        {
-                            method: 'POST',
-                            body: JSON.stringify(request),
-                        }
-                    )
-                    const response = await res.text()
-                    if (res.ok) {
-                        p.setSuksess(`Melding ${uuid} opprettet`)
-                    } else {
-                        p.setError(response)
-                    }
-                    setResetter(false)
-                    setUuid(uuidv4())
-                }}
-            >
-                Opprett
-            </Button>
+            <FormProvider {...methods}>
+                <form onSubmit={methods.handleSubmit(onSubmit)}>
+                    <Aktivitet />
+                    <Button onClick={leggTilAktivitet}>
+                        Legg til aktivitet
+                    </Button>
+                    <DatePicker>
+                        <DatePicker.Input
+                            {...register('syketilfelleStartDato')}
+                            label="Startdato på syketilfelle"
+                            className="mt-4"
+                        />
+                    </DatePicker>
+                    <DatePicker>
+                        <DatePicker.Input
+                            {...register('behandlingsDato')}
+                            label="Behandlingsdato"
+                            className="mt-4"
+                        />
+                    </DatePicker>
+                    <TextField
+                        {...register('arbeidsgiver')}
+                        label="Arbeidsgiver"
+                        className="mt-4"
+                    />
+                    <Button className="mt-4" type="submit">
+                        Opprett
+                    </Button>
+                </form>
+            </FormProvider>
         </>
     )
 }

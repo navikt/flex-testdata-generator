@@ -16,7 +16,7 @@ export interface FellesInputChildrenProps {
 }
 
 export const CommonInput = (p: FellesInputProps) => {
-    const [fnr, setFnr] = useState<string>()
+    const [fnr, setFnr] = useState<string>('')
     const [error, setError] = useState<string | null>(null)
     const [suksess, setSuksess] = useState<string | null>(null)
 

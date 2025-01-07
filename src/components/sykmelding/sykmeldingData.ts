@@ -3,10 +3,12 @@ import { v4 as uuidv4 } from 'uuid'
 
 
 export type SykmeldingInput = {
+    id: string
     fnr: string
     aktivitet: AktivitetInput[]
     syketilfelleStartDato: LocalDate
     behandlingsDato: LocalDate
+    arbeidsgiver: string
 }
 
 export type AktivitetInput = {
@@ -26,12 +28,6 @@ export enum AktivitetInputType {
     GRADERT_20,
     GRADERT_10,
     REISETILSKUDD,
-}
-
-export function defaultSykmeldingInput(): SykmeldingInput {
-    return {
-
-    }
 }
 
 function mapAktivitetInput(aktivitet: AktivitetInput): any {

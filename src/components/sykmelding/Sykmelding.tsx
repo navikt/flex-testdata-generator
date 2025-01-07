@@ -2,6 +2,7 @@ import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { Button, DatePicker, TextField } from '@navikt/ds-react'
 import { LocalDate } from '@js-joda/core'
+import { v4 as uuid4 } from 'uuid'
 
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'
 
@@ -40,12 +41,13 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
             return
         }
 
+        const meldingId = uuid4()
         const kafkaMelding = genererSykmeldingMedBehandlingsutfallKafkaMelding({
             ...sykmeldingInput,
+            id: meldingId,
             fnr: fnr,
         })
 
-        const meldingId = kafkaMelding.id
         const res = await fetch(
             `/api/kafka/flex/test-sykmelding/${meldingId}`,
             {
@@ -55,7 +57,9 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
         )
         const response = await res.text()
         if (res.ok) {
-            p.setSuksess(`Melding ${meldingId} opprettet`)
+            p.setSuksess(
+                `Kafka melding og sykmelding med id ${meldingId} opprettet`
+            )
         } else {
             p.setError(response)
         }

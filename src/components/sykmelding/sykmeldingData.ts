@@ -46,6 +46,7 @@ export function genererKomplettSykmelding(input: SykmeldingInput): any {
     const standardSykmelding = lagStandardSykmelding()
     return {
         ...standardSykmelding,
+        id: input.id,
         pasient: {
             ...standardSykmelding.pasient,
             fnr: input.fnr,

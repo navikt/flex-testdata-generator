@@ -11,7 +11,7 @@
     "@navikt/ds-react": "^7.9.1",
     "@navikt/ds-tailwind": "^7.9.1",
     "@navikt/ds-tokens": "^7.8.0",
-    "jsonschema": "^1.4.1",
+    "jsonschema": "^1.5.0",
     "kafkajs": "^2.2.4",
     "next": "^15.1.4",
     "react": "^18.3.1",

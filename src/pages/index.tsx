@@ -10,8 +10,6 @@ const Index = () => {
             </Head>
             <Page>
                 <Page.Block width="xl">
-                    <div>Det oppsto en uforventet feil</div>
-
                     <Heading size="xlarge" level="1">
                         💪
                     </Heading>

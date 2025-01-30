@@ -9,6 +9,7 @@ import {
 import React, { useCallback, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import ConfettiExplosion from 'react-confetti-explosion'
+import { v5 as uuidv5 } from 'uuid'
 
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'
 import {
@@ -208,8 +209,9 @@ export const FriskmeldingTilArbeidsformidling = (
                             statusBy: statusBy,
                         }
 
+                        const key = asProducerRecordKey(p.fnr)
                         const res = await fetch(
-                            `/api/kafka/flex/test-isfrisktilarbeid-vedtak-status/${uuid}`,
+                            `/api/kafka/flex/test-isfrisktilarbeid-vedtak-status/${key}`,
                             {
                                 method: 'POST',
                                 body: JSON.stringify(request),
@@ -217,7 +219,9 @@ export const FriskmeldingTilArbeidsformidling = (
                         )
                         const response = await res.text()
                         if (res.ok) {
-                            p.setSuksess(`Vedtak ${uuid} opprettet`)
+                            p.setSuksess(
+                                `Vedtak om Friskmeldt til Arbeidsformidling med key: ${key} og uuid: ${uuid} er sendt`
+                            )
                             setIsExploding(true)
                         } else {
                             p.setError(response)
@@ -244,6 +248,12 @@ export const FriskmeldingTilArbeidsformidling = (
             )}
         </div>
     )
+}
+
+function asProducerRecordKey(value: string): string {
+    // uuidv5() generates a UUID based on an input string and a namespace.
+    // The same input string + namespace will always result in the same UUID.
+    return uuidv5(value, '6ba7b810-9dad-11d1-80b4-00c04fd430c8')
 }
 
 export interface FriskmeldingVedtakKafkaMelding {

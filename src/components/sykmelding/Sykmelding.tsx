@@ -3,6 +3,7 @@ import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { Button, DatePicker, TextField, useDatepicker } from '@navikt/ds-react'
 import { LocalDate } from '@js-joda/core'
 import { v4 as uuid4 } from 'uuid'
+import ConfettiExplosion from 'react-confetti-explosion'
 
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'
 
@@ -21,6 +22,7 @@ export const standardAktivitet: AktivitetInput = {
 }
 
 export const Sykmelding = (p: FellesInputChildrenProps) => {
+    const [isExploding, setIsExploding] = React.useState(false)
     const methods = useForm<SykmeldingInput>({
         mode: 'onSubmit',
         reValidateMode: 'onChange',
@@ -35,6 +37,7 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
     const { register, setValue } = methods
 
     const onSubmit = async (sykmeldingInput: SykmeldingInput) => {
+        setIsExploding(false)
         const fnr = p.fnr
         if (fnr == null || fnr.length != 11) {
             p.setError('Forventer 11 siffer')
@@ -57,10 +60,12 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
         )
         const response = await res.text()
         if (res.ok) {
+            setIsExploding(true)
             p.setSuksess(
                 `Kafka melding og sykmelding med id ${meldingId} opprettet`
             )
         } else {
+            setIsExploding(false)
             p.setError(response)
         }
     }
@@ -145,6 +150,16 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
                     </Button>
                 </form>
             </FormProvider>
+            {isExploding && (
+                <ConfettiExplosion
+                    {...{
+                        force: 0.8,
+                        duration: 3200,
+                        particleCount: 50,
+                        width: 800,
+                    }}
+                />
+            )}
         </>
     )
 }

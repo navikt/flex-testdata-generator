@@ -1,6 +1,6 @@
 import React from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import { Button, DatePicker, TextField } from '@navikt/ds-react'
+import { Controller, FormProvider, useForm } from 'react-hook-form'
+import { Button, DatePicker, TextField, useDatepicker } from '@navikt/ds-react'
 import { LocalDate } from '@js-joda/core'
 import { v4 as uuid4 } from 'uuid'
 
@@ -32,7 +32,7 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
             arbeidsgiver: 'Kiosken AS',
         },
     })
-    const { register } = methods
+    const { register, setValue } = methods
 
     const onSubmit = async (sykmeldingInput: SykmeldingInput) => {
         const fnr = p.fnr
@@ -65,25 +65,76 @@ export const Sykmelding = (p: FellesInputChildrenProps) => {
         }
     }
 
+    const { datepickerProps, inputProps } = useDatepicker({
+        fromDate: new Date('Jan 01 2000'),
+        onDateChange: (dato) => {
+            if (!dato) {
+                setValue('syketilfelleStartDato', LocalDate.now())
+            } else {
+                setValue(
+                    'syketilfelleStartDato',
+                    LocalDate.of(
+                        dato.getFullYear(),
+                        dato.getMonth() + 1,
+                        dato.getDate()
+                    )
+                )
+            }
+        },
+    })
+
+    const {
+        datepickerProps: datepickerPropsBehandling,
+        inputProps: inputPropsBehandling,
+    } = useDatepicker({
+        fromDate: new Date('Jan 01 2000'),
+        onDateChange: (dato) => {
+            if (!dato) {
+                setValue('behandlingsDato', LocalDate.now())
+            } else {
+                setValue(
+                    'behandlingsDato',
+                    LocalDate.of(
+                        dato.getFullYear(),
+                        dato.getMonth() + 1,
+                        dato.getDate()
+                    )
+                )
+            }
+        },
+    })
+
     return (
         <>
             <FormProvider {...methods}>
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
                     <Aktiviteter />
-                    <DatePicker>
-                        <DatePicker.Input
-                            {...register('syketilfelleStartDato')}
-                            label="Startdato på syketilfelle"
-                            className="mt-4"
-                        />
-                    </DatePicker>
-                    <DatePicker>
-                        <DatePicker.Input
-                            {...register('behandlingsDato')}
-                            label="Behandlingsdato"
-                            className="mt-4"
-                        />
-                    </DatePicker>
+                    <Controller
+                        name="syketilfelleStartDato"
+                        render={({ field }) => (
+                            <DatePicker {...datepickerProps}>
+                                <DatePicker.Input
+                                    {...inputProps}
+                                    value={field.value.toString()}
+                                    label="Startdato på syketilfelle"
+                                    className="mt-4"
+                                />
+                            </DatePicker>
+                        )}
+                    />
+                    <Controller
+                        name="behandlingsDato"
+                        render={({ field }) => (
+                            <DatePicker {...datepickerPropsBehandling}>
+                                <DatePicker.Input
+                                    {...inputPropsBehandling}
+                                    value={field.value.toString()}
+                                    label="Behandlingsdato"
+                                    className="mt-4"
+                                />
+                            </DatePicker>
+                        )}
+                    />
                     <TextField
                         {...register('arbeidsgiver')}
                         label="Arbeidsgiver"

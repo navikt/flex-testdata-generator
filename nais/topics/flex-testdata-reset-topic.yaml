@@ -40,5 +40,8 @@ spec:
       application: flex-sykmeldinger-backend
       access: read
     - team: flex
+      application: flex-arbeidssokerregister-oppdatering
+      access: read
+    - team: flex
       application: flex-testdata-generator
       access: write

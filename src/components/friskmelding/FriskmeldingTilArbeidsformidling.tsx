@@ -38,6 +38,7 @@ export const FriskmeldingTilArbeidsformidling = (
 
     const [uuid, setUuid] = useState<string>(uuidv4())
     const [friskmelder, setFriskmelder] = useState<boolean>(false)
+    const [cj, setCj] = useState<boolean>(false)
 
     const {
         datepickerProps: fromDpProps,
@@ -171,71 +172,106 @@ export const FriskmeldingTilArbeidsformidling = (
                 </Button>
             </div>
 
-            <Button
-                style={{ marginTop: '1em' }}
-                className="w-72"
-                loading={friskmelder}
-                onClick={async () => {
-                    try {
-                        if (p.fnr?.length != 11) {
-                            p.setError('Forventer 11 siffer')
-                            return
-                        }
-                        if (!begrunnelse) {
-                            p.setError('Begrunnelse må fylles ut')
-                            return
-                        }
-
-                        const parsedStatusAt =
-                            OffsetDateTime.parse(statusAt).format(formatter)
-                        if (fra!.getTime() >= tom!.getTime()) {
-                            p.setError('Fra dato må være før til dato')
-                            return
-                        }
-                        setFriskmelder(true)
-                        setIsExploding(false)
-                        const request: FriskmeldingVedtakKafkaMelding = {
-                            uuid: uuid,
-                            status: status,
-                            personident: p.fnr,
-                            begrunnelse: begrunnelse,
-                            fom: jsDateToLocalDate(fra!).format(
-                                localdateFormatter
-                            ),
-                            tom: jsDateToLocalDate(tom!).format(
-                                localdateFormatter
-                            ),
-                            statusAt: parsedStatusAt,
-                            statusBy: statusBy,
-                        }
-
-                        const key = asProducerRecordKey(p.fnr)
-                        const res = await fetch(
-                            `/api/kafka/flex/test-isfrisktilarbeid-vedtak-status/${key}`,
-                            {
-                                method: 'POST',
-                                body: JSON.stringify(request),
+            <div className="flex space-x-2">
+                <Button
+                    loading={friskmelder}
+                    onClick={async () => {
+                        try {
+                            if (p.fnr?.length != 11) {
+                                p.setError('Forventer 11 siffer')
+                                return
                             }
-                        )
-                        const response = await res.text()
-                        if (res.ok) {
-                            p.setSuksess(
-                                `Vedtak om Friskmeldt til Arbeidsformidling med key: ${key} og uuid: ${uuid} er sendt`
+                            if (!begrunnelse) {
+                                p.setError('Begrunnelse må fylles ut')
+                                return
+                            }
+
+                            const parsedStatusAt =
+                                OffsetDateTime.parse(statusAt).format(formatter)
+                            if (fra!.getTime() >= tom!.getTime()) {
+                                p.setError('Fra dato må være før til dato')
+                                return
+                            }
+                            setFriskmelder(true)
+                            setIsExploding(false)
+                            const request: FriskmeldingVedtakKafkaMelding = {
+                                uuid: uuid,
+                                status: status,
+                                personident: p.fnr,
+                                begrunnelse: begrunnelse,
+                                fom: jsDateToLocalDate(fra!).format(
+                                    localdateFormatter
+                                ),
+                                tom: jsDateToLocalDate(tom!).format(
+                                    localdateFormatter
+                                ),
+                                statusAt: parsedStatusAt,
+                                statusBy: statusBy,
+                            }
+
+                            const key = asProducerRecordKey(p.fnr)
+                            const res = await fetch(
+                                `/api/kafka/flex/test-isfrisktilarbeid-vedtak-status/${key}`,
+                                {
+                                    method: 'POST',
+                                    body: JSON.stringify(request),
+                                }
                             )
-                            setIsExploding(true)
-                        } else {
-                            p.setError(response)
+                            const response = await res.text()
+                            if (res.ok) {
+                                p.setSuksess(
+                                    `Vedtak om Friskmeldt til Arbeidsformidling med key: ${key} og uuid: ${uuid} er sendt`
+                                )
+                                setIsExploding(true)
+                            } else {
+                                p.setError(response)
+                            }
+                            setFriskmelder(false)
+                            setUuid(uuidv4())
+                        } catch (e) {
+                            p.setError('Noe gikk galt: ' + JSON.stringify(e))
+                            setFriskmelder(false)
                         }
-                        setFriskmelder(false)
-                        setUuid(uuidv4())
-                    } catch (e) {
-                        p.setError('Noe gikk galt: ' + JSON.stringify(e))
-                        setFriskmelder(false)
-                    }
-                }}
-            >
-                Send vedtak om friskmelding
-            </Button>
+                    }}
+                >
+                    Send vedtak om friskmelding
+                </Button>
+                <Button
+                    variant="secondary"
+                    loading={cj}
+                    onClick={async () => {
+                        try {
+                            setCj(true)
+                            setIsExploding(false)
+                            const request = {
+                                command: 'fta-cronjob',
+                            }
+
+                            const key = uuidv4()
+                            const res = await fetch(
+                                `/api/kafka/flex/test-command/${key}`,
+                                {
+                                    method: 'POST',
+                                    body: JSON.stringify(request),
+                                }
+                            )
+                            const response = await res.text()
+                            if (res.ok) {
+                                p.setSuksess(`Bestilt cronjob`)
+                                setIsExploding(true)
+                            } else {
+                                p.setError(response)
+                            }
+                            setCj(false)
+                        } catch (e) {
+                            p.setError('Noe gikk galt: ' + JSON.stringify(e))
+                            setCj(false)
+                        }
+                    }}
+                >
+                    Start cronjob
+                </Button>
+            </div>
             {isExploding && (
                 <ConfettiExplosion
                     {...{

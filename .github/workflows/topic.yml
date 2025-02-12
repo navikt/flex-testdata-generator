@@ -32,3 +32,9 @@ jobs:
           CLUSTER: dev-gcp
           RESOURCE: nais/topics/flex-test-isfrisktilarbeid-vedtak-status-topic.yaml
           VARS: nais/topics/dev.json
+      - name: Deploy test-command topic til dev-gcp
+        uses: nais/deploy/actions/deploy@v2
+        env:
+          CLUSTER: dev-gcp
+          RESOURCE: nais/topics/flex-test-command-topic.yaml
+          VARS: nais/topics/dev.json

@@ -149,6 +149,15 @@ export const FriskmeldingTilArbeidsformidling = (
                     variant="secondary-neutral"
                     size="small"
                     onClick={() =>
+                        set12UkerFraDato(LocalDate.now().minusWeeks(3))
+                    }
+                >
+                    Fra 3 uker siden
+                </Button>
+                <Button
+                    variant="secondary-neutral"
+                    size="small"
+                    onClick={() =>
                         set12UkerFraDato(LocalDate.now().minusWeeks(1))
                     }
                 >

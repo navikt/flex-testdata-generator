@@ -40,7 +40,7 @@ export function genererSykmeldingMedBehandlingsutfallKafkaMelding(
             rules: [],
         },
         metadata: {
-            type: "EGENMELDT",
+            type: 'EGENMELDT',
             msgInfo: {
                 type: 'SYKMELDING',
                 genDate: OffsetDateTime.parse('2021-01-01T00:00:00.00Z'),

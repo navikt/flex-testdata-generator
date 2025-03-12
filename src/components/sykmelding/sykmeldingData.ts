@@ -43,7 +43,7 @@ export function genererSykmeldingMedBehandlingsutfallKafkaMelding(
             type: 'ENKEL',
             msgInfo: {
                 type: 'SYKMELDING',
-                genDate: '2023-10-01T12:00:00Z',
+                genDate: '2025-01-01T12:00:00Z',
                 msgId: '12345',
                 migVersjon: '1.0',
             },
@@ -56,10 +56,6 @@ export function genererSykmeldingMedBehandlingsutfallKafkaMelding(
                         type: 'AKO',
                     },
                 ],
-                adresse: null,
-                kontaktinfo: null,
-                underOrganisasjon: null,
-                helsepersonell: null,
             },
             receiver: {
                 navn: 'Receiver Organization',
@@ -70,10 +66,6 @@ export function genererSykmeldingMedBehandlingsutfallKafkaMelding(
                         type: 'AVD',
                     },
                 ],
-                adresse: null,
-                kontaktinfo: null,
-                underOrganisasjon: null,
-                helsepersonell: null,
             },
         },
     }

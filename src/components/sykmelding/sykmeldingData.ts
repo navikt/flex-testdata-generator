@@ -40,12 +40,32 @@ export function genererSykmeldingMedBehandlingsutfallKafkaMelding(
             rules: [],
         },
         metadata: {
-            type: 'EGENMELDT',
+            type: 'ENKEL',
             msgInfo: {
                 type: 'SYKMELDING',
-                genDate: OffsetDateTime.parse('2021-01-01T00:00:00.00Z'),
-                msgId: '0',
-                migVersjon: null,
+                genDate: '2025-01-01T12:00:00Z',
+                msgId: '12345',
+                migVersjon: '1.0',
+            },
+            sender: {
+                navn: 'Sender Organization',
+                type: 'PRIVATE_SPESIALISTER_MED_DRIFTSAVTALER',
+                ids: [
+                    {
+                        id: '123',
+                        type: 'AKO',
+                    },
+                ],
+            },
+            receiver: {
+                navn: 'Receiver Organization',
+                type: 'TANNLEGE_TANNHELSE',
+                ids: [
+                    {
+                        id: '456',
+                        type: 'AVD',
+                    },
+                ],
             },
         },
     }

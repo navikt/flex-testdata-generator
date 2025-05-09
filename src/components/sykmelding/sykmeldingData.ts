@@ -123,15 +123,40 @@ function mapAktivitetInput(aktivitet: AktivitetInput): any {
                 ...baseVerdier,
             }
         case AktivitetInputType.GRADERT_80:
-            return { type: 'GRADERT', grad: 80, ...baseVerdier }
+            return {
+                type: 'GRADERT',
+                grad: 80,
+                reisetilskudd: false,
+                ...baseVerdier,
+            }
         case AktivitetInputType.GRADERT_60:
-            return { type: 'GRADERT', grad: 60, ...baseVerdier }
+            return {
+                type: 'GRADERT',
+                grad: 60,
+                reisetilskudd: false,
+                ...baseVerdier,
+            }
         case AktivitetInputType.GRADERT_40:
-            return { type: 'GRADERT', grad: 40, ...baseVerdier }
+            return {
+                type: 'GRADERT',
+                grad: 40,
+                reisetilskudd: false,
+                ...baseVerdier,
+            }
         case AktivitetInputType.GRADERT_20:
-            return { type: 'GRADERT', grad: 20, ...baseVerdier }
+            return {
+                type: 'GRADERT',
+                grad: 20,
+                reisetilskudd: false,
+                ...baseVerdier,
+            }
         case AktivitetInputType.GRADERT_10:
-            return { type: 'GRADERT', grad: 10, ...baseVerdier }
+            return {
+                type: 'GRADERT',
+                grad: 10,
+                reisetilskudd: false,
+                ...baseVerdier,
+            }
         case AktivitetInputType.REISETILSKUDD:
             return { type: 'REISETILSKUDD', ...baseVerdier }
     }
@@ -140,7 +165,7 @@ function mapAktivitetInput(aktivitet: AktivitetInput): any {
 function lagStandardSykmelding(): any {
     return {
         id: uuidv4(),
-        type: 'SYKMELDING',
+        type: 'XML',
         metadata: {
             mottattDato: OffsetDateTime.now().minusDays(1),
             genDate: OffsetDateTime.now().minusDays(1),
@@ -167,8 +192,15 @@ function lagStandardSykmelding(): any {
             hovedDiagnose: {
                 system: 'ICPC2',
                 kode: 'R51',
+                tekst: 'Diagnose detaljer skulle vært her',
             },
-            biDiagnoser: [{ system: 'ICD10', kode: 'J06.9' }],
+            biDiagnoser: [
+                {
+                    system: 'ICD10',
+                    kode: 'J06.9',
+                    tekst: 'Diagnose detaljer skulle vært her',
+                },
+            ],
             svangerskap: false,
             annenFraversArsak: null,
             yrkesskade: null,
@@ -177,8 +209,9 @@ function lagStandardSykmelding(): any {
         },
         aktivitet: [
             {
+                type: 'AKTIVITET_IKKE_MULIG',
                 medisinskArsak: {
-                    arsak: 'TILSTAND_HINDRER_AKTIVITET',
+                    arsak: ['TILSTAND_HINDRER_AKTIVITET'],
                     beskrivelse: 'Pasient er syk',
                 },
                 arbeidsrelatertArsak: null,
@@ -209,7 +242,7 @@ function lagStandardSykmelding(): any {
             meldingTilArbeidsgiver: 'Melding til arbeidsgiver',
             tiltakArbeidsplassen: 'Dette er et tiltak',
         },
-        signerendeBehandler: {
+        sykmelder: {
             ids: [{ id: '00000000000', type: 'FNR' }],
             helsepersonellKategori: 'LEGE',
         },

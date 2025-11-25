@@ -16,6 +16,9 @@ spec:
     retentionHours: 72
   acl:
     - team: flex
+      application: flex-inntektsmelding-status
+      access: read
+    - team: flex
       application: flex-syketilfelle
       access: read
     - team: flex

@@ -14,7 +14,7 @@
     "i": "^0.3.7",
     "jsonschema": "^1.5.0",
     "kafkajs": "^2.2.4",
-    "next": "^16.0.7",
+    "next": "^16.0.10",
     "npm": "^11.6.4",
     "react": "^18.3.1",
     "react-confetti-explosion": "^3.0.3",

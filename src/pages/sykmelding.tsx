@@ -1,13 +1,18 @@
 import React from 'react'
-
-import { CommonInput } from '../components/commoninput/CommonInput'
-import { Sykmelding } from '../components/sykmelding/Sykmelding'
+import { Link } from '@navikt/ds-react'
 
 const SykmeldingPage = () => {
     return (
-        <CommonInput header="Sykmelding">
-            {(props) => <Sykmelding {...props} />}
-        </CommonInput>
+        <>
+            <span>Opprett sykmelding i </span>
+            <Link
+                href="https://teamsykmelding-mock.ansatt.dev.nav.no/sykmelding/opprett"
+                target="_blank"
+                rel="noreferrer"
+            >
+                teamsykmelding-mock
+            </Link>
+        </>
     )
 }
 

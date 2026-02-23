@@ -42,9 +42,9 @@ spec:
   accessPolicy:
     outbound:
       external:
-        - host: dokarkiv.dev-fss-pub.nais.io
+        - host: dokarkiv-q2.dev-fss-pub.nais.io
   env:
     - name: MOCK_BACKEND
       value: "false"
     - name: DOKARKIV_CLIENT_ID
-      value: "api://dev-fss.teamdokumenthandtering.dokarkiv-q1/.default"
+      value: "api://dev-fss.teamdokumenthandtering.dokarkiv/.default"

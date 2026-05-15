@@ -2,7 +2,6 @@ import '../style/global.css'
 
 import { Heading, Link } from '@navikt/ds-react'
 import type { AppProps } from 'next/app'
-import NextLink from 'next/link'
 import React from 'react'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
@@ -12,46 +11,25 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
                 className="flex py-4 pl-72 border-b-2 border-black mb-4"
                 size="xlarge"
             >
-                Flex testdata
+                Flex Testdata
             </Heading>
             <div className="flex">
                 <ul className="w-72 pl-4">
                     <li>
-                        <NextLink legacyBehavior passHref href="/">
-                            <Link>Hjem</Link>
-                        </NextLink>
+                        <Link href="/">Reset testdata</Link>
                     </li>
                     <li>
-                        <NextLink legacyBehavior passHref href="/reset">
-                            <Link>Reset testdata</Link>
-                        </NextLink>
+                        <Link href="/ditt-sykefravaer-melding">
+                            Send melding til Ditt Sykefravaer
+                        </Link>
                     </li>
                     <li>
-                        <NextLink
-                            legacyBehavior
-                            passHref
-                            href="/ditt-sykefravaer-melding"
-                        >
-                            <Link>Ditt sykefravær melding</Link>
-                        </NextLink>
+                        <Link href="/papir-dokument">Papirdokument</Link>
                     </li>
                     <li>
-                        <NextLink
-                            legacyBehavior
-                            passHref
-                            href="/papir-dokument"
-                        >
-                            <Link>Papir dokument</Link>
-                        </NextLink>
-                    </li>
-                    <li>
-                        <NextLink
-                            legacyBehavior
-                            passHref
-                            href="/friskmelding-til-arbeidsformidling"
-                        >
-                            <Link>Friskmeld til arbeidsformidling</Link>
-                        </NextLink>
+                        <Link href="/friskmelding-til-arbeidsformidling">
+                            Friskmeld til arbeidsformidling
+                        </Link>
                     </li>
                 </ul>
                 <div className="flex-auto">

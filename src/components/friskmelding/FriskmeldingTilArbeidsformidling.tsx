@@ -244,7 +244,7 @@ export const FriskmeldingTilArbeidsformidling = (
                         }
                     }}
                 >
-                    Send vedtak om friskmelding
+                    Send vedtak
                 </Button>
                 <Button
                     variant="secondary"

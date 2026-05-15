@@ -92,7 +92,7 @@ export const Papirdokument = (p: FellesInputChildrenProps) => {
                     setResetter(false)
                 }}
             >
-                Opprett papir dokument
+                Opprett papirdokument
             </Button>
         </>
     )

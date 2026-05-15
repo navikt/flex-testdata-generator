@@ -24,10 +24,6 @@ export const TemaSkjema = [
                 tittel: 'Anke',
             },
             {
-                brevkode: 'NAV 08-07.04D',
-                tittel: 'Sykmelding D',
-            },
-            {
                 brevkode: 'NAV 08-07.05',
                 tittel: 'Egenmelding 365 - Egenmeldingskjema til NAV',
             },
@@ -42,10 +38,6 @@ export const TemaSkjema = [
             {
                 brevkode: 'NAV 08-47.05',
                 tittel: 'Søknad om sykepenger - midlertidig ute av inntektsgivende arbeid',
-            },
-            {
-                brevkode: 'NAV 08-09.06',
-                tittel: 'Egenerklæring for utenlandske sykmeldinger (vedlegges sykmelding)',
             },
             {
                 brevkode: 'NAV 08-35.01',
@@ -74,16 +66,6 @@ export const TemaSkjema = [
             {
                 brevkode: 'NAV 96-01.01',
                 tittel: 'Rettskjennelse fra Trygderetten',
-            },
-        ],
-    },
-    {
-        value: 'SYM',
-        label: 'Sykmeldinger',
-        skjema: [
-            {
-                brevkode: '900023',
-                tittel: 'Sykmelding - Utland',
             },
         ],
     },

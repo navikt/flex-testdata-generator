@@ -1,21 +1,13 @@
-import { Page, Heading } from '@navikt/ds-react'
-import Head from 'next/head'
 import React from 'react'
+
+import { CommonInput } from '../components/commoninput/CommonInput'
+import { Reset } from '../components/reset/Reset'
 
 const Index = () => {
     return (
-        <>
-            <Head>
-                <title>Flex testdata generator</title>
-            </Head>
-            <Page>
-                <Page.Block width="xl">
-                    <Heading size="xlarge" level="1">
-                        💪
-                    </Heading>
-                </Page.Block>
-            </Page>
-        </>
+        <CommonInput header="Reset Testdata">
+            {(p) => <Reset {...p} />}
+        </CommonInput>
     )
 }
 

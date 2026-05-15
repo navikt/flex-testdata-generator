@@ -5,7 +5,7 @@ import { Papirdokument } from '../components/papirdokument/Papirdokument'
 
 const PapirDokumentPage = () => {
     return (
-        <CommonInput header="Opprett et papir dokument">
+        <CommonInput header="Opprett et papirdokument">
             {(p) => <Papirdokument {...p} />}
         </CommonInput>
     )

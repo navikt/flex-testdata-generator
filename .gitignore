@@ -4,7 +4,9 @@
 .idea
 *.iml
 .next
-
+.claude
+next-env.d.ts
+CLAUDE.md
 # dependencies
 /node_modules
 /.pnp

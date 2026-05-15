@@ -84,7 +84,6 @@ export const FriskmeldingTilArbeidsformidling = (
                 label="Tekst"
                 size="small"
             />
-
             <TextField
                 onChange={(e) => {
                     setStatusAt(e.target.value)
@@ -117,7 +116,6 @@ export const FriskmeldingTilArbeidsformidling = (
                 <option value="FATTET">FATTET</option>
                 <option value="FERDIG_BEHANDLET">FERDIG_BEHANDLET</option>
             </Select>
-
             <div className="flex space-x-2">
                 <DatePicker {...fromDpProps}>
                     <DatePicker.Input
@@ -134,10 +132,10 @@ export const FriskmeldingTilArbeidsformidling = (
                     />
                 </DatePicker>
             </div>
-
             <div className="flex space-x-2">
                 <Button
-                    variant="secondary-neutral"
+                    data-color="neutral"
+                    variant="secondary"
                     size="small"
                     onClick={() =>
                         set12UkerFraDato(LocalDate.now().minusWeeks(12))
@@ -146,7 +144,8 @@ export const FriskmeldingTilArbeidsformidling = (
                     Fra 12 uker siden
                 </Button>
                 <Button
-                    variant="secondary-neutral"
+                    data-color="neutral"
+                    variant="secondary"
                     size="small"
                     onClick={() =>
                         set12UkerFraDato(LocalDate.now().minusWeeks(3))
@@ -155,7 +154,8 @@ export const FriskmeldingTilArbeidsformidling = (
                     Fra 3 uker siden
                 </Button>
                 <Button
-                    variant="secondary-neutral"
+                    data-color="neutral"
+                    variant="secondary"
                     size="small"
                     onClick={() =>
                         set12UkerFraDato(LocalDate.now().minusWeeks(1))
@@ -164,14 +164,16 @@ export const FriskmeldingTilArbeidsformidling = (
                     Fra forrige uke
                 </Button>
                 <Button
-                    variant="secondary-neutral"
+                    data-color="neutral"
+                    variant="secondary"
                     size="small"
                     onClick={() => set12UkerFraDato(LocalDate.now())}
                 >
                     Fra denne uken
                 </Button>
                 <Button
-                    variant="secondary-neutral"
+                    data-color="neutral"
+                    variant="secondary"
                     size="small"
                     onClick={() =>
                         set12UkerFraDato(LocalDate.now().plusWeeks(1))
@@ -180,7 +182,6 @@ export const FriskmeldingTilArbeidsformidling = (
                     Fra neste uke
                 </Button>
             </div>
-
             <div className="flex space-x-2">
                 <Button
                     loading={friskmelder}

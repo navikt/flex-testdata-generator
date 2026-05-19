@@ -10,7 +10,8 @@
     "@navikt/ds-css": "^8.10.5",
     "@navikt/ds-react": "^8.10.5",
     "@navikt/ds-tailwind": "^8.10.5",
-    "@navikt/ds-tokens": "^8.10.5",
+    "@tailwindcss/postcss": "^4.3.0",
+    "tailwindcss": "^4.3.0",
     "i": "^0.3.7",
     "jsonschema": "^1.5.0",
     "kafkajs": "^2.2.4",
@@ -21,7 +22,6 @@
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.75.0",
     "react-modal": "^3.16.3",
-    "tailwindcss": "^3.4.17",
     "uuid": "^11.1.0"
   },
   "devDependencies": {

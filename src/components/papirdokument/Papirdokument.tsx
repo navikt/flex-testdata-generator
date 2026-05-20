@@ -7,7 +7,7 @@ import { TemaSkjema } from './Temaskjema'
 
 export const Papirdokument = (p: FellesInputChildrenProps) => {
     const [tema, setTema] = useState<string>('SYK')
-    const [brevkode, setBrevkode] = useState<string>('VANL')
+    const [brevkode, setBrevkode] = useState<string>('NAV 08-07.04D')
     const [journalforendeEnhet, setJournalforendeEnhet] = useState<
         string | undefined
     >(undefined)

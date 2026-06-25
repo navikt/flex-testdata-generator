@@ -11,7 +11,7 @@
     "@navikt/ds-react": "^8.13.1",
     "@navikt/ds-tailwind": "^8.13.1",
     "@tailwindcss/postcss": "^4.3.0",
-    "tailwindcss": "^4.3.0",
+    "tailwindcss": "^4.3.1",
     "i": "^0.3.7",
     "jsonschema": "^1.5.0",
     "kafkajs": "^2.2.4",

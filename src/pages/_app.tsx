@@ -3,9 +3,8 @@ import '../style/global.css'
 import { Dropdown, InternalHeader, Spacer } from '@navikt/ds-react'
 import { MenuHamburgerIcon } from '@navikt/aksel-icons'
 import type { AppProps } from 'next/app'
-import React from 'react'
 
-function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
             <InternalHeader>

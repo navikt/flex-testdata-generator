@@ -28,7 +28,7 @@
     "@types/react-dom": "^19.2.3",
     "@types/uuid": "^10.0.0",
     "eslint": "^8.57.1",
-    "eslint-config-next": "^15.5.4",
+    "eslint-config-next": "^16.2.11",
     "openid-client": "^5.7.0",
     "prettier": "^3.9.5",
     "typescript": "^6.0.3"

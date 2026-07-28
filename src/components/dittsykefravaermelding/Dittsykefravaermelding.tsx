@@ -1,6 +1,6 @@
 import { DateTimeFormatter, LocalDateTime, ZoneOffset } from '@js-joda/core'
 import { Button, Radio, RadioGroup, Select, TextField } from '@navikt/ds-react'
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'
@@ -15,16 +15,13 @@ export const Dittsykefravaermelding = (p: FellesInputChildrenProps) => {
     const [variant, setVariant] = useState<string>('success')
     const [lukkbar, setLukkbar] = useState<boolean>(true)
     const [medSynligFremTil, setMedSynligFremTil] = useState<boolean>(true)
-    const [synligFremTil, setSynligFremTil] = useState<string>(
-        '2022-06-16T10:00:00'
+    const [synligFremTil, setSynligFremTil] = useState<string>(() =>
+        LocalDateTime.now().plusMinutes(2).format(formatter)
     )
 
     const [uuid, setUuid] = useState<string>(uuidv4())
     const [resetter, setResetter] = useState<boolean>(false)
 
-    useEffect(() => {
-        setSynligFremTil(LocalDateTime.now().plusMinutes(2).format(formatter))
-    }, [])
     return (
         <>
             <TextField

@@ -27,21 +27,13 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@types/uuid": "^10.0.0",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^15.5.4",
+    "eslint": "^9",
+    "eslint-config-next": "^16.2.10",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
     "openid-client": "^5.7.0",
     "prettier": "^3.9.5",
     "typescript": "^6.0.3"
-  },
-  "eslintConfig": {
-    "extends": [
-      "next/core-web-vitals"
-    ],
-    "rules": {
-      "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-non-null-assertion": "off"
-    }
   },
   "scripts": {
     "dev": "next dev -p 8080",
@@ -49,8 +41,8 @@
     "build": "next build",
     "prettier:write": "prettier --write .",
     "prettier:check": "prettier --check .",
-    "lint": "eslint --ext=ts,tsx src",
-    "lint:fix": "eslint --ext=ts,tsx src --fix",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "format": "npm run prettier:write && npm run lint:fix"
   }
 }

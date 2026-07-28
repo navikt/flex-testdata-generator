@@ -1,5 +1,5 @@
 import { Button, Select, TextField } from '@navikt/ds-react'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'
 

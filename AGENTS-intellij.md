@@ -17,7 +17,7 @@ Eksempel:
 ```
 execute_run_configuration(
   configurationName: "build",
-  projectPath: "/Users/.../flex-testdata-generator",
+  projectPath: "/Users/Ole.Bastian.Kolstad.Lochen/IdeaProjects/flex-testdata-generator",
   waitForExit: true,
   timeout: 120000
 )

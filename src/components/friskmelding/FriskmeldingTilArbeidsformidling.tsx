@@ -6,7 +6,7 @@ import {
     TextField,
     useDatepicker,
 } from '@navikt/ds-react'
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import ConfettiExplosion from 'react-confetti-explosion'
 import { v5 as uuidv5 } from 'uuid'
@@ -30,7 +30,7 @@ export const FriskmeldingTilArbeidsformidling = (
     const [status, setStatus] = useState<string>('FATTET')
     const [statusBy, setStatusBy] = useState<string>('Flex')
 
-    const [isExploding, setIsExploding] = React.useState(false)
+    const [isExploding, setIsExploding] = useState(false)
 
     const [statusAt, setStatusAt] = useState<string>(
         OffsetDateTime.now().format(formatter)

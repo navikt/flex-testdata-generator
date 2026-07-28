@@ -1,6 +1,5 @@
 import { LocalDate } from '@js-joda/core'
 import { DatePicker, useRangeDatepicker } from '@navikt/ds-react'
-import React from 'react'
 
 interface Props {
     fomTom: FomTom

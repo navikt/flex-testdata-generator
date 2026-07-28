@@ -1,6 +1,6 @@
 import { DateTimeFormatter, LocalDateTime, ZoneOffset } from '@js-joda/core'
 import { Button, Radio, RadioGroup, Select, TextField } from '@navikt/ds-react'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { FellesInputChildrenProps } from '../commoninput/CommonInput'

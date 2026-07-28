@@ -8,7 +8,6 @@ const handler = async (
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ): Promise<void> => {
-    // eslint-disable-next-line no-console
     console.log(
         'Next.js server: received pre stop request, waiting for 10s before starting shutdown'
     )
@@ -17,7 +16,7 @@ const handler = async (
             resolve()
         }, 10_000)
     })
-    // eslint-disable-next-line no-console
+
     console.log('Next.js server: starting shutdown')
     res.status(200).json({ message: 'ready for shutdown' })
 }

@@ -15,19 +15,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
       - name: Deploy testdata-reset topic til dev-gcp
-        uses: nais/deploy/actions/deploy@v2
+        uses: nais/deploy/actions/deploy@v3
         env:
           CLUSTER: dev-gcp
           RESOURCE: nais/topics/flex-testdata-reset-topic.yaml
           VARS: nais/topics/dev.json
       - name: Deploy test-isfrisktilarbeid-vedtak-status topic til dev-gcp
-        uses: nais/deploy/actions/deploy@v2
+        uses: nais/deploy/actions/deploy@v3
         env:
           CLUSTER: dev-gcp
           RESOURCE: nais/topics/flex-test-isfrisktilarbeid-vedtak-status-topic.yaml
           VARS: nais/topics/dev.json
       - name: Deploy test-command topic til dev-gcp
-        uses: nais/deploy/actions/deploy@v2
+        uses: nais/deploy/actions/deploy@v3
         env:
           CLUSTER: dev-gcp
           RESOURCE: nais/topics/flex-test-command-topic.yaml

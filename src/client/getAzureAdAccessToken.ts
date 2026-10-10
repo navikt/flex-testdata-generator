@@ -1,10 +1,16 @@
-import { TokenSet } from 'openid-client'
+import {
+    clientCredentialsGrant,
+    TokenEndpointResponse,
+    TokenEndpointResponseHelpers,
+} from 'openid-client'
 
 import { getAzureAuthClient } from './azureClient'
 
+type Tokenrespons = TokenEndpointResponse & TokenEndpointResponseHelpers
+
 interface TokesetAndExp {
     expiresAt: number
-    tokenset: TokenSet
+    tokenset: Tokenrespons
 }
 
 type TokensetMap = {
@@ -24,20 +30,19 @@ function erIkkeUtlopt(tokenset: TokesetAndExp) {
 
 export const getAzureAdAccessToken = async (
     scope: string
-): Promise<TokenSet> => {
+): Promise<Tokenrespons> => {
     const eksisterendeToken = tokens[scope]
     if (eksisterendeToken && erIkkeUtlopt(eksisterendeToken)) {
         return eksisterendeToken.tokenset
     }
     const oidcClient = await getAzureAuthClient()
 
-    const tokenSet = await oidcClient.grant({
-        grant_type: 'client_credentials',
+    const tokenSet = await clientCredentialsGrant(oidcClient, {
         scope,
     })
 
     if (!tokenSet.access_token) {
-        throw new Error(' Access token is undefined')
+        throw new Error('Tilgangstoken mangler')
     }
 
     const expiresAt = (tokenSet.expires_in || 0) + now() - drift

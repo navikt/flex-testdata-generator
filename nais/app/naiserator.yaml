@@ -47,4 +47,5 @@ spec:
     - name: MOCK_BACKEND
       value: "false"
     - name: DOKARKIV_CLIENT_ID
-      value: "api://dev-fss.teamdokumenthandtering.dokarkiv/.default"
+      value: "api://dev-fss.teamdokumenthandtering.dokarkiv-q2/.default"
+

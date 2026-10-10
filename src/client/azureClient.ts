@@ -1,13 +1,18 @@
-import { Client, ClientMetadata, Issuer, ResponseType } from 'openid-client'
+import {
+    ClientMetadata,
+    ClientSecretPost,
+    Configuration,
+    discovery,
+} from 'openid-client'
 
-let client: Client | null = null
+let client: Configuration | null = null
 
 export interface AzureConfig {
     discoveryUrl: string
     clientId: string
     clientSecret: string
     redirectUri: string
-    responseTypes: ResponseType[]
+    responseTypes: 'code'[]
     tokenEndpointAuthMethod:
         | 'client_secret_post'
         | 'client_secret_basic'
@@ -35,7 +40,7 @@ function getAzureConfig(): AzureConfig {
     return azureAd
 }
 
-export async function getAzureAuthClient(): Promise<Client> {
+export async function getAzureAuthClient(): Promise<Configuration> {
     if (client) {
         return client
     }
@@ -51,7 +56,11 @@ export async function getAzureAuthClient(): Promise<Client> {
         response_mode: azureConfig.responseMode,
     }
 
-    const issuer = await Issuer.discover(azureConfig.discoveryUrl)
-    client = new issuer.Client(metadata)
+    client = await discovery(
+        new URL(azureConfig.discoveryUrl),
+        azureConfig.clientId,
+        metadata,
+        ClientSecretPost(azureConfig.clientSecret)
+    )
     return client
 }

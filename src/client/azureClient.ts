@@ -12,6 +12,7 @@ export interface AzureConfig {
     clientId: string
     clientSecret: string
     redirectUri: string
+    // Bedre typesikkerhet compile time ved at responseTypes MÅ være et array med "code" som eneste element.
     responseTypes: 'code'[]
     tokenEndpointAuthMethod:
         | 'client_secret_post'

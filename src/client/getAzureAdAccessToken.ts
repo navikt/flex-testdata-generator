@@ -42,7 +42,7 @@ export const getAzureAdAccessToken = async (
     })
 
     if (!tokenSet.access_token) {
-        throw new Error('Tilgangstoken mangler')
+        throw new Error('AzureAd access token mangler')
     }
 
     const expiresAt = (tokenSet.expires_in || 0) + now() - drift

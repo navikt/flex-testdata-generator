@@ -13,14 +13,15 @@ interface Opts {
 
 export async function opprettJournalpost(opts: Opts): Promise<Response> {
     const url =
-        'https://dokarkiv.dev-fss-pub.nais.io/rest/journalpostapi/v1/journalpost?forsoekFerdigstill=false'
+        'https://dokarkiv-q2.dev-fss-pub.nais.io/rest/journalpostapi/v1/journalpost?forsoekFerdigstill=false'
 
-    const token = await getAzureAdAccessToken(process.env.DOKARKIV_CLIENT_ID!)
-    const access_token = token.access_token
+    const access_token = (
+        await getAzureAdAccessToken(process.env.DOKARKIV_CLIENT_ID!)
+    ).access_token
 
     const request = opprettJournalpostPayload(opts)
 
-    const response = await fetch(url, {
+    return await fetch(url, {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${access_token}`,
@@ -29,8 +30,6 @@ export async function opprettJournalpost(opts: Opts): Promise<Response> {
         },
         body: JSON.stringify(request),
     })
-
-    return response
 }
 
 function opprettJournalpostPayload(opts: Opts): JournalpostRequest {

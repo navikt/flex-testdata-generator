@@ -1,4 +1,5 @@
-import { Alert, Page, Heading, TextField } from '@navikt/ds-react'
+import { Page, Heading, TextField } from '@navikt/ds-react'
+import Alert from '../alert/Alert'
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 
@@ -53,12 +54,12 @@ export const CommonInput = (p: FellesInputProps) => {
                     {p.children({ fnr, setError, setSuksess })}
 
                     {error && (
-                        <Alert style={{ marginTop: '1em' }} variant="error">
+                        <Alert className="mt-4" variant="error">
                             {error}
                         </Alert>
                     )}
                     {suksess && (
-                        <Alert style={{ marginTop: '1em' }} variant="success">
+                        <Alert className="mt-4" variant="success">
                             {suksess}
                         </Alert>
                     )}

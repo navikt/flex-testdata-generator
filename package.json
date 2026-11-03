@@ -6,7 +6,7 @@
     "node": "24"
   },
   "dependencies": {
-    "@js-joda/core": "^6.3.0",
+    "@js-joda/core": "^6.3.1",
     "@navikt/ds-css": "^8.20.1",
     "@navikt/ds-react": "^8.20.1",
     "@navikt/ds-tailwind": "^8.20.1",
